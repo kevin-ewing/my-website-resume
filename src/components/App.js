@@ -2,9 +2,10 @@ import React, {useState} from 'react';
 import {BrowserRouter, Route,Switch } from "react-router-dom";
 import { ThemeProvider } from '@material-ui/styles';
 
-import theme from './ui/Theme';
-import Header from './ui/Header';
-import Footer from './ui/Footer';
+import theme from '../components/ui/Theme';
+import Header from '../components/ui/Header';
+import Footer from '../components/ui/Footer';
+import LandingPage from '../components/LandingPage';
 
 
 function App() {
@@ -15,7 +16,7 @@ function App() {
       <BrowserRouter>
         <Header value={value} setValue={setValue}/>
         <Switch>
-          <Route exact path="/" component={() => <div style={{height: "2000px"}}> Home</div>} />
+          <Route exact path="/" component={LandingPage} />
           <Route exact path="/projects" component={() => <div>Projects</div>} />
           <Route exact path="/experience" component={() => <div>Expereince</div>} />
           <Route exact path="/interests" component={() => <div>Interests</div>} />

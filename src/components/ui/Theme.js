@@ -39,5 +39,4 @@ export default createMuiTheme({
             minHeight: 70
         }
     }
-    
 });

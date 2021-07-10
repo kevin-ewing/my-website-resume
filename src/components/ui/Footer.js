@@ -78,7 +78,7 @@ const useStyles = makeStyles (theme => ({
     icons: {
         color: "white",
         fontFamily: "Tillium+Web",
-        fontWeight: 200,
+        fontWeight: 100,
         fontSize: "2rem",
         WebkitTextDecorationColor: theme.palette.secondary.main,
     },
@@ -149,17 +149,17 @@ export default function Footer(props) {
                             <Grid item className={classes.icons}>
                                 <Grid container spacing={2}>
                                     <Grid item>
-                                        <IconButton className={classes.widgit} component={"a"} href="https://www.linkedin.com/in/kevin-ewing-4294301a1">
+                                        <IconButton className={classes.widgit} component={"a"} href="https://www.linkedin.com/in/kevin-ewing-4294301a1" rel="noopener noreferrer" target="_blank">
                                             <LinkedIn />
                                         </IconButton>
                                     </Grid>
                                     <Grid item>
-                                        <IconButton className={classes.widgit} component={"a"} href="https://www.facebook.com/profile.php?id=100008674630754">
+                                        <IconButton className={classes.widgit} component={"a"} href="https://www.facebook.com/profile.php?id=100008674630754" rel="noopener noreferrer" target="_blank">
                                             <Facebook />
                                         </IconButton>
                                     </Grid>
                                     <Grid item>
-                                        <IconButton className={classes.widgit} component={"a"} href="https://github.com/kevin-ewing">
+                                        <IconButton className={classes.widgit} component={"a"} href="https://github.com/kevin-ewing" rel="noopener noreferrer" target="_blank">
                                             <GitHub />
                                         </IconButton>
                                     </Grid>
