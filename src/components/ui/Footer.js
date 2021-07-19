@@ -5,9 +5,11 @@ import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
 import IconButton from '@material-ui/core/IconButton';
+import Button from '@material-ui/core/Button';
 import LinkedIn from '@material-ui/icons/LinkedIn';
 import Facebook from '@material-ui/icons/Facebook';
 import GitHub from '@material-ui/icons/GitHub';
+import docker from '../../assets/docker.svg';
 
 
 const useStyles = makeStyles (theme => ({
@@ -22,7 +24,7 @@ const useStyles = makeStyles (theme => ({
         height: "3rem",
         zIndex: 1302,
         position: "relative",
-        backgroundColor: theme.palette.primary.main,
+        backgroundColor: theme.palette.common.white,
         [theme.breakpoints.down("sm")]: {
             height: "2rem",
         },
@@ -73,7 +75,10 @@ const useStyles = makeStyles (theme => ({
         },
         [theme.breakpoints.down("xs")]:{
             marginTop: ".9rem",
-        }
+        },
+        "&:hover" :{
+            color: theme.palette.secondary.main,
+        },
     },
     icons: {
         color: "white",
@@ -104,6 +109,9 @@ const useStyles = makeStyles (theme => ({
         }
     },
     widgit: {
+        "&:hover" :{
+            backgroundColor: "transparent"
+        },
         color: theme.palette.secondary.dark,
         '& svg': {
             fontSize: "2rem"
@@ -114,6 +122,15 @@ const useStyles = makeStyles (theme => ({
             }
         },
     },
+    docker: {
+        marginTop: "5px",
+        height: "2.2rem",
+        width: "2.2rem",
+        [theme.breakpoints.down("sm")]:{
+            height: "2rem",
+            width: "2rem",
+        },
+    }
 }))
 
 export default function Footer(props) {
@@ -162,6 +179,11 @@ export default function Footer(props) {
                                         <IconButton className={classes.widgit} component={"a"} href="https://github.com/kevin-ewing" rel="noopener noreferrer" target="_blank">
                                             <GitHub />
                                         </IconButton>
+                                    </Grid>
+                                    <Grid item>
+                                        <Button className={classes.widgit} component={"a"} href="https://hub.docker.com/u/kevinewing" rel="noopener noreferrer" target="_blank">
+                                        <img alt= "docker" src={docker} className={classes.docker}/>
+                                        </Button>
                                     </Grid>
                                 </Grid>
                             </Grid>

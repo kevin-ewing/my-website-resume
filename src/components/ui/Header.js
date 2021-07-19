@@ -81,14 +81,18 @@ const useStyles = makeStyles((theme) => ({
         textTransform: "none",
         fontSize: "1rem",
         minWidth: 10,
-        marginLeft: "20px"
+        marginLeft: "20px",
+        "&:hover": {
+            color: theme.palette.secondary.light
+            },
   },
   buttonSettings: {
       height: "20px",
       width: "20px",
       margin: "5px",
       "&:hover": {
-        backgroundColor: "transparent"
+        backgroundColor: "transparent",
+        color: theme.palette.secondary.main
         }
   },
   logoContainer: {
@@ -158,11 +162,14 @@ export default function ProminentAppBar(props) {
 
   const tabs = (
       <React.Fragment>
-          <Tabs value={props.value} onChange={handleChange} className={classes.tabContainer} indicatorColor="secondary">
-                <Tab className={classes.tab} component={Link} to="/" label="Home" />
-                <Tab className={classes.tab} component={Link} to="/projects" label="Projects"/>
-                <Tab className={classes.tab} component={Link} to="/experience" label="Experience"/>
-                <Tab className={classes.tab} component={Link} to="/interests" label="Interests" />
+          <Tabs value={props.value} 
+                onChange={handleChange} 
+                className={classes.tabContainer} 
+                indicatorColor="secondary">
+                <Tab className={classes.tab} disableRipple component={Link} to="/" label="Home" />
+                <Tab className={classes.tab} disableRipple component={Link} to="/projects" label="Projects"/>
+                <Tab className={classes.tab} disableRipple component={Link} to="/experience" label="Experience"/>
+                <Tab className={classes.tab} disableRipple component={Link} to="/interests" label="Interests" />
             </Tabs>
       </React.Fragment>
   )
