@@ -19,6 +19,8 @@ import MenuIcon from "@material-ui/icons/Menu";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
+import Slide from '@material-ui/core/Slide';
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -121,18 +123,19 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-function ElevationScroll(props) {
-    const { children } = props;
-    
-    const trigger = useScrollTrigger({
-      disableHysteresis: true,
-      threshold: 0
-    });
+function HideOnScroll(props) {
+    const { children, window } = props;
+    // Note that you normally won't need to set the window ref as useScrollTrigger
+    // will default to window.
+    // This is only being set here because the demo is in an iframe.
+    const trigger = useScrollTrigger({ target: window ? window() : undefined });
   
-    return React.cloneElement(children, {
-      elevation: trigger ? 4 : 0,
-    });
-}
+    return (
+      <Slide appear={false} direction="down" in={!trigger}>
+        {children}
+      </Slide>
+    );
+  }
 
 export default function ProminentAppBar(props) {
     
@@ -227,7 +230,7 @@ export default function ProminentAppBar(props) {
 
   return (
       <React.Fragment>
-          <ElevationScroll>
+          <HideOnScroll>
             <AppBar position="fixed" color = {theme.palette.common.white} className={classes.appbar}>
                 <Toolbar className={classes.toolbar} disableGutters>
                 <Button component={Link} to="/" className={classes.logoContainer} onClick={() => props.setValue(0)} disableRipple>
@@ -240,7 +243,7 @@ export default function ProminentAppBar(props) {
                 {widgits}
                 </Toolbar>
             </AppBar>
-        </ElevationScroll>
+        </HideOnScroll>
         <div className = {classes.toolbarMargin} />
       </React.Fragment>
   );
