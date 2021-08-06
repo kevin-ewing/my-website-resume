@@ -85,16 +85,17 @@ const useStyles = makeStyles((theme) => ({
         minWidth: 10,
         marginLeft: "20px",
         "&:hover": {
-            color: theme.palette.secondary.light
+            color: theme.palette.common.orange
             },
   },
   buttonSettings: {
       height: "20px",
+      color: theme.palette.common.purple,
       width: "20px",
       margin: "5px",
       "&:hover": {
         backgroundColor: "transparent",
-        color: theme.palette.secondary.main
+        color: theme.palette.common.orange
         }
   },
   logoContainer: {

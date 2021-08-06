@@ -77,7 +77,7 @@ const useStyles = makeStyles (theme => ({
             marginTop: ".9rem",
         },
         "&:hover" :{
-            color: theme.palette.secondary.main,
+            color: theme.palette.common.orange,
         },
     },
     icons: {
