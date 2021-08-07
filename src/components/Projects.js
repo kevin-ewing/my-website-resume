@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
@@ -66,6 +66,17 @@ const useStyles = makeStyles(theme => ({
 export default function LandingPage() {
     const classes = useStyles()
     const bullet = <span className={classes.bullet}>•</span>;
+    const [image, setImage] = useState("https://source.unsplash.com/collection/33032665/");
+
+    const updateApp = () => {
+        if (image === "https://source.unsplash.com/collection/33032665/") {
+            setImage("https://source.unsplash.com/collection/11407617/");
+        }
+        else {
+            setImage("https://source.unsplash.com/collection/33032665/");
+        }
+    };
+
 
     return (
         <div className={classes.background}>
@@ -238,12 +249,17 @@ export default function LandingPage() {
                                     </Typography>
                                 </Grid>
                                 <Grid item xs={12} lg={7}>
-                                    <SamplePhoneShortcut />
+                                    <SamplePhoneShortcut image={image} />
                                 </Grid>
                             </Grid>
                         </CardContent>
                         <CardActions>
-                            <Button className={classes.button}>Visit the Repo</Button>
+                            <Button className={classes.button} component={"a"} href="https://www.icloud.com/shortcuts/09ff9068fe074cc19ddf99afbb8f232c" rel="noopener noreferrer" target="_blank">
+                                Download the Shortcut
+                            </Button>
+                            <Button className={classes.button} onClick={updateApp}>
+                                Refresh
+                            </Button>
                         </CardActions>
                     </Card>
                 </Grid>

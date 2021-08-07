@@ -77,11 +77,11 @@ const useStyles = makeStyles(theme => ({
             paddingLeft: "15rem",
         },
         [theme.breakpoints.down("sm")]:{
-            marginTop: "17rem",
+            marginTop: "15rem",
             paddingLeft: "10rem",
         },
         [theme.breakpoints.down("xs")]:{
-            marginTop: "17rem",
+            marginTop: "10rem",
             paddingLeft: "7rem",
         }
     },
@@ -101,7 +101,7 @@ const useStyles = makeStyles(theme => ({
             paddingRight: "10rem",
         },
         [theme.breakpoints.down("xs")]:{
-            paddingRight: "7rem",
+            paddingRight: "5rem",
         }
     },
     GreenFont: {
