@@ -12,7 +12,7 @@ import GitHub from '@material-ui/icons/GitHub';
 import docker from '../../assets/docker.svg';
 
 
-const useStyles = makeStyles (theme => ({
+const useStyles = makeStyles(theme => ({
     footer: {
         backgroundColor: theme.palette.primary.dark,
         zIndex: 1302,
@@ -48,10 +48,8 @@ const useStyles = makeStyles (theme => ({
     copyright: {
         marginLeft: "1rem",
         paddingBottom: ".5rem",
-        fontFamily: "Source+Sans+Pro",
-        fontWeight: 300,
         fontSize: "1rem",
-        color: theme.palette.common.white,
+        color: theme.palette.common.orange,
         [theme.breakpoints.down("sm")]: {
             fontSize: ".8rem"
         },
@@ -60,7 +58,7 @@ const useStyles = makeStyles (theme => ({
         }
     },
     container: {
-        position: "absolute", 
+        position: "absolute",
         marginRight: "2rem",
     },
     item: {
@@ -70,13 +68,13 @@ const useStyles = makeStyles (theme => ({
         fontSize: "1.5rem",
         textDecoration: "none",
         textTransfrom: "Capitalize",
-        [theme.breakpoints.down("sm")]:{
+        [theme.breakpoints.down("sm")]: {
             fontSize: "1rem"
         },
-        [theme.breakpoints.down("xs")]:{
+        [theme.breakpoints.down("xs")]: {
             marginTop: ".9rem",
         },
-        "&:hover" :{
+        "&:hover": {
             color: theme.palette.common.orange,
         },
     },
@@ -92,31 +90,31 @@ const useStyles = makeStyles (theme => ({
         fontFamily: "Source+Sans+Pro",
         fontWeight: 300,
         fontSize: "1rem",
-        [theme.breakpoints.down("sm")]:{
+        [theme.breakpoints.down("sm")]: {
             fontSize: ".77rem"
         },
-        [theme.breakpoints.down("xs")]:{
+        [theme.breakpoints.down("xs")]: {
             marginTop: ".7rem",
         }
     },
-    gridTop:{
+    gridTop: {
         margin: "2.5rem",
-        [theme.breakpoints.down("sm")]:{
+        [theme.breakpoints.down("sm")]: {
             marginTop: "1rem"
         },
-        [theme.breakpoints.down("xs")]:{
+        [theme.breakpoints.down("xs")]: {
             marginTop: ".25rem",
         }
     },
     widgit: {
-        "&:hover" :{
+        "&:hover": {
             backgroundColor: "transparent"
         },
         color: theme.palette.secondary.dark,
         '& svg': {
             fontSize: "2rem"
         },
-        [theme.breakpoints.down("sm")]:{
+        [theme.breakpoints.down("sm")]: {
             '& svg': {
                 fontSize: "1.5rem"
             }
@@ -126,7 +124,7 @@ const useStyles = makeStyles (theme => ({
         marginTop: "5px",
         height: "2.2rem",
         width: "2.2rem",
-        [theme.breakpoints.down("sm")]:{
+        [theme.breakpoints.down("sm")]: {
             height: "2rem",
             width: "2rem",
         },
@@ -150,18 +148,20 @@ export default function Footer(props) {
                         </Typography>
                     </Grid>
                     <Grid item className={classes.gridTop}>
-                        <Grid container direction = "column" alignItems="flex-end" spacing={2}>
+                        <Grid container direction="column" alignItems="flex-end" spacing={2}>
                             <Grid item>
-                                <Typography item component={Link} onClick={() => props.setValue(0)} to = "/" className={classes.item}>Home</Typography>
+                                <Typography className={classes.item}>
+                                    <br/>
+                                </Typography>
                             </Grid>
                             <Grid item>
-                                <Typography item component={Link} onClick={() => props.setValue(1)} to = "/projects" className={classes.item}>Projects</Typography>
+                                <Typography item component={Link} onClick={() => props.setValue(0)} to="/" className={classes.item}>Home</Typography>
                             </Grid>
                             <Grid item>
-                                <Typography item component={Link} onClick={() => props.setValue(2)} to = "/experience" className={classes.item}>Experience</Typography>
+                                <Typography item component={Link} onClick={() => props.setValue(1)} to="/projects" className={classes.item}>Projects</Typography>
                             </Grid>
                             <Grid item>
-                                <Typography item component={Link} onClick={() => props.setValue(3)} to = "/interests" className={classes.item}>Interests</Typography>
+                                <Typography item component={Link} onClick={() => props.setValue(3)} to="/experience" className={classes.item}>Experience</Typography>
                             </Grid>
                             <Grid item className={classes.icons}>
                                 <Grid container spacing={2}>
@@ -182,7 +182,7 @@ export default function Footer(props) {
                                     </Grid>
                                     <Grid item>
                                         <Button className={classes.widgit} component={"a"} href="https://hub.docker.com/u/kevinewing" rel="noopener noreferrer" target="_blank">
-                                        <img alt= "docker" src={docker} className={classes.docker}/>
+                                            <img alt="docker" src={docker} className={classes.docker} />
                                         </Button>
                                     </Grid>
                                 </Grid>

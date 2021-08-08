@@ -26,6 +26,8 @@ const useStyles = makeStyles(theme => ({
     },
     root: {
         minWidth: 275,
+        borderRadius: 20, 
+        borderColor: theme.palette.common.purple
     },
     bullet: {
         display: 'inline-block',
@@ -56,9 +58,10 @@ const useStyles = makeStyles(theme => ({
     },
     button: {
         backgroundColor: theme.palette.primary.dark,
+        borderRadius: 20,
         color: "white",
         "&:hover": {
-            color: theme.palette.common.orange
+            backgroundColor: theme.palette.common.orange
         },
     },
 }))
@@ -66,21 +69,12 @@ const useStyles = makeStyles(theme => ({
 export default function LandingPage() {
     const classes = useStyles()
     const bullet = <span className={classes.bullet}>•</span>;
-    const [image, setImage] = useState("https://source.unsplash.com/collection/33032665/");
-
-    const updateApp = () => {
-        if (image === "https://source.unsplash.com/collection/33032665/") {
-            setImage("https://source.unsplash.com/collection/11407617/");
-        }
-        else {
-            setImage("https://source.unsplash.com/collection/33032665/");
-        }
-    };
+    const [image] = useState("https://source.unsplash.com/collection/33032665/");
 
 
     return (
-        <div className={classes.background}>
-            <Grid container spacing={10} justify="center" className={classes.TopAndBottomMargin}>
+        <div className={classes.background} style={{ padding: 30 }}>
+            <Grid container spacing={7} justify="center" className={classes.TopAndBottomMargin}>
                 <Grid item xs={12} lg={6}>
                     <Card className={classes.root}>
                         <CardContent>
@@ -241,14 +235,22 @@ export default function LandingPage() {
                                 {bullet} Written in the Apple shortcuts app.
                             </Typography>
                             <Grid container spacing={1} justify="center">
-                                <Grid item xs={12} lg={5}>
+                                <Grid item xs={12} lg={4}>
                                     <Typography variant="body2" component="p">
-                                        well meaning and kindly.
-                                        well meaning and kindly. well meaning and kindly. well meaning and kindly. well meaning and kindly. well meaning and kindly. well meaning and kindly. well meaning and kindly. well meaning and kindly. well meaning and kindly. well meaning and kindly. well meaning and kindly. well meaning and kindly. well meaning and kindly. well meaning and kindly. well meaning and kindly. well meaning and kindly. well meaning and kindly. well meaning and kindly. well meaning and kindly. well meaning and kindly. well meaning and kindly. well meaning and kindly. well meaning and kindly. well meaning and kindly. well meaning and kindly. well meaning and kindly. well meaning and kindly. well meaning and kindly. well meaning and kindly. well meaning and kindly. well meaning and kindly. well meaning and kindly. well meaning and kindly. well meaning and kindly. well meaning and kindly. well meaning and kindly. well meaning and kindly. well meaning and kindly. well meaning and kindly. well meaning and kindly. well meaning and kindly. well meaning and kindly. well meaning and kindly. well meaning and kindly.
+                                        Ever since the release of iPhone shortcuts app with iOS 13 I was trying to come up with
+                                        interesting and helpful shorcuts. After playing around with the simple scripting you
+                                        can write within these shortcuts, I created this lockscreen changing shortcut. Every night
+                                        at 3:00 this automation is run on my phone which grabs a random image from my Unsplashed
+                                        colection of nature photos and sets that to my wallpaper. Though quite a simple task,
+                                        it is extrmememly pleasant to wake up each morning to a different beautiful wallpaper.
+                                        And, while it is not a very techincally impressive project, due tjo how much I interact
+                                        with it, it is one of my favorite. I have included a sample of what my lockscreen and
+                                        wallpaper looks like for today! Please note that in order to download the shortcut, you must
+                                        be on a moble Apple device.
                                         <br />
                                     </Typography>
                                 </Grid>
-                                <Grid item xs={12} lg={7}>
+                                <Grid item xs={12} lg={8}>
                                     <SamplePhoneShortcut image={image} />
                                 </Grid>
                             </Grid>
@@ -257,8 +259,8 @@ export default function LandingPage() {
                             <Button className={classes.button} component={"a"} href="https://www.icloud.com/shortcuts/09ff9068fe074cc19ddf99afbb8f232c" rel="noopener noreferrer" target="_blank">
                                 Download the Shortcut
                             </Button>
-                            <Button className={classes.button} onClick={updateApp}>
-                                Refresh
+                            <Button className={classes.button} component={"a"} href="https://unsplash.com/collections/33032665/naturewallpapers" rel="noopener noreferrer" target="_blank">
+                                Unsplash Collection
                             </Button>
                         </CardActions>
                     </Card>
@@ -279,17 +281,22 @@ export default function LandingPage() {
                                 {bullet} Written in R with RStudio's Shinny.
                             </Typography>
                             <Typography variant="body2" component="p">
-                                well meaning and kindly.
+                                An app used to explore the population of ticks over time in the United States. Using data
+                                collected by NEON over the past six years, this app alows users to ask questions of the data
+                                and intuativly explore the results of those questions on there own. With interactive options
+                                and filters for the data, as well as beausitful visuals made with the R packagas of the
+                                Tidyverse and Leaflet, select button below to view the hosted app on shinyapps.io and explore
+                                the data for yourself.
                                 <br />
-                                well meaning and kindly.
-                                <br />
-                                well meaning and kindly.
-                                <br />
-                                {'"a benevolent smile"'}
                             </Typography>
                         </CardContent>
                         <CardActions>
-                            <Button className={classes.button}>Visit the Repo</Button>
+                            <Button className={classes.button} component={"a"} href="https://github.com/kevin-ewing/tick-density-data-exploration" rel="noopener noreferrer" target="_blank">
+                                Visit the Repo
+                            </Button>
+                            <Button className={classes.button} component={"a"} href="https://kevin-ewing.shinyapps.io/FinalTickPathogen/" rel="noopener noreferrer" target="_blank">
+                                Visit the Web App
+                            </Button>
                         </CardActions>
                     </Card>
                 </Grid>
@@ -309,13 +316,20 @@ export default function LandingPage() {
                                 {bullet} Written in R with RStudio's Shinny.
                             </Typography>
                             <Typography variant="body2" component="p">
-                                well meaning and kindly.
+                                This app similarly uses NEON data to explore tick populations. However this app is focused on the pathogens
+                                that those ticks can spread. This Shiny app again uses Tidyverse and Leaflet to visual and graphically display
+                                the data, so feel free to select select button below to view the hosted app on shinyapps.io and explore
+                                tick pathogen trends yourself.
                                 <br />
-                                {'"a benevolent smile"'}
                             </Typography>
                         </CardContent>
                         <CardActions>
-                            <Button className={classes.button}>Visit the Repo</Button>
+                            <Button className={classes.button} component={"a"} href="https://github.com/kevin-ewing/tick-density-data-exploration" rel="noopener noreferrer" target="_blank">
+                                Visit the Repo
+                            </Button>
+                            <Button className={classes.button} component={"a"} href="https://kevin-ewing.shinyapps.io/FinalTickPathogen/" rel="noopener noreferrer" target="_blank">
+                                Visit the Web App
+                            </Button>
                         </CardActions>
                     </Card>
                 </Grid>
@@ -335,7 +349,7 @@ export default function LandingPage() {
                                 {bullet} Written in Javascript with React.
                             </Typography>
                             <Typography variant="body2" component="p">
-                                In progress at the moment! Check up on the progress by visiting the repo below.
+                                Currently working on this! Check up on the progress by visiting the repo below.
                                 <br />
                             </Typography>
                         </CardContent>

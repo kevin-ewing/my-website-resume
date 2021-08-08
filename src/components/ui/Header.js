@@ -159,9 +159,6 @@ export default function ProminentAppBar(props) {
     else if (window.location.pathname === "/experience" && props.value !== 2){
         props.setValue(2);
     }
-    else if (window.location.pathname === "/interests" && props.value !== 3){
-        props.setValue(3);
-    }
   });
 
   const tabs = (
@@ -173,7 +170,6 @@ export default function ProminentAppBar(props) {
                 <Tab className={classes.tab} disableRipple component={Link} to="/" label="Home" />
                 <Tab className={classes.tab} disableRipple component={Link} to="/projects" label="Projects"/>
                 <Tab className={classes.tab} disableRipple component={Link} to="/experience" label="Experience"/>
-                <Tab className={classes.tab} disableRipple component={Link} to="/interests" label="Interests" />
             </Tabs>
       </React.Fragment>
   )
@@ -211,13 +207,6 @@ export default function ProminentAppBar(props) {
                 <ListItem selected={props.value === 2} onClick={()=> {setOpenDrawer(false); props.setValue(2)}} divider button component={Link} to="/experience">
                     <ListItemText className={classes.drawerItems}>
                         Experience
-                    </ListItemText>
-                </ListItem>
-                <ListItem selected={props.value === 3} onClick={()=> {setOpenDrawer(false); props.setValue(3)}} divider button component={Link} to="/interests">
-                    <ListItemText className={props.value === 3 ? 
-                        classes.drawerSelectedItem : 
-                        classes.drawerItems}>
-                        Interests
                     </ListItemText>
                 </ListItem>
             </List>
