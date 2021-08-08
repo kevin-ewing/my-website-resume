@@ -38,5 +38,9 @@ export default createMuiTheme({
         toolbar: {
             minHeight: 70
         }
-    }
+    },
+    fontFamily: [
+        'Noto sans', 
+        'sans-serif'
+    ].join(','),
 });

@@ -1,371 +1,657 @@
-import React, { useState } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import Grid from '@material-ui/core/Grid';
+import React from 'react';
+import PropTypes from 'prop-types';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import Divider from '@material-ui/core/Divider';
+import Drawer from '@material-ui/core/Drawer';
+import Hidden from '@material-ui/core/Hidden';
+import IconButton from '@material-ui/core/IconButton';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import MenuIcon from '@material-ui/icons/Menu';
 import Typography from '@material-ui/core/Typography';
-import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
+import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
-import Highlight from 'react-highlight';
-import SamplePhoneShortcut from './ui/LockscreenApp';
+import GitHub from '@material-ui/icons/GitHub';
+import LinkedIn from '@material-ui/icons/LinkedIn';
+import ViewWeekOutlined from '@material-ui/icons/ViewWeekOutlined';
+import Grid from '@material-ui/core/Grid'
+import HelpOutlineOutlinedIcon from '@material-ui/icons/HelpOutlineOutlined';
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
+import Box from '@material-ui/core/Box'
+import ButtonBase from '@material-ui/core/ButtonBase';
+import CheckBoxIcon from '@material-ui/icons/CheckBox';
+import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
+import AddCircleIcon from '@material-ui/icons/AddCircle';
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+import BookmarkIcon from '@material-ui/icons/Bookmark';
+import BuildIcon from '@material-ui/icons/Build';
+import MoreVertOutlinedIcon from '@material-ui/icons/MoreVertOutlined';
+import NotInterestedOutlinedIcon from '@material-ui/icons/NotInterestedOutlined';
+import RemoveCircleOutlinedIcon from '@material-ui/icons/RemoveCircleOutlined';
+import Dialog0 from './ui/projectsPopups/Dialog0'
+import Dialog1 from './ui/projectsPopups/Dialog1'
+import Dialog2 from './ui/projectsPopups/Dialog2'
+import Dialog3 from './ui/projectsPopups/Dialog3'
+import Dialog4 from './ui/projectsPopups/Dialog4'
+import Dialog5 from './ui/projectsPopups/Dialog5'
+import Dialog6 from './ui/projectsPopups/Dialog6'
+import Dialog7 from './ui/projectsPopups/Dialog7'
+import Dialog8 from './ui/projectsPopups/Dialog8'
 
-const useStyles = makeStyles(theme => ({
-    background: {
-        marginTop: "2.5rem",
-        backgroundColor: theme.palette.secondary.light,
+
+
+const drawerWidth = 210;
+
+const useStyles = makeStyles((theme) => ({
+    root: {
+        display: 'flex',
+    },
+    drawer: {
+        [theme.breakpoints.up('sm')]: {
+            width: drawerWidth,
+            flexShrink: 0,
+        },
+    },
+    marginTop: {
+        marginTop: "6rem",
         [theme.breakpoints.down('sm')]: {
-            marginTop: ".1rem",
+            marginTop: "4rem",
         },
         [theme.breakpoints.down('xs')]: {
-            marginTop: "0rem",
+            marginTop: "3rem",
         },
-        flexGrow: 1,
     },
-    TopAndBottomMargin: {
-        padding: "3rem"
-    },
-    root: {
-        minWidth: 275,
-        borderRadius: 20, 
-        borderColor: theme.palette.common.purple
-    },
-    bullet: {
-        display: 'inline-block',
-        margin: '0 2px',
-        transform: 'scale(1.5)',
-        color: theme.palette.common.purple,
-        marginRight: "1rem"
-    },
-    title: {
-        fontFamily: "Source+Sans+Pro",
-        fontWeight: 200,
-        fontSize: "2rem",
-    },
-    languages: {
-        marginBottom: 12,
-        color: theme.palette.common.purple,
-    },
-    comingSoon: {
-        fontFamily: "Source+Sans+Pro",
-        fontWeight: 200,
-        fontSize: "2rem",
-        color: theme.palette.secondary.dark,
-    },
-    projectIntros: {
-        fontWeight: 300,
-        fontSize: "1.3rem",
-        color: theme.palette.text.secondary,
-    },
-    button: {
-        backgroundColor: theme.palette.primary.dark,
-        borderRadius: 20,
-        color: "white",
+    menuButton: {
+        marginRight: theme.spacing(2),
+        color: theme.palette.primary.dark,
+        [theme.breakpoints.up('sm')]: {
+            display: 'none',
+        },
         "&:hover": {
-            backgroundColor: theme.palette.common.orange
+            backgroundColor: "transparent",
+            color: theme.palette.common.orange
         },
     },
-}))
+    moreButton: {
+        marginRight: theme.spacing(2),
+        color: theme.palette.primary.dark,
+        "&:hover": {
+            backgroundColor: "transparent",
+            color: theme.palette.common.orange
+        },
+    },
+    drawerPaper: {
+        width: drawerWidth,
+        backgroundColor: "#fafbfc",
+    },
+    mainPage: {
+        flexGrow: 1,
+        padding: theme.spacing(5),
+        backgroundColor: "white",
+        paddingTop: "3rem",
+        [theme.breakpoints.down('sm')]: {
+            paddingTop: "2rem",
+            padding: theme.spacing(4),
+        },
+        [theme.breakpoints.down('xs')]: {
+            paddingTop: "0rem",
+            padding: theme.spacing(2),
+        },
+        paddingLeft: "1rem",
+    },
+    sideBarButton: {
+        "&:hover": {
+            backgroundColor: "transparent",
+            color: theme.palette.common.orange
+        },
+        color: "#475772"
+    },
+    sidebarFont: {
+        fontSize: "1rem",
+        textTransform: "none",
+    },
+    selectedSidebarFont: {
+        fontSize: "1rem",
+        textTransform: "none",
+        color: theme.palette.primary.dark,
+    },
+    boardTitle: {
+        fontSize: "2rem",
+        color: theme.palette.primary.dark,
+        fontFamily: 'Noto sans,sans-serif',
+    },
+    boardDescripton: {
+        fontSize: "1rem",
+        color: "#475772",
+        fontFamily: 'Noto sans,sans-serif',
+    },
+    mainColumns: {
+        height: "65rem",
+        width: "15rem",
+        backgroundColor: "#f1f3f5",
+        borderColor: "white",
+        borderRadius: ".5rem",
 
-export default function LandingPage() {
-    const classes = useStyles()
-    const bullet = <span className={classes.bullet}>•</span>;
-    const [image] = useState("https://source.unsplash.com/collection/33032665/");
+    },
+    columnTopText: {
+        fontSize: ".9rem",
+        color: "#778298",
+    },
+    columnTopSpacing: {
+        paddingTop: "1rem",
+        paddingLeft: "1rem",
+    },
+    ticket: {
+        height: "10rem",
+        width: "14.5rem",
+        marginLeft: "-.8rem",
+        marginBottom: ".5rem",
+        textTransform: "none",
+        borderRadius: ".5rem",
+        borderColor: "#f1f3f5",
+        backgroundColor: "white",
+        "&:hover": {
+            backgroundColor: "#fafbfc",
+            color: theme.palette.secondary.dark
+        },
+        display: 'flex',
+        alignItems: 'left',
+        justifyContent: 'left',
+    },
+    ticketDescription: {
+        fontSize: ".9rem",
+        color: "#475772",
+        fontFamily: 'Noto sans,sans-serif',
+        alignText: 'left',
+        justifyContent: 'left',
+        margin: ".5rem",
+        marginBottom: "1.5rem",
+    },
+    Languages: {
+        marginLeft: ".5rem",
+        borderRadius: ".2rem",
+        marginBottom: "1rem",
 
+    },
+    ticketLanguageDescription: {
+        fontSize: ".75rem",
+        color: "white",
+        fontFamily: 'Noto sans,sans-serif',
+        alignText: 'left',
+        justifyContent: 'left',
+    },
+    ticketNumber: {
+        fontSize: ".75rem",
+        color: "#bbc1ce",
+        fontFamily: 'Noto sans,sans-serif',
+        alignText: 'left',
+        justifyContent: 'left',
+    }
+}));
+
+function ResponsiveDrawer(props) {
+    const { window } = props;
+    const classes = useStyles();
+    const theme = useTheme();
+    const [mobileOpen, setMobileOpen] = React.useState(false);
+
+    const [alertShow0, setAlertShow0] = React.useState(false);
+    const handleAlertOpen0 = () => {
+        setAlertShow0(true)
+    };
+
+    const handleAlertClose0 = () => {
+        setAlertShow0(false)
+    }
+
+    const [alertShow1, setAlertShow1] = React.useState(false);
+    const handleAlertOpen1 = () => {
+        setAlertShow1(true)
+    };
+
+    const handleAlertClose1 = () => {
+        setAlertShow1(false)
+    }
+
+    const [alertShow2, setAlertShow2] = React.useState(false);
+    const handleAlertOpen2 = () => {
+        setAlertShow2(true)
+    };
+
+    const handleAlertClose2 = () => {
+        setAlertShow2(false)
+    }
+    
+
+    const [alertShow3, setAlertShow3] = React.useState(false);
+    const handleAlertOpen3 = () => {
+        setAlertShow3(true)
+    };
+
+    const handleAlertClose3 = () => {
+        setAlertShow3(false)
+    }
+
+    const [alertShow4, setAlertShow4] = React.useState(false);
+    const handleAlertOpen4 = () => {
+        setAlertShow4(true)
+    };
+
+    const handleAlertClose4 = () => {
+        setAlertShow4(false)
+    }
+
+    const [alertShow5, setAlertShow5] = React.useState(false);
+    const handleAlertOpen5 = () => {
+        setAlertShow5(true)
+    };
+
+    const handleAlertClose5 = () => {
+        setAlertShow5(false)
+    }
+
+    const [alertShow6, setAlertShow6] = React.useState(false);
+    const handleAlertOpen6 = () => {
+        setAlertShow6(true)
+    };
+
+    const handleAlertClose6 = () => {
+        setAlertShow6(false)
+    }
+
+    const [alertShow7, setAlertShow7] = React.useState(false);
+    const handleAlertOpen7 = () => {
+        setAlertShow7(true)
+    };
+
+    const handleAlertClose7 = () => {
+        setAlertShow7(false)
+    }
+
+    const [alertShow8, setAlertShow8] = React.useState(false);
+    const handleAlertOpen8 = () => {
+        setAlertShow8(true)
+    };
+
+    const handleAlertClose8 = () => {
+        setAlertShow8(false)
+    }
+
+    const handleDrawerToggle = () => {
+        setMobileOpen(!mobileOpen);
+    };
+    
+
+    const drawer = (
+        <div>
+            <div className={classes.marginTop} />
+            <Divider />
+            <List>
+                <ListItem>
+                    <Button className={classes.sideBarButton} disableRipple component={"a"} href="https://github.com/kevin-ewing" rel="noopener noreferrer" target="_blank">
+                        <Typography className={classes.sidebarFont}>
+                            <GitHub style={{ verticalAlign: 'middle', display: 'inline-flex', fontSize: "1.6rem" }} /> Visit my GitHub
+                        </Typography>
+                    </Button>
+                </ListItem>
+                <ListItem>
+                <Button className={classes.sideBarButton} disableRipple component={"a"} href="https://www.linkedin.com/in/kevin-ewing-4294301a1" rel="noopener noreferrer" target="_blank">
+                        <Typography className={classes.sidebarFont}>
+                            <LinkedIn style={{ verticalAlign: 'middle', display: 'inline-flex', fontSize: "1.6rem" }} /> Visit my LinkedIn
+                        </Typography>
+                    </Button>
+                </ListItem>
+                <ListItem>
+                    <Button className={classes.sideBarButton} disableRipple>
+                        <Typography className={classes.selectedSidebarFont}>
+                            <ViewWeekOutlined style={{ verticalAlign: 'middle', display: 'inline-flex', fontSize: "1.6rem" }} /> Active Sprints
+                        </Typography>
+                    </Button>
+                </ListItem>
+            </List>
+            <Divider />
+        </div>
+    );
+
+    const container = window !== undefined ? () => window().document.body : undefined;
 
     return (
-        <div className={classes.background} style={{ padding: 30 }}>
-            <Grid container spacing={7} justify="center" className={classes.TopAndBottomMargin}>
-                <Grid item xs={12} lg={6}>
-                    <Card className={classes.root}>
-                        <CardContent>
-                            <Typography className={classes.title} gutterBottom>
-                                My Web Resume
-                            </Typography>
-                            <Typography className={classes.projectIntros} gutterBottom>
-                                You already know what this is... you are visiting it right now.
-                                <hr />
-                                <br />
-                                <br />
-                            </Typography>
-                            <Typography className={classes.languages} color="textSecondary">
-                                {bullet} Written in Javascript with React and Material UI.
-                            </Typography>
-                            <Typography variant="body2" component="p">
-                                I was perusing the internet one day when I noticed that the domain with my name was
-                                available. I had never done any sort of web design with javascript or react but was
-                                eager to tackle the challange and do something interesting with the domain. After
-                                brianstorming for a bit, I settled on creating a web resume. It would provide me with
-                                a space to show off some of my projects and interests. But it would also provide a challange
-                                as a multi-page website. Since starting I have learned tons about web design, JavaScript,
-                                React and Material UI. I have found it extrmemely satisfying to build this project from my
-                                imagination. If you have any feedback or suggetions, feel free to leave them by selecting
-                                the bug icon in the right corner of the app bar. Also feel free to checkout my code in the
-                                repo linked below.
-                                <br />
-                            </Typography>
-                        </CardContent>
-                        <CardActions>
-                            <Button className={classes.button} component={"a"} href="https://github.com/kevin-ewing/my-website-resume" rel="noopener noreferrer" target="_blank">
-                                Visit the Repo
-                            </Button>
-                        </CardActions>
-                    </Card>
+        <div className={classes.root}>
+            <CssBaseline />
+            <nav className={classes.drawer} aria-label="mailbox folders">
+                {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
+                <Hidden smUp implementation="css">
+                    <Drawer
+                        container={container}
+                        variant="temporary"
+                        anchor={theme.direction === 'rtl' ? 'right' : 'left'}
+                        open={mobileOpen}
+                        onClose={handleDrawerToggle}
+                        classes={{
+                            paper: classes.drawerPaper,
+                        }}
+                        ModalProps={{
+                            keepMounted: true, // Better open performance on mobile.
+                        }}
+                    >
+                        {drawer}
+                    </Drawer>
+                </Hidden>
+                <Hidden xsDown implementation="css">
+                    <Drawer
+                        classes={{
+                            paper: classes.drawerPaper,
+                        }}
+                        variant="permanent"
+                        open
+                    >
+                        {drawer}
+                    </Drawer>
+                </Hidden>
+            </nav>
+            <main className={classes.mainPage}>
+                <Grid container direction={"row"} style={{ justifyContent: "space-between", marginBottom: ".5rem" }}>
+                    <Grid item>
+                        <IconButton
+                            color="inherit"
+                            aria-label="open drawer"
+                            edge="start"
+                            onClick={handleDrawerToggle}
+                            className={classes.menuButton}
+                            disableRipple
+                        >
+                            <MenuIcon />
+                        </IconButton>
+                        <Typography className={classes.boardTitle}>
+                            My Project Board
+                        </Typography>
+                    </Grid>
+                    <Grid item>
+                        <IconButton
+                            color="inherit"
+                            aria-label="More information"
+                            edge="start"
+                            className={classes.moreButton}
+                            disableRipple
+                        >
+                            <HelpOutlineOutlinedIcon onClick={handleAlertOpen0}/>
+                        </IconButton>
+                    </Grid>
                 </Grid>
-                <Grid item xs={12} lg={6}>
-                    <Card className={classes.root}>
-                        <CardContent>
-                            <Typography className={classes.title} gutterBottom>
-                                Sentiment Analasys of Harry Potter
-                            </Typography>
-                            <Typography className={classes.projectIntros} gutterBottom>
-                                Graphical tracking of sentiment over the course of the seven Harry Potter books.
-                                <hr />
-                                <br />
-                                <br />
-                            </Typography>
-                            <Typography className={classes.languages} color="textSecondary">
-                                {bullet} Written in R with RStudio's Shinny.
-                            </Typography>
-                            <Typography variant="body2" component="p">
-                                The Harry Potter series has always been one of my favorite book series of all time. And so,
-                                I wanted to see how the linguistic sentiment changes over the coures of the books. To do this
-                                I wrote a simple app using RStudio's Shiny. Shiny is an R package that makes it easy to build
-                                interactive web apps straight from R. For this project I used the well known R packages of the
-                                Tidyverse to plot the data. In order to analyze the sentiment of these books I used the sentiment
-                                lexicons of AFINN and Bing et al. To explore the results head over to the github repo to view the
-                                code or visit the shinyapp.io hosted web app directly.
-                                <br />
-                            </Typography>
-                        </CardContent>
-                        <CardActions>
-                            <Button className={classes.button} component={"a"} href="https://github.com/kevin-ewing/harry-potter-sentiment" rel="noopener noreferrer" target="_blank">
-                                Visit the Repo
-                            </Button>
-                            <Button className={classes.button} component={"a"} href="https://kevin-ewing.shinyapps.io/HarryPotterAnalysis/" rel="noopener noreferrer" target="_blank">
-                                Visit the Web App
-                            </Button>
-                        </CardActions>
-                    </Card>
+                <Typography className={classes.boardDescripton} style={{ marginBottom: "2rem" }}>
+                    Select a ticket below to learn more information about that project.
+                </Typography>
+
+                <Grid container direction={"row"} spacing={1}>
+                    <Grid item>
+                        <Card className={classes.mainColumns} variant="outlined">
+                            <div className={classes.columnTopSpacing}>
+                                <Typography className={classes.columnTopText}>
+                                    <b>TO DO</b> 1
+                                </Typography>
+                            </div>
+                            <CardContent>
+                                <ButtonBase className={classes.ticket} variant="outlined" onClick={handleAlertOpen8}>
+                                    <Grid contianer direction={"column"} justifyContent="flex-start" alignItems="flex-start">
+                                        <Grid item>
+                                            <Typography className={classes.ticketDescription}>
+                                                Keep learning, experimenting and asking quetions
+                                            </Typography>
+                                        </Grid>
+                                        <Grid item>
+                                            <Box className={classes.Languages} style={{ width: '10.5rem', backgroundColor: "#8b6ca1" }}>
+                                                <Typography className={classes.ticketLanguageDescription}>
+                                                    <b>ANY AND ALL LANGUAGES</b>
+                                                </Typography>
+                                            </Box>
+                                        </Grid>
+                                        <Grid item>
+                                            <Box className={classes.ticketNumber}>
+                                                <CheckBoxIcon style={{ color: "#23aafa", marginRight: ".25rem", verticalAlign: 'middle', display: 'inline-flex', }} />
+                                                <ArrowUpwardIcon style={{ color: "#d41a1b", marginRight: ".25rem", verticalAlign: 'middle', display: 'inline-flex', }} />
+                                                <AddCircleIcon style={{ color: "#78758e", marginRight: "5rem", verticalAlign: 'middle', display: 'inline-flex', }} />
+                                                <b>KEV-8</b>
+                                                <AccountCircleIcon style={{ color: "#78758e", marginLeft: ".25rem", verticalAlign: 'middle', display: 'inline-flex', }} />
+                                            </Box>
+                                        </Grid>
+                                    </Grid>
+                                </ButtonBase>
+                            </CardContent>
+                        </Card>
+
+                    </Grid>
+                    <Grid item>
+                        <Card className={classes.mainColumns} variant="outlined">
+                            <div className={classes.columnTopSpacing}>
+                                <Typography className={classes.columnTopText}>
+                                    <b>IN PROGRESS</b> 1
+                                </Typography>
+                            </div>
+                            <CardContent>
+                                <ButtonBase className={classes.ticket} variant="outlined" onClick={handleAlertOpen7}>
+                                    <Grid contianer direction={"column"} justifyContent="flex-start" alignItems="flex-start">
+                                        <Grid item>
+                                            <Typography className={classes.ticketDescription}>
+                                                Interactively play a trumpet by scaling the browser window
+                                            </Typography>
+                                        </Grid>
+                                        <Grid item>
+                                            <Box className={classes.Languages} style={{ width: '10rem', backgroundColor: "#c99c30" }}>
+                                                <Typography className={classes.ticketLanguageDescription}>
+                                                    <b>JAVASCRIPT WITH REACT</b>
+                                                </Typography>
+                                            </Box>
+                                        </Grid>
+                                        <Grid item>
+                                            <Box className={classes.ticketNumber}>
+                                                <BuildIcon style={{ color: "#AD2998", marginRight: ".25rem", verticalAlign: 'middle', display: 'inline-flex', fontSize:"1.2rem" }} />
+                                                <MoreVertOutlinedIcon style={{ color: "#899B46", marginRight: ".25rem", verticalAlign: 'middle', display: 'inline-flex', }} />
+                                                <AddCircleIcon style={{ color: "#78758e", marginRight: "5rem", verticalAlign: 'middle', display: 'inline-flex', }} />
+                                                <b>KEV-7</b>
+                                                <AccountCircleIcon style={{ color: "#78758e", marginLeft: ".25rem", verticalAlign: 'middle', display: 'inline-flex', }} />
+                                            </Box>
+                                        </Grid>
+                                    </Grid>
+                                </ButtonBase>
+                            </CardContent>
+                        </Card>
+                    </Grid>
+                    <Grid item>
+                        <Card className={classes.mainColumns} variant="outlined">
+                            <div className={classes.columnTopSpacing}>
+                                <Typography className={classes.columnTopText}>
+                                    <b>CODE REVIEW</b> 1
+                                </Typography>
+                            </div>
+                            <CardContent>
+                                <ButtonBase className={classes.ticket} variant="outlined" onClick={handleAlertOpen6}>
+                                    <Grid contianer direction={"column"} justifyContent="flex-start" alignItems="flex-start">
+                                        <Grid item>
+                                            <Typography className={classes.ticketDescription}>
+                                                Bug fixes on this, my website resume
+                                            </Typography>
+                                        </Grid>
+                                        <Grid item>
+                                            <Box className={classes.Languages} style={{ width: '10rem', backgroundColor: "#c99c30" }}>
+                                                <Typography className={classes.ticketLanguageDescription}>
+                                                    <b>JAVASCRIPT WITH REACT</b>
+                                                </Typography>
+                                            </Box>
+                                        </Grid>
+                                        <Grid item>
+                                            <Box className={classes.ticketNumber}>
+                                                <BuildIcon style={{ color: "#AD2998", marginRight: ".25rem", verticalAlign: 'middle', display: 'inline-flex', fontSize:"1.2rem"}} />
+                                                <ArrowUpwardIcon style={{ color: "#d41a1b", marginRight: ".25rem", verticalAlign: 'middle', display: 'inline-flex', }} />
+                                                <AddCircleIcon style={{ color: "#78758e", marginRight: "5rem", verticalAlign: 'middle', display: 'inline-flex', }} />
+                                                <b>KEV-6</b>
+                                                <AccountCircleIcon style={{ color: "#78758e", marginLeft: ".25rem", verticalAlign: 'middle', display: 'inline-flex', }} />
+                                            </Box>
+                                        </Grid>
+                                    </Grid>
+                                </ButtonBase>
+                            </CardContent>
+                        </Card>
+                    </Grid>
+                    <Grid item>
+                        <Card className={classes.mainColumns} variant="outlined">
+                            <div className={classes.columnTopSpacing}>
+                                <Typography className={classes.columnTopText}>
+                                    <b>DONE</b> 5
+                                </Typography>
+                            </div>
+                            <CardContent>
+                                <ButtonBase className={classes.ticket} variant="outlined" onClick={handleAlertOpen5}>
+                                    <Grid contianer direction={"column"} justifyContent="flex-start" alignItems="flex-start">
+                                        <Grid item>
+                                            <Typography className={classes.ticketDescription}>
+                                                Graphically analyze the sentiment of Harry Potter
+                                            </Typography>
+                                        </Grid>
+                                        <Grid item>
+                                            <Box className={classes.Languages} style={{ width: '6rem', backgroundColor: "#0e90d8" }}>
+                                                <Typography className={classes.ticketLanguageDescription}>
+                                                    <b>R WITH SHINY</b>
+                                                </Typography>
+                                            </Box>
+                                        </Grid>
+                                        <Grid item>
+                                            <Box className={classes.ticketNumber}>
+                                                <NotInterestedOutlinedIcon style={{ color: "#FCA273", marginRight: ".25rem", verticalAlign: 'middle', display: 'inline-flex', }} />
+                                                <BookmarkIcon style={{ color: "#85E633", marginRight: ".25rem", verticalAlign: 'middle', display: 'inline-flex', }} />
+                                                <RemoveCircleOutlinedIcon style={{ color: "#78758e", marginRight: "5rem", verticalAlign: 'middle', display: 'inline-flex', }} />
+                                                <b>KEV-5</b>
+                                                <AccountCircleIcon style={{ color: "#78758e", marginLeft: ".25rem", verticalAlign: 'middle', display: 'inline-flex', }} />
+                                            </Box>
+                                        </Grid>
+                                    </Grid>
+                                </ButtonBase>
+                                <ButtonBase className={classes.ticket} variant="outlined" onClick={handleAlertOpen4}>
+                                    <Grid contianer direction={"column"} justifyContent="flex-start" alignItems="flex-start">
+                                        <Grid item>
+                                            <Typography className={classes.ticketDescription}>
+                                                Babashka command line tool for querying files
+                                            </Typography>
+                                        </Grid>
+                                        <Grid item>
+                                            <Box className={classes.Languages} style={{ width: '10rem', backgroundColor: "#8bc34a" }}>
+                                                <Typography className={classes.ticketLanguageDescription}>
+                                                    <b>CLOJURE WITH BABASHKA</b>
+                                                </Typography>
+                                            </Box>
+                                        </Grid>
+                                        <Grid item>
+                                            <Box className={classes.ticketNumber}>
+                                                <CheckBoxIcon style={{ color: "#23aafa", marginRight: ".25rem", verticalAlign: 'middle', display: 'inline-flex', }} />
+                                                <ArrowUpwardIcon style={{ color: "#d41a1b", marginRight: ".25rem", verticalAlign: 'middle', display: 'inline-flex', }} />
+                                                <AddCircleIcon style={{ color: "#78758e", marginRight: "5rem", verticalAlign: 'middle', display: 'inline-flex', }} />
+                                                <b>KEV-4</b>
+                                                <AccountCircleIcon style={{ color: "#78758e", marginLeft: ".25rem", verticalAlign: 'middle', display: 'inline-flex', }} />
+                                            </Box>
+                                        </Grid>
+                                    </Grid>
+                                </ButtonBase>
+                                <ButtonBase className={classes.ticket} variant="outlined" onClick={handleAlertOpen3}>
+                                    <Grid contianer direction={"column"} justifyContent="flex-start" alignItems="flex-start">
+                                        <Grid item>
+                                            <Typography className={classes.ticketDescription}>
+                                                Nighlty changing lockscreen shortcut for my iPhone
+                                            </Typography>
+                                        </Grid>
+                                        <Grid item>
+                                            <Box className={classes.Languages} style={{ width: '10rem', backgroundColor: "#ec8a85" }}>
+                                                <Typography className={classes.ticketLanguageDescription}>
+                                                    <b>APPLE SHORTCUTS SCRIPT</b>
+                                                </Typography>
+                                            </Box>
+                                        </Grid>
+                                        <Grid item>
+                                            <Box className={classes.ticketNumber}>
+                                                <CheckBoxIcon style={{ color: "#23aafa", marginRight: ".25rem", verticalAlign: 'middle', display: 'inline-flex', }} />
+                                                <BookmarkIcon style={{ color: "#85E633", marginRight: ".25rem", verticalAlign: 'middle', display: 'inline-flex', }} />
+                                                <AddCircleIcon style={{ color: "#78758e", marginRight: "5rem", verticalAlign: 'middle', display: 'inline-flex', }} />
+                                                <b>KEV-3</b>
+                                                <AccountCircleIcon style={{ color: "#78758e", marginLeft: ".25rem", verticalAlign: 'middle', display: 'inline-flex', }} />
+                                            </Box>
+                                        </Grid>
+                                    </Grid>
+                                </ButtonBase>
+                                <ButtonBase className={classes.ticket} variant="outlined" onClick={handleAlertOpen2}>
+                                    <Grid contianer direction={"column"} justifyContent="flex-start" alignItems="flex-start">
+                                        <Grid item>
+                                            <Typography className={classes.ticketDescription}>
+                                                Interactively map geographic tick population densities
+                                            </Typography>
+                                        </Grid>
+                                        <Grid item>
+                                            <Box className={classes.Languages} style={{ width: '6rem', backgroundColor: "#0e90d8" }}>
+                                                <Typography className={classes.ticketLanguageDescription}>
+                                                    <b>R WITH SHINY</b>
+                                                </Typography>
+                                            </Box>
+                                        </Grid>
+                                        <Grid item>
+                                            <Box className={classes.ticketNumber}>
+                                                <BuildIcon style={{ color: "#AD2998", marginRight: ".25rem", verticalAlign: 'middle', display: 'inline-flex', fontSize:"1.2rem"}} />
+                                                <ArrowUpwardIcon style={{ color: "#d41a1b", marginRight: ".25rem", verticalAlign: 'middle', display: 'inline-flex', }} />
+                                                <AddCircleIcon style={{ color: "#78758e", marginRight: "5rem", verticalAlign: 'middle', display: 'inline-flex', }} />
+                                                <b>KEV-2</b>
+                                                <AccountCircleIcon style={{ color: "#78758e", marginLeft: ".25rem", verticalAlign: 'middle', display: 'inline-flex', }} />
+                                            </Box>
+                                        </Grid>
+                                    </Grid>
+                                </ButtonBase>
+                                <ButtonBase className={classes.ticket} variant="outlined" onClick={handleAlertOpen1}>
+                                    <Grid contianer direction={"column"} justifyContent="flex-start" alignItems="flex-start">
+                                        <Grid item>
+                                            <Typography className={classes.ticketDescription}>
+                                                Eplore geographic tick-borne pathogen distributions
+                                            </Typography>
+                                        </Grid>
+                                        <Grid item>
+                                            <Box className={classes.Languages} style={{ width: '6rem', backgroundColor: "#0e90d8" }}>
+                                                <Typography className={classes.ticketLanguageDescription}>
+                                                    <b>R WITH SHINY</b>
+                                                </Typography>
+                                            </Box>
+                                        </Grid>
+                                        <Grid item>
+                                            <Box className={classes.ticketNumber}>
+                                                <BuildIcon style={{ color: "#AD2998", marginRight: ".25rem", verticalAlign: 'middle', display: 'inline-flex', fontSize:"1.2rem"}} />
+                                                <MoreVertOutlinedIcon style={{ color: "#899B46", marginRight: ".25rem", verticalAlign: 'middle', display: 'inline-flex', }} />
+                                                <RemoveCircleOutlinedIcon style={{ color: "#78758e", marginRight: "5rem", verticalAlign: 'middle', display: 'inline-flex', }} />
+                                                <b>KEV-1</b>
+                                                <AccountCircleIcon style={{ color: "#78758e", marginLeft: ".25rem", verticalAlign: 'middle', display: 'inline-flex', }} />
+                                            </Box>
+                                        </Grid>
+                                    </Grid>
+                                </ButtonBase>
+                            </CardContent>
+                        </Card>
+                    </Grid>
                 </Grid>
-                <Grid item xs={12}>
-                    <Card className={classes.root}>
-                        <CardContent>
-                            <Typography className={classes.title} gutterBottom>
-                                Babashka Search
-                            </Typography>
-                            <Typography className={classes.projectIntros} gutterBottom>
-                                Command line tool for querying information from home directory files.
-                                <hr />
-                                <br />
-                                <br />
-                            </Typography>
-                            <Typography className={classes.languages} color="textSecondary">
-                                {bullet} Written in Clojure implementing the Babashka interpreter
-                            </Typography>
-                            <Typography variant="body2" component="p">
-                                Using Clojure, a Lisp language on the JVM, I created a command line tool for querying files. While normally
-                                compiled on the JVM and run as a .jar file, Babashka is a Clojure interpreter that allows for much faster
-                                startup as an alternative for Clojure scripting compared to slugish JVM Clojure. In order to acheive this,
-                                increased startup speed, it sacrafices a general performance as compaired to executing compiled Clojure code.
-                                Another safrafice Babaska makes is that the sci interpreter is only compatable a "substantial subset of Clojure."
-                                If you are interested I would encorange you to check out the link to Babaska's git page below. Below I have also
-                                included a sample usage of babashka-search.
-                                <br />
-                                <Highlight language="bash">
-                                    {"$ bbsearch 'test.py'"}
-                                    <br />
-                                    <br />
-                                    {"test.py"}
-                                    <br />
-                                    {"  Path: /Users/kewing/one/test.py"}
-                                    <br />
-                                    {"  Modified: 2021-01-01"}
-                                    <br />
-                                    {"  Size: 48096 bytes"}
-                                    <br />
-                                    {"test.py"}
-                                    <br />
-                                    {"  Path: /Users/kewing/two/test.py"}
-                                    <br />
-                                    {"  Modified: 2021-01-01"}
-                                    <br />
-                                    {"  Size: 9490 bytes"}
-                                    <br />
-                                    {"test.py"}
-                                    <br />
-                                    {"  Path: /Users/kewing/three/test.py"}
-                                    <br />
-                                    {"  Modified: 2021-01-01"}
-                                    <br />
-                                    {"  Size: 222 bytes"}
-                                    <br />
-                                    {"test.py"}
-                                    <br />
-                                    {"  Path: /Users/kewing/four/test.py"}
-                                    <br />
-                                    {"  Modified: 2021-01-01"}
-                                    <br />
-                                    {"  Size: 9490 bytes"}
-                                </Highlight>
-                            </Typography>
-                        </CardContent>
-                        <CardActions>
-                            <Button className={classes.button} component={"a"} href="https://github.com/kevin-ewing/babashka_search" rel="noopener noreferrer" target="_blank">
-                                Visit the Repo
-                            </Button>
-                            <Button className={classes.button} component={"a"} href="https://github.com/babashka/babashka" rel="noopener noreferrer" target="_blank">
-                                More info on Babashka
-                            </Button>
-                        </CardActions>
-                    </Card>
-                </Grid>
-                <Grid item xs={12}>
-                    <Card className={classes.root}>
-                        <CardContent>
-                            <Typography className={classes.title} gutterBottom>
-                                Lockscreen Shortcut
-                            </Typography>
-                            <Typography className={classes.projectIntros} gutterBottom>
-                                Nighlty changing lockscreen shortcut for my iPhone.
-                                <hr />
-                                <br />
-                                <br />
-                            </Typography>
-                            <Typography className={classes.languages} color="textSecondary">
-                                {bullet} Written in the Apple shortcuts app.
-                            </Typography>
-                            <Grid container spacing={1} justify="center">
-                                <Grid item xs={12} lg={4}>
-                                    <Typography variant="body2" component="p">
-                                        Ever since the release of iPhone shortcuts app with iOS 13 I was trying to come up with
-                                        interesting and helpful shorcuts. After playing around with the simple scripting you
-                                        can write within these shortcuts, I created this lockscreen changing shortcut. Every night
-                                        at 3:00 this automation is run on my phone which grabs a random image from my Unsplashed
-                                        colection of nature photos and sets that to my wallpaper. Though quite a simple task,
-                                        it is extrmememly pleasant to wake up each morning to a different beautiful wallpaper.
-                                        And, while it is not a very techincally impressive project, due tjo how much I interact
-                                        with it, it is one of my favorite. I have included a sample of what my lockscreen and
-                                        wallpaper looks like for today! Please note that in order to download the shortcut, you must
-                                        be on a moble Apple device.
-                                        <br />
-                                    </Typography>
-                                </Grid>
-                                <Grid item xs={12} lg={8}>
-                                    <SamplePhoneShortcut image={image} />
-                                </Grid>
-                            </Grid>
-                        </CardContent>
-                        <CardActions>
-                            <Button className={classes.button} component={"a"} href="https://www.icloud.com/shortcuts/09ff9068fe074cc19ddf99afbb8f232c" rel="noopener noreferrer" target="_blank">
-                                Download the Shortcut
-                            </Button>
-                            <Button className={classes.button} component={"a"} href="https://unsplash.com/collections/33032665/naturewallpapers" rel="noopener noreferrer" target="_blank">
-                                Unsplash Collection
-                            </Button>
-                        </CardActions>
-                    </Card>
-                </Grid>
-                <Grid item xs={12} lg={6}>
-                    <Card className={classes.root}>
-                        <CardContent>
-                            <Typography className={classes.title} gutterBottom>
-                                Exploring Tick Density
-                            </Typography>
-                            <Typography className={classes.projectIntros} gutterBottom>
-                                Web app with geographical representations of tick population densities.
-                                <hr />
-                                <br />
-                                <br />
-                            </Typography>
-                            <Typography className={classes.languages} color="textSecondary">
-                                {bullet} Written in R with RStudio's Shinny.
-                            </Typography>
-                            <Typography variant="body2" component="p">
-                                An app used to explore the population of ticks over time in the United States. Using data
-                                collected by NEON over the past six years, this app alows users to ask questions of the data
-                                and intuativly explore the results of those questions on there own. With interactive options
-                                and filters for the data, as well as beausitful visuals made with the R packagas of the
-                                Tidyverse and Leaflet, select button below to view the hosted app on shinyapps.io and explore
-                                the data for yourself.
-                                <br />
-                            </Typography>
-                        </CardContent>
-                        <CardActions>
-                            <Button className={classes.button} component={"a"} href="https://github.com/kevin-ewing/tick-density-data-exploration" rel="noopener noreferrer" target="_blank">
-                                Visit the Repo
-                            </Button>
-                            <Button className={classes.button} component={"a"} href="https://kevin-ewing.shinyapps.io/FinalTickPathogen/" rel="noopener noreferrer" target="_blank">
-                                Visit the Web App
-                            </Button>
-                        </CardActions>
-                    </Card>
-                </Grid>
-                <Grid item xs={12} lg={6}>
-                    <Card className={classes.root}>
-                        <CardContent>
-                            <Typography className={classes.title} gutterBottom>
-                                Exploring Tick-Borne Pathogens
-                            </Typography>
-                            <Typography className={classes.projectIntros} gutterBottom>
-                                Web app with geographical representations of tick-borne pathogen distrabutions.
-                                <hr />
-                                <br />
-                                <br />
-                            </Typography>
-                            <Typography className={classes.languages} color="textSecondary">
-                                {bullet} Written in R with RStudio's Shinny.
-                            </Typography>
-                            <Typography variant="body2" component="p">
-                                This app similarly uses NEON data to explore tick populations. However this app is focused on the pathogens
-                                that those ticks can spread. This Shiny app again uses Tidyverse and Leaflet to visual and graphically display
-                                the data, so feel free to select select button below to view the hosted app on shinyapps.io and explore
-                                tick pathogen trends yourself.
-                                <br />
-                            </Typography>
-                        </CardContent>
-                        <CardActions>
-                            <Button className={classes.button} component={"a"} href="https://github.com/kevin-ewing/tick-density-data-exploration" rel="noopener noreferrer" target="_blank">
-                                Visit the Repo
-                            </Button>
-                            <Button className={classes.button} component={"a"} href="https://kevin-ewing.shinyapps.io/FinalTickPathogen/" rel="noopener noreferrer" target="_blank">
-                                Visit the Web App
-                            </Button>
-                        </CardActions>
-                    </Card>
-                </Grid>
-                <Grid item xs={12}>
-                    <Card className={classes.root}>
-                        <CardContent>
-                            <Typography className={classes.title} gutterBottom>
-                                Browser Trumpet
-                            </Typography>
-                            <Typography className={classes.projectIntros} gutterBottom>
-                                Web app to interactivly play the trumpet by scaling the browser window.
-                                <hr />
-                                <br />
-                                <br />
-                            </Typography>
-                            <Typography className={classes.languages} color="textSecondary">
-                                {bullet} Written in Javascript with React.
-                            </Typography>
-                            <Typography variant="body2" component="p">
-                                Currently working on this! Check up on the progress by visiting the repo below.
-                                <br />
-                            </Typography>
-                        </CardContent>
-                        <CardActions>
-                            <Button className={classes.button} component={"a"} href="https://github.com/kevin-ewing/browser-instruments" rel="noopener noreferrer" target="_blank">
-                                Visit the Repo
-                            </Button>
-                        </CardActions>
-                    </Card>
-                </Grid>
-                <Grid item>
-                    <Typography className={classes.comingSoon}>
-                        More coming soon!..
-                    </Typography>
-                </Grid>
-            </Grid>
+            </main>
+            <Dialog0 alertShow={alertShow0} handleAlertClose={handleAlertClose0} />
+            <Dialog1 alertShow={alertShow1} handleAlertClose={handleAlertClose1} />
+            <Dialog2 alertShow={alertShow2} handleAlertClose={handleAlertClose2} />
+            <Dialog3 alertShow={alertShow3} handleAlertClose={handleAlertClose3} />
+            <Dialog4 alertShow={alertShow4} handleAlertClose={handleAlertClose4} />
+            <Dialog5 alertShow={alertShow5} handleAlertClose={handleAlertClose5} />
+            <Dialog6 alertShow={alertShow6} handleAlertClose={handleAlertClose6} />
+            <Dialog7 alertShow={alertShow7} handleAlertClose={handleAlertClose7} />
+            <Dialog8 alertShow={alertShow8} handleAlertClose={handleAlertClose8} />
+
+
         </div>
-    )
+    );
 }
+
+ResponsiveDrawer.propTypes = {
+    /**
+     * Injected by the documentation to work in an iframe.
+     * You won't need it on your project.
+     */
+    window: PropTypes.func,
+};
+
+export default ResponsiveDrawer;
