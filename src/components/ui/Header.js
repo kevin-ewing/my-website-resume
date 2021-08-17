@@ -5,7 +5,6 @@ import useScrollTrigger from '@material-ui/core/useScrollTrigger';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import BugReport from '@material-ui/icons/BugReport';
-import PersonAdd from '@material-ui/icons/PersonAdd';
 import leafVen from '../../assets/LeafVen.svg';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
@@ -120,7 +119,8 @@ const useStyles = makeStyles((theme) => ({
     opacity: 0.70,
   },
   appbar: {
-      zIndex: theme.zIndex.modal+1
+      zIndex: theme.zIndex.modal+1,
+      backgroundColor: "white",
   }
 }));
 
@@ -176,9 +176,6 @@ export default function ProminentAppBar(props) {
 
   const widgits = (
     <React.Fragment >
-        <IconButton color= "primary" aria-label="Connect" className={classes.buttonSettings}>
-            <PersonAdd />
-        </IconButton>
         <IconButton color= "primary" aria-label="Report a Bug" className={classes.buttonSettings}>
             <BugReport />
         </IconButton>
@@ -221,7 +218,7 @@ export default function ProminentAppBar(props) {
   return (
       <React.Fragment>
           <HideOnScroll>
-            <AppBar position="fixed" color = {theme.palette.common.white} className={classes.appbar}>
+            <AppBar position="relative" className={classes.appbar}>
                 <Toolbar className={classes.toolbar} disableGutters>
                 <Button component={Link} to="/" className={classes.logoContainer} onClick={() => props.setValue(0)} disableRipple>
                     <img alt= "Kevin Nor Logo" className={classes.logo} src={leafVen} />

@@ -86,6 +86,7 @@ const useStyles = makeStyles((theme) => ({
         backgroundColor: "#fafbfc",
     },
     mainPage: {
+        marginTop:"-5rem",
         flexGrow: 1,
         padding: theme.spacing(5),
         backgroundColor: "white",
@@ -383,7 +384,7 @@ function ResponsiveDrawer(props) {
                     Select a ticket below to learn more information about that project.
                 </Typography>
 
-                <Grid container direction={"row"} spacing={1}>
+                <Grid container direction={"row"} spacing={1} style={{ justifyContent: "center" }}>
                     <Grid item>
                         <Card className={classes.mainColumns} variant="outlined">
                             <div className={classes.columnTopSpacing}>

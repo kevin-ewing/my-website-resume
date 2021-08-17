@@ -6,6 +6,7 @@ import Typography from '@material-ui/core/Typography';
 
 const useStyles = makeStyles(theme => ({
     Background: {
+        marginTop:"-5rem",
         backgroundImage: `url(${background})`,
         backgroundRepeat:'repeat-x',
         height: '1920px',
@@ -127,7 +128,6 @@ export default function LandingPage() {
     const classes = useStyles()
 
     return (
-        <div>
             <div className={classes.Background}>
                 <Grid container direction="column" justifyContent="space-evenly" alignItems="center">
                     <Grid item className={classes.gridTop}>
@@ -172,7 +172,6 @@ export default function LandingPage() {
                     </Grid>
                 </Grid>
             </div>
-        </div>
         
     )
 }

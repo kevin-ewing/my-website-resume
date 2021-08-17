@@ -85,7 +85,7 @@ export default function SimpleDialogDemo(props) {
                 <Button className={classes.button} component={"a"} href="https://github.com/kevin-ewing/tick-density-data-exploration" rel="noopener noreferrer" target="_blank">
                     Visit the Repo
                 </Button>
-                <Button className={classes.button} component={"a"} href="https://kevin-ewing.shinyapps.io/FinalTickPathogen/" rel="noopener noreferrer" target="_blank">
+                <Button className={classes.button} component={"a"} href="https://kevin-ewing.shinyapps.io/FinalTickDensity/" rel="noopener noreferrer" target="_blank">
                     Visit the Web App
                 </Button>
             </CardActions>
