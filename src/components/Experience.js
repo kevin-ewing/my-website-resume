@@ -9,40 +9,30 @@ import javascriptLogo from "../assets/javascriptLogo.svg";
 import javaLogo from "../assets/javaLogo.svg";
 import rLogo from "../assets/rLogo.svg";
 import clojureLogo from "../assets/clojureLogo.svg";
-import cLogo from "../assets/cLogo.svg";
 
 const useStyles = makeStyles((theme) => ({
   root: {
     marginTop: "-5rem",
   },
-  blackBox: {
-    width: "100%",
-    height: "50rem",
-    backgroundColor: "black",
-  },
   lightBlueBox: {
     width: "100%",
-    height: "75rem",
+    height: "60rem",
     backgroundColor: theme.palette.primary.light,
   },
   darkBlueBox: {
     width: "100%",
-    height: "75rem",
+    height: "60rem",
     backgroundColor: theme.palette.primary.dark,
   },
   lightGreenBox: {
     width: "100%",
-    height: "75rem",
+    height: "60rem",
     backgroundColor: theme.palette.secondary.light,
   },
   darkGreenBox: {
     width: "100%",
-    height: "75rem",
+    height: "60rem",
     backgroundColor: theme.palette.secondary.dark,
-  },
-  headerBox: {
-    width: "100%",
-    height: "75rem",
   },
   headerTypography: {
     fontFamily: "Noto sans,sans-serif",
@@ -79,11 +69,6 @@ const useStyles = makeStyles((theme) => ({
     marginTop: "-1rem",
     fontSize: "1.5rem",
   },
-  cLogo: {
-    padding: "2rem",
-    height: "20rem",
-    width: "20rem",
-  },
 }));
 
 export default function ResponsiveDrawer(props) {
@@ -91,14 +76,6 @@ export default function ResponsiveDrawer(props) {
 
   return (
     <div className={classes.root}>
-      <Box
-        display="flex"
-        justifyContent="center"
-        alignItems="center"
-        className={classes.blackBox}
-      >
-        <Typography className={classes.headerTypography}>Languages</Typography>
-      </Box>
       <Box
         display="flex"
         justifyContent="center"
@@ -275,36 +252,6 @@ export default function ResponsiveDrawer(props) {
           </Grid>
         </Grid>
       </Box>
-      <Box
-        display="flex"
-        justifyContent="center"
-        alignItems="center"
-        className={classes.lightGreenBox}
-      >
-        <Grid
-          container
-          direction="row"
-          justifyContent="center"
-          alignItems="center"
-        >
-          <Grid item md={4} sm={12} xs={12}>
-            <img alt="c logo" src={cLogo} className={classes.cLogo} />
-          </Grid>
-          <Grid item md={8} sm={12} xs={12}>
-            <Typography className={classes.langageName}>C</Typography>
-            <Typography className={classes.packages}>
-              Packages: <br />
-              This, that
-            </Typography>
-          </Grid>
-        </Grid>
-      </Box>
-      <Box
-        display="flex"
-        justifyContent="center"
-        alignItems="center"
-        className={classes.blackBox}
-      ></Box>
     </div>
   );
 }
