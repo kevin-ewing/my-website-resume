@@ -11,36 +11,33 @@ const orange = "#c99c30";
 const white = "#ffffff";
 
 export default createMuiTheme({
-    palette: {
-        common: {
-            lightBlue: `${lightBlue}`,
-            blue: `${blue}`,
-            darkBlue: `${darkBlue}`,
-            green: `${green}`,
-            lightGreen: `${lightGreen}`,
-            darkGreen: `${darkGreen}`,
-            purple: `${purple}`,
-            orange: `${orange}`,
-            white: `${white}`
-        },
-        primary: {
-            light: lightBlue,
-            main: blue,
-            dark: darkBlue
-        },
-        secondary: {
-            light: lightGreen,
-            main: green,
-            dark: darkGreen
-        }
+  palette: {
+    common: {
+      lightBlue: `${lightBlue}`,
+      blue: `${blue}`,
+      darkBlue: `${darkBlue}`,
+      green: `${green}`,
+      lightGreen: `${lightGreen}`,
+      darkGreen: `${darkGreen}`,
+      purple: `${purple}`,
+      orange: `${orange}`,
+      white: `${white}`,
     },
-    mixins: {
-        toolbar: {
-            minHeight: 70
-        }
+    primary: {
+      light: lightBlue,
+      main: blue,
+      dark: darkBlue,
     },
-    fontFamily: [
-        'Noto sans', 
-        'sans-serif'
-    ].join(','),
+    secondary: {
+      light: lightGreen,
+      main: green,
+      dark: darkGreen,
+    },
+  },
+  mixins: {
+    toolbar: {
+      minHeight: 70,
+    },
+  },
+  fontFamily: ["Noto sans", "sans-serif"].join(","),
 });
