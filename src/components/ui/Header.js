@@ -4,7 +4,7 @@ import Toolbar from "@material-ui/core/Toolbar";
 import useScrollTrigger from "@material-ui/core/useScrollTrigger";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
-// import BugReport from "@material-ui/icons/BugReport";
+import BugReport from "@material-ui/icons/BugReport";
 import leafVen from "../../assets/LeafVen.svg";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
@@ -19,6 +19,7 @@ import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import Slide from "@material-ui/core/Slide";
+import bugDialog from "./bugPopups/bugPopup.js";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -34,7 +35,7 @@ const useStyles = makeStyles((theme) => ({
     marginRight: theme.spacing(2),
   },
   toolbar: {
-    minHeight: 100,
+    minHeight: 80,
     alignItems: "flex-start",
     paddingBottom: 10,
     [theme.breakpoints.down("sm")]: {
@@ -147,6 +148,17 @@ export default function ProminentAppBar(props) {
   };
   const iOS = process.browser && /iPad|iPhone|iPod/.test(navigator.userAgent);
 
+
+  const [alertShow, setAlertShow] = React.useState(false);
+  const handleAlertOpen = () => {
+    setAlertShow(true);
+  };
+
+  const handleAlertClose = () => {
+    setAlertShow(false);
+  };
+
+
   useEffect(() => {
     if (window.location.pathname === "/" && props.value !== 0) {
       props.setValue(0);
@@ -182,26 +194,26 @@ export default function ProminentAppBar(props) {
           to="/projects"
           label="Projects"
         />
-        {/* <Tab
+        <Tab
           className={classes.tab}
           disableRipple
           component={Link}
           to="/experience"
           label="Experience"
-        /> */}
+        />
       </Tabs>
     </React.Fragment>
   );
 
   const widgits = (
     <React.Fragment>
-      {/* <IconButton
+      <IconButton
         color="primary"
         aria-label="Report a Bug"
         className={classes.buttonSettings}
       >
-        <BugReport />
-      </IconButton> */}
+        <BugReport onClick={handleAlertOpen}/>
+      </IconButton>
     </React.Fragment>
   );
 
@@ -297,6 +309,7 @@ export default function ProminentAppBar(props) {
         </AppBar>
       </HideOnScroll>
       <div className={classes.toolbarMargin} />
+      <bugDialog alertShow={alertShow} handleAlertClose={handleAlertClose} />
     </React.Fragment>
   );
 }

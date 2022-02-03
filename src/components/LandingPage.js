@@ -144,7 +144,7 @@ export default function LandingPage() {
             </Grid>
             <Grid item>
               <Typography className={classes.DescriptionFont} align="center">
-                And welcome to my website resume.
+                Welcome to my website resume.
               </Typography>
             </Grid>
           </Grid>
@@ -153,9 +153,9 @@ export default function LandingPage() {
           <Typography className={classes.DescriptionFont} align="center">
             <br />
             <br />
-            I am a junior at Middlebury College majoring in Computer Science.{" "}
-            <br /> Interested in exploring the ever-growing connections between
-            biology, statistics, and computer science.
+            I am a junior at Middlebury College majoring in Computer Science,{" "}
+            <br /> interested in exploring the ever-growing connections between
+            biology, statistics, and technology.
           </Typography>
         </Grid>
 
@@ -179,10 +179,10 @@ export default function LandingPage() {
               justifyContent="flex-end"
             >
               <Typography className={classes.GreenFont}>
-                About the logo: The logo in the header, is an exclusive or venn
+                About the logo: The logo in the header is an exclusive or venn
                 diagram. With the exclusive or being a logic operation by which
                 all other logic can be derived, it represensts my commitiment to
-                exploring the two discaplines of computer science and biology in
+                exploring the two disciplines of computer science and biology in
                 the hopes of building connections.
               </Typography>
             </Grid>
