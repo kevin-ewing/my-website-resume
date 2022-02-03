@@ -4,7 +4,7 @@ import Toolbar from "@material-ui/core/Toolbar";
 import useScrollTrigger from "@material-ui/core/useScrollTrigger";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
-import BugReport from "@material-ui/icons/BugReport";
+// import BugReport from "@material-ui/icons/BugReport";
 import leafVen from "../../assets/LeafVen.svg";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
@@ -182,26 +182,26 @@ export default function ProminentAppBar(props) {
           to="/projects"
           label="Projects"
         />
-        <Tab
+        {/* <Tab
           className={classes.tab}
           disableRipple
           component={Link}
           to="/experience"
           label="Experience"
-        />
+        /> */}
       </Tabs>
     </React.Fragment>
   );
 
   const widgits = (
     <React.Fragment>
-      <IconButton
+      {/* <IconButton
         color="primary"
         aria-label="Report a Bug"
         className={classes.buttonSettings}
       >
         <BugReport />
-      </IconButton>
+      </IconButton> */}
     </React.Fragment>
   );
 
