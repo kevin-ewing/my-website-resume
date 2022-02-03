@@ -6,9 +6,9 @@ import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
 import pythonLogo from "../assets/pythonLogo.svg";
 import javascriptLogo from "../assets/javascriptLogo.svg";
-import javaLogo from "../assets/javaLogo.svg";
 import rLogo from "../assets/rLogo.svg";
 import clojureLogo from "../assets/clojureLogo.svg";
+import cLogo from "../assets/cLogo.svg";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -106,8 +106,8 @@ export default function ResponsiveDrawer(props) {
           <Grid item md={8} sm={12} xs={12}>
             <Typography className={classes.langageName}>Python</Typography>
             <Typography className={classes.packages}>
-              Packages: <br />
-              This, that
+              Libraries: <br />
+              Openpyxl, Pandas, Boto3, Scapy, Unittest, Blender
             </Typography>
           </Grid>
         </Grid>
@@ -142,8 +142,8 @@ export default function ResponsiveDrawer(props) {
           <Grid item md={8} sm={12} xs={12}>
             <Typography className={classes.langageName}>JavaScript</Typography>
             <Typography className={classes.packages}>
-              Packages: <br />
-              This, that
+              Frameworks: <br />
+              React (Material UI)
             </Typography>
           </Grid>
         </Grid>
@@ -164,22 +164,18 @@ export default function ResponsiveDrawer(props) {
             <Button
               className={classes.logoButton}
               component={"a"}
-              href="https://www.java.com/en/"
+              href="https://www.cprogramming.com/"
               rel="noopener noreferrer"
               target="_blank"
             >
-              <img
-                alt="java logo"
-                src={javaLogo}
-                className={classes.languageLogo}
-              />
+              <img alt="c logo" src={cLogo} className={classes.languageLogo} />
             </Button>
           </Grid>
           <Grid item md={8} sm={12} xs={12}>
-            <Typography className={classes.langageName}>Java</Typography>
+            <Typography className={classes.langageName}>C</Typography>
             <Typography className={classes.packages}>
-              Packages: <br />
-              This, that
+              Experience: <br />
+              Re-wrote a handlful of C standard library finctions-- available at my github.
             </Typography>
           </Grid>
         </Grid>
@@ -211,7 +207,7 @@ export default function ResponsiveDrawer(props) {
             <Typography className={classes.langageName}>R</Typography>
             <Typography className={classes.packages}>
               Packages: <br />
-              This, that
+              Ggplot2, Tidyr, Dplyr, Leaflet, Shiny, Plotly, Stringr, Sentimentr
             </Typography>
           </Grid>
         </Grid>
@@ -246,8 +242,8 @@ export default function ResponsiveDrawer(props) {
           <Grid item md={8} sm={12} xs={12}>
             <Typography className={classes.langageName}>Clojure</Typography>
             <Typography className={classes.packages}>
-              Packages: <br />
-              This, that
+              Libraries: <br />
+              Cognitect-labs/aws-api, Http-kit, Compojure, Quil
             </Typography>
           </Grid>
         </Grid>

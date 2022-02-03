@@ -140,7 +140,7 @@ export default function Footer(props) {
         <Grid container justify="space-around" className={classes.container}>
           <Grid item className={classes.gridTop}>
             <Typography className={classes.memmo}>
-              I am alwasy learning and looking for new projects! <br />
+              I am always learning and looking for new projects! <br />
               Leave a suggestion for a new feature, report a bug, <br />
               or give your feedback by selecting the bug icon <br />
               in the top left corner.
