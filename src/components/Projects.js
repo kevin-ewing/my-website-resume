@@ -38,6 +38,7 @@ import Dialog5 from "./ui/projectsPopups/Dialog5";
 import Dialog6 from "./ui/projectsPopups/Dialog6";
 import Dialog7 from "./ui/projectsPopups/Dialog7";
 import Dialog8 from "./ui/projectsPopups/Dialog8";
+import Dialog9 from "./ui/projectsPopups/Dialog9";
 
 const drawerWidth = 210;
 
@@ -278,6 +279,15 @@ function ResponsiveDrawer(props) {
     setMobileOpen(!mobileOpen);
   };
 
+  const [alertShow9, setAlertShow9] = React.useState(false);
+  const handleAlertOpen9 = () => {
+    setAlertShow9(true);
+  };
+
+  const handleAlertClose9 = () => {
+    setAlertShow9(false);
+  };
+
   const drawer = (
     <div>
       <div className={classes.marginTop} />
@@ -448,7 +458,7 @@ function ResponsiveDrawer(props) {
                   >
                     <Grid item>
                       <Typography className={classes.ticketDescription}>
-                        Keep learning, experimenting and asking quetions
+                        Keep learning, experimenting and asking questions
                       </Typography>
                     </Grid>
                     <Grid item>
@@ -509,7 +519,7 @@ function ResponsiveDrawer(props) {
             <Card className={classes.mainColumns} variant="outlined">
               <div className={classes.columnTopSpacing}>
                 <Typography className={classes.columnTopText}>
-                  <b>IN PROGRESS</b> 1
+                  <b>IN PROGRESS</b> 2
                 </Typography>
               </div>
               <CardContent>
@@ -570,6 +580,74 @@ function ResponsiveDrawer(props) {
                           }}
                         />
                         <b>KEV-7</b>
+                        <AccountCircleIcon
+                          style={{
+                            color: "#78758e",
+                            marginLeft: ".25rem",
+                            verticalAlign: "middle",
+                            display: "inline-flex",
+                          }}
+                        />
+                      </Box>
+                    </Grid>
+                  </Grid>
+                </ButtonBase>
+                <ButtonBase
+                  className={classes.ticket}
+                  variant="outlined"
+                  onClick={handleAlertOpen9}
+                >
+                  <Grid
+                    contianer
+                    direction={"column"}
+                    justifyContent="flex-start"
+                    alignItems="flex-start"
+                  >
+                    <Grid item>
+                      <Typography className={classes.ticketDescription}>
+                         Independent Study Creating Generative Art
+                      </Typography>
+                    </Grid>
+                    <Grid item>
+                      <Box
+                        className={classes.Languages}
+                        style={{ width: "10rem", backgroundColor: "#60ab83" }}
+                      >
+                        <Typography
+                          className={classes.ticketLanguageDescription}
+                        >
+                          <b>PYTHON WITH BLENDER</b>
+                        </Typography>
+                      </Box>
+                    </Grid>
+                    <Grid item>
+                      <Box className={classes.ticketNumber}>
+                        <BuildIcon
+                          style={{
+                            color: "#AD2998",
+                            marginRight: ".25rem",
+                            verticalAlign: "middle",
+                            display: "inline-flex",
+                            fontSize: "1.2rem",
+                          }}
+                        />
+                        <ArrowUpwardIcon
+                          style={{
+                            color: "#d41a1b",
+                            marginRight: ".25rem",
+                            verticalAlign: "middle",
+                            display: "inline-flex",
+                          }}
+                        />
+                        <AddCircleIcon
+                          style={{
+                            color: "#78758e",
+                            marginRight: "5rem",
+                            verticalAlign: "middle",
+                            display: "inline-flex",
+                          }}
+                        />
+                        <b>KEV-9</b>
                         <AccountCircleIcon
                           style={{
                             color: "#78758e",
@@ -1023,6 +1101,7 @@ function ResponsiveDrawer(props) {
       <Dialog6 alertShow={alertShow6} handleAlertClose={handleAlertClose6} />
       <Dialog7 alertShow={alertShow7} handleAlertClose={handleAlertClose7} />
       <Dialog8 alertShow={alertShow8} handleAlertClose={handleAlertClose8} />
+      <Dialog9 alertShow={alertShow9} handleAlertClose={handleAlertClose9} />
     </div>
   );
 }

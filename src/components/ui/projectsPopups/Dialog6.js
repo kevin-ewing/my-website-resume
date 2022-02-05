@@ -76,14 +76,14 @@ export default function SimpleDialogDemo(props) {
         <Typography variant="body2" component="p">
           I was perusing the internet one day when I noticed that the domain
           with my name was available. I had never done any sort of web design
-          with javascript or react but was eager to tackle the challange and do
-          something interesting with the domain. After brianstorming for a bit,
+          with javascript or react but was eager to tackle the challenge and do
+          something interesting with the domain. After brainstorming for a bit,
           I settled on creating a web resume. It would provide me with a space
           to show off some of my projects and interests. But it would also
-          provide a challange as a multi-page website. Since starting I have
+          provide a challenge as a multi-page website. Since starting I have
           learned tons about web design, JavaScript, React and Material UI. I
-          have found it extrmemely satisfying to build this project from my
-          imagination. If you have any feedback or suggetions, feel free to
+          have found it extremely satisfying to build this project from my
+          imagination. If you have any feedback or suggestions, feel free to
           leave them by selecting the bug icon in the right corner of the app
           bar. Also feel free to checkout my code in the repo linked below.
           <br />

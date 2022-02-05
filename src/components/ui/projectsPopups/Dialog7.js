@@ -65,7 +65,7 @@ export default function SimpleDialogDemo(props) {
           Browser Trumpet
         </Typography>
         <Typography className={classes.projectIntros} gutterBottom>
-          Web app to interactivly play the trumpet by scaling the browser
+          Web app to interactively play the trumpet by scaling the browser
           window.
           <hr />
           <br />

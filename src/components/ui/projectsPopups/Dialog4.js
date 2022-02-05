@@ -79,11 +79,11 @@ export default function SimpleDialogDemo(props) {
           tool for querying files. While normally compiled on the JVM and run as
           a .jar file, Babashka is a Clojure interpreter that allows for much
           faster startup as an alternative for Clojure scripting compared to
-          slugish JVM Clojure. In order to acheive this, increased startup
-          speed, it sacrafices a general performance as compaired to executing
-          compiled Clojure code. Another safrafice Babaska makes is that the sci
-          interpreter is only compatable a "substantial subset of Clojure." If
-          you are interested I would encorange you to check out the link to
+          sluggish JVM Clojure. In order to achieve this, increased startup
+          speed, it sacrifices a general performance as compared to executing
+          compiled Clojure code. Another sacrifice Babaska makes is that the sci
+          interpreter is only compatible a "substantial subset of Clojure." If
+          you are interested I would encourage you to check out the link to
           Babaska's git page below. Below I have also included a sample usage of
           babashka-search.
           <br />

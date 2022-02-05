@@ -168,7 +168,7 @@ export default function LandingPage() {
           >
             <Grid item className={classes.Left}>
               <Typography className={classes.GreenFont}>
-                And so, if you are here on purpose, or have stumbled apon this
+                And so, if you are here on purpose, or have stumbled upon this
                 page by accident, hello. Feel free to explore and I hope you
                 learn a little about me.
               </Typography>
@@ -181,7 +181,7 @@ export default function LandingPage() {
               <Typography className={classes.GreenFont}>
                 About the logo: The logo in the header is an exclusive or venn
                 diagram. With the exclusive or being a logic operation by which
-                all other logic can be derived, it represensts my commitiment to
+                all other logic can be derived, it represents my commitment to
                 exploring the two disciplines of computer science and biology in
                 the hopes of building connections.
               </Typography>

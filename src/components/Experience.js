@@ -175,7 +175,7 @@ export default function ResponsiveDrawer(props) {
             <Typography className={classes.langageName}>C</Typography>
             <Typography className={classes.packages}>
               Experience: <br />
-              Re-wrote a handlful of C standard library finctions-- available at my github.
+              Re-wrote a handful of C standard library functions-- available at my github.
             </Typography>
           </Grid>
         </Grid>

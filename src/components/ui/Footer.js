@@ -248,7 +248,7 @@ export default function Footer(props) {
         </Grid>
       </Box>
       <Typography className={classes.copyright}>
-        Kevin Ewing's Website Resume, 2021.
+          Kevin Ewing's Website Resume, 2021.
       </Typography>
     </footer>
   );

@@ -70,9 +70,9 @@ export default function SimpleDialogDemo(props) {
           <br />
         </Typography>
         <Typography variant="body2" component="p">
-          I am always learning. Wheather that be through school, work, or
+          I am always learning. Whether that be through school, work, or
           projects I am continuously pushing myself to learn new things,
-          expirement and push myself. Some examples of my learning are on this
+          experiment and push myself. Some examples of my learning are on this
           page. Take a look at the projects marked as done.
           <br />
         </Typography>

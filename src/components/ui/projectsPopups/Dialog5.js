@@ -77,7 +77,7 @@ export default function SimpleDialogDemo(props) {
         <Typography variant="body2" component="p">
           The Harry Potter series has always been one of my favorite book series
           of all time. And so, I wanted to see how the linguistic sentiment
-          changes over the coures of the books. To do this I wrote a simple app
+          changes over the course of the books. To do this I wrote a simple app
           using RStudio's Shiny. Shiny is an R package that makes it easy to
           build interactive web apps straight from R. For this project I used
           the well known R packages of the Tidyverse to plot the data. In order
