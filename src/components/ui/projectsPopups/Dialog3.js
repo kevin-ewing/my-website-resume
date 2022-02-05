@@ -81,17 +81,17 @@ export default function SimpleDialogDemo(props) {
           style={{ marginBottom: "2rem" }}
         >
           Ever since the release of iPhone shortcuts app with iOS 13 I was
-          trying to come up with interesting and helpful shorcuts. After playing
+          trying to come up with interesting and helpful shortcuts. After playing
           around with the simple scripting you can write within these shortcuts,
           I created this lockscreen changing shortcut. Every night at 3:00 this
           automation is run on my phone which grabs a random image from my
-          Unsplashed colection of nature photos and sets that to my wallpaper.
-          Though quite a simple task, it is extrmememly pleasant to wake up each
+          Unsplashed collection of nature photos and sets that to my wallpaper.
+          Though quite a simple task, it is extremely pleasant to wake up each
           morning to a different beautiful wallpaper. And, while it is not a
-          very techincally impressive project, due tjo how much I interact with
+          very technically impressive project, due tjo how much I interact with
           it, it is one of my favorite. I have included a sample of what my
-          lockscreen and wallpaper looks like for today! Please note that in
-          order to download the shortcut, you must be on a moble Apple device.
+          touchscreen and wallpaper looks like for today! Please note that in
+          order to download the shortcut, you must be on a mobile Apple device.
           <br />
         </Typography>
         <SamplePhoneShortcut image={image} />

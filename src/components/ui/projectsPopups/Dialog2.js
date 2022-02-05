@@ -77,10 +77,10 @@ export default function SimpleDialogDemo(props) {
         <Typography variant="body2" component="p">
           An app used to explore the population of ticks over time in the United
           States. Using data collected by NEON over the past six years, this app
-          alows users to ask questions of the data and intuativly explore the
+          allows users to ask questions of the data and intuitively explore the
           results of those questions on there own. With interactive options and
-          filters for the data, as well as beausitful visuals made with the R
-          packagas of the Tidyverse and Leaflet, select button below to view the
+          filters for the data, as well as beautiful visuals made with the R
+          packages of the Tidyverse and Leaflet, select button below to view the
           hosted app on shinyapps.io and explore the data for yourself.
           <br />
         </Typography>

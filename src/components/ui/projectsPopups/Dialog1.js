@@ -66,7 +66,7 @@ export default function SimpleDialogDemo(props) {
         </Typography>
         <Typography className={classes.projectIntros} gutterBottom>
           Web app with geographical representations of tick-borne pathogen
-          distrabutions.
+          distributions.
           <hr />
           <br />
           <br />

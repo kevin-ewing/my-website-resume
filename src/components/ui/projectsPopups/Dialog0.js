@@ -71,8 +71,8 @@ export default function SimpleDialogDemo(props) {
           <br />
         </Typography>
         <Typography variant="body2" component="p">
-          This interface was inspired by Jira. Each ticke represents a small
-          project that I have undertaken, with a small blurb of infomration
+          This interface was inspired by Jira. Each ticket represents a small
+          project that I have undertaken, with a small blurb of information
           about that project. To learn more about a project select that ticket
           just as you would in Jira.
           <br />

@@ -5,7 +5,6 @@ import Dialog from "@material-ui/core/Dialog";
 import Typography from "@material-ui/core/Typography";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
-import Highlight from "react-highlight";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -63,66 +62,22 @@ export default function SimpleDialogDemo(props) {
     >
       <CardContent>
         <Typography className={classes.title} gutterBottom>
-          Babashka Search
+          Python Generative Art With Blender
         </Typography>
         <Typography className={classes.projectIntros} gutterBottom>
-          Command line tool for querying information from home directory files.
+          Independent study with the Middlebury Animation studio.
           <hr />
           <br />
           <br />
         </Typography>
         <Typography className={classes.languages} color="textSecondary">
-          {bullet} Written in Clojure implementing the Babashka interpreter
+          {bullet} Python using Blender's scripting API
         </Typography>
         <Typography variant="body2" component="p">
-          Using Clojure, a Lisp language on the JVM, I created a command line
-          tool for querying files. While normally compiled on the JVM and run as
-          a .jar file, Babashka is a Clojure interpreter that allows for much
-          faster startup as an alternative for Clojure scripting compared to
-          sluggish JVM Clojure. In order to achieve this, increased startup
-          speed, it sacrifices a general performance as compared to executing
-          compiled Clojure code. Another sacrifice Babaska makes is that the sci
-          interpreter is only compatible a "substantial subset of Clojure." If
-          you are interested I would encourage you to check out the link to
-          Babaska's git page below. Below I have also included a sample usage of
-          babashka-search.
+          Tackling a new challenge for me of combining my interest in animation and 3d design with 
+          my love for coding. Hoping to progress to using C# and the Unity engine to
+          create more powerful generative works.
           <br />
-          <Highlight language="bash">
-            {"$ bbsearch 'test.py'"}
-            <br />
-            <br />
-            {"test.py"}
-            <br />
-            {"  Path: /Users/kewing/one/test.py"}
-            <br />
-            {"  Modified: 2021-01-01"}
-            <br />
-            {"  Size: 48096 bytes"}
-            <br />
-            {"test.py"}
-            <br />
-            {"  Path: /Users/kewing/two/test.py"}
-            <br />
-            {"  Modified: 2021-01-01"}
-            <br />
-            {"  Size: 9490 bytes"}
-            <br />
-            {"test.py"}
-            <br />
-            {"  Path: /Users/kewing/three/test.py"}
-            <br />
-            {"  Modified: 2021-01-01"}
-            <br />
-            {"  Size: 222 bytes"}
-            <br />
-            {"test.py"}
-            <br />
-            {"  Path: /Users/kewing/four/test.py"}
-            <br />
-            {"  Modified: 2021-01-01"}
-            <br />
-            {"  Size: 9490 bytes"}
-          </Highlight>
         </Typography>
       </CardContent>
       <CardActions>
@@ -132,20 +87,11 @@ export default function SimpleDialogDemo(props) {
         <Button
           className={classes.button}
           component={"a"}
-          href="https://github.com/kevin-ewing/babashka_search"
+          href="https://github.com/kevin-ewing/blender_scripting"
           rel="noopener noreferrer"
           target="_blank"
         >
           Visit the Repo
-        </Button>
-        <Button
-          className={classes.button}
-          component={"a"}
-          href="https://github.com/babashka/babashka"
-          rel="noopener noreferrer"
-          target="_blank"
-        >
-          More info on Babashka
         </Button>
       </CardActions>
     </Dialog>
