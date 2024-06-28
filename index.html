@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Kevin Ewing Resume Website</title>
+    <link rel="stylesheet" href="./main.css">
+    <link rel="stylesheet" href="./carousel.css">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.5.0/p5.js"></script>
+    <link rel='stylesheet' href='https://unpkg.com/aos@2.3.0/dist/aos.css'>
+
+
+    <script src="./mobile.js"></script>
+    <script>
+        SA.redirection_mobile({
+            mobile_url: "www.cs.middlebury.edu/~kewing/digital_studio/mobile",
+            mobile_prefix: "https"
+        });
+    </script>
+
+</head>
+
+
+<body>
+    <div id="landing", onresize = "resizeWindow()">
+        <script src="landing.js"></script>
+    </div>
+    <div id="content">
+        <p>
+            Test for spacing
+        </p>
+
+        <div class="footer" id="contact">
+            <section>
+                <h2>Contact me</h2>
+                <a class="btn" id="icons" href="https://www.linkedin.com/in/kevincewing/" target="_blank"><i class="fa fa-linkedin"></i></a>
+                <a class="btn" id="icons" href="https://github.com/kevin-ewing" target="_blank"><i class="fa fa-github"></i></a>
+                <a class="btn" id="icons" href="mailto:kevin.c.ewing@outlook.com" target="_blank"><i class="fa fa-send"></i></a>
+            </section>
+            <p>
+                Copyright © 2024 Kevin Ewing
+            </p>
+        </div>
+    </div>
+
+</body>
+</html>
