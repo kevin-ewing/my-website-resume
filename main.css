@@ -9,17 +9,49 @@
   background-color: white; /* Assuming the background color of the div */
 }
 
-#landing::after {
-  content: "";
+#downIcon {
   position: absolute;
-  bottom: -60px;
+  top: 80vh;
+  margin-top: 60px;
   left: 50%;
   transform: translateX(-50%);
-  width: 200px; /* Adjust the width as needed */
-  height: 120px; /* Adjust the height as needed */
-  background-color: black; /* Assuming the background color of the body */
-  border-radius: 60px; /* Adjust the border-radius as needed */
-  z-index: 2; /* Ensure it appears above the landing div */
+  width: 200px;
+  height: 120px;
+  background-color: black; 
+  border-radius: 30px; 
+  z-index: 2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: transform 0.3s ease; /* Hover animation for the whole icon */
+}
+
+#downIcon:hover {
+  transform: translateX(-50%) scale(1.1); /* Scale up slightly on hover */
+}
+
+.down-arrow {
+  margin-top: -40px;
+  width: 0; 
+  height: 0; 
+  border-left: 20px solid transparent;
+  border-right: 20px solid transparent;
+  border-top: 20px solid; 
+  border-top-color: rgb(91, 36, 36);
+  cursor: pointer;
+  animation: moveUpDown 2s infinite;
+  transition: transform 0.3s ease;
+}
+
+
+@keyframes moveUpDown {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
 }
 
 /* Ensure the body and html take up the full height */
@@ -28,6 +60,7 @@ body {
   height: 100%;
   margin: 0;
   padding: 0;
+  scroll-behavior: smooth;
 }
 
 body {

@@ -20,10 +20,18 @@
     <script src="./mobile.js"></script>
     <script>
         SA.redirection_mobile({
-            mobile_url: "www.cs.middlebury.edu/~kewing/digital_studio/mobile",
+            mobile_url: "kevin-ewing.github.io/my-website-resume/mobile.html",
             mobile_prefix: "https"
         });
     </script>
+
+    <link rel="stylesheet" href="bento.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@500;700&display=swap"
+    rel="stylesheet"
+    />
 
 </head>
 
@@ -32,22 +40,238 @@
     <div id="landing" onresize="resizeWindow()">
         <script src="landing.js"></script>
     </div>
+    <div id="downIcon" onclick="location.href='#about'">
+        <div class="down-arrow"></div>
+      </div>
     <div id="content">
-        <p>
-            Test for spacing
-        </p>
+            <div class="container">
+              <div class="about" id = "about">
+                <div class="aboutSection">
+                  <img class="myPic" alt="photo" src="images/kevin-ewing.jpg" />
+                  <div class="fieldSection">
+                    <div>Kevin Ewing</div>
+                    <div class="fieldName">Cloud Service Availability Developer at Genesys</div>
+                  </div>
+                </div>
+                <div class="navbar">
+                    <div class="pageLinks" onclick="location.href='#experience'">
+                        EXPERIENCE
+                    </div>
+                    <div class="pageLinks" onclick="location.href='#skills'">
+                        SKILLS
+                    </div>
+                    <div class="pageLinks" onclick="location.href='#project'">
+                        PROJECTS
+                    </div>
+                    <div class="pageLinks" onclick="location.href='#contact'">
+                        CONTACT
+                    </div>
+                </div>
+                <div class="nameSection">
+                  <div class="aboutHeading">ABOUT</div>
+                  <p class="aboutDesc">
+                    A software engineer robust computer science education background, hands-on software engineering experience, 
+                    and a <span>passion for identifying problems and finding solutions.</span>
+                </p>
+                </div>
+              </div>
+              
+        
+              <div class="socials">
+                <a class="socialLink" href="mailto:kevin.c.ewing@outlook.com"
+                  >EMAIL</a
+                >
+                <a
+                  class="socialLink"
+                  href="https://www.linkedin.com/in/kevincewing/"
+                  target="_blank"
+                  >LINKEDIN</a
+                >
+                <a
+                  class="socialLink"
+                  href="https://github.com/kevin-ewing"
+                  target="_blank"
+                  >GITHUB</a
+                >
+                <a class="socialLink" href="resources/Kevin Ewing Resume.pdf" download>RESUME</a>
+              </div>
+        
+              <div class="skills" id="skills">
+                <div class="skillSection" id="lang">
+                    <div class="skillHeader">LANGUAGES</div>
+                    <div class="skillNameSection">
+                      <div class="skillName">Python</div>
+                      <div class="skillName">Java</div>
+                      <div class="skillName">Clojure</div>
+                    </div>
+                </div>
+                <div class="skillSection" id="frame">
+                  <div class="skillHeader">FRAMEWORKS</div>
+                  <div class="skillNameSection">
+                    <div class="skillName">Flask</div>
+                    <div class="skillName">React</div>
+                    <div class="skillName">Shiny</div>
+                    <!-- <div class="skillName">React Native</div> -->
+                  </div>
+                </div>
+                <div class="skillSection" id="devops">
+                  <div class="skillHeader">DEVOPS TOOLS</div>
+                  <div class="skillNameSection">
+                    <div class="skillName">AWS</div>
+                    <div class="skillName">Jenkins</div>
+                    <div class="skillName">Docker</div>
+                  </div>
+                </div>
+              </div>
+        
+              <div class="experience" id="experience">
+                <div class="companySection">
+                  <div class="experienceheading">EXPERIENCE</div>
+                  <div>
+                    <div class="companyName">GENESYS CLOUD</div>
+                    <div class="companyPeriod">June 2023 - Present</div>
+                    <div class="companySkills">
+                      <div class="companySkillName">Python</div>
+                      <div class="companySkillName">Clojure</div>
+                      <div class="companySkillName">AWS</div>
+                    </div>
+                  </div>
+                </div>
+        
+                <div class="experienceSection">
+                  <div class="experienceItem">
+                    <div class="experienceName">Software Engineer</div>
+                    <div class="experienceDesc">
+                      Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur placeat temporibus dignissimos numquam aperiam vero quasi asperiores amet voluptatem sunt, voluptas harum quisquam nemo unde facilis nesciunt similique quam vitae?
+                    </div>
+                  </div>
+                  <div class="experienceItem">
+                    <div class="experienceName">Associate Software Engineer</div>
+                    <div class="experienceDesc">
+                      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Illo in accusantium tenetur sequi accusamus quisquam quaerat, dignissimos dolore officia tempora eius hic aliquid cupiditate quidem quam maiores reiciendis commodi ab!
+                    </div>
+                  </div>
+                </div>
+              </div>
 
-        <div class="footer" id="contact">
-            <section>
-                <h2>Contact me</h2>
-                <a class="btn" id="icons" href="https://www.linkedin.com/in/kevincewing/" target="_blank"><i class="fa fa-linkedin"></i></a>
-                <a class="btn" id="icons" href="https://github.com/kevin-ewing" target="_blank"><i class="fa fa-github"></i></a>
-                <a class="btn" id="icons" href="mailto:kevin.c.ewing@outlook.com" target="_blank"><i class="fa fa-send"></i></a>
-            </section>
-            <p>
-                Copyright © 2024 Kevin Ewing
-            </p>
-        </div>
+              <div class="experience" id="experience">
+                <div class="companySection">
+                    <div class="experienceheading"></div>
+                  <div>
+                    <div class="companyName">MIDDLEBURY COLLEGE</div>
+                    <div class="companyPeriod">August 2019 - May 2023</div>
+                    <div class="companySkills">
+                      <div class="companySkillName">Python</div>
+                      <div class="companySkillName">C</div>
+                      <div class="companySkillName">R</div>
+                    </div>
+                  </div>
+                </div>
+        
+                <div class="experienceSection">
+                  <div class="experienceItem">
+                    <div class="experienceName">Middlebury Consulting Group Lead Data Scientist</div>
+                    <div class="experienceDesc">
+                      Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga velit porro ipsum, provident voluptates deserunt, dolorem soluta eaque odio ut officia similique. Voluptates magni perferendis similique totam nemo. Ipsa, vero!
+                    </div>
+                  </div>
+                  <div class="experienceItem">
+                    <div class="experienceName">Computer Science Department Peer Tutor</div>
+                    <div class="experienceDesc">
+                      Lorem ipsum dolor sit, amet consectetur adipisicing elit. Cum culpa placeat omnis error odio explicabo eum ex maxime rem at odit quis velit veniam voluptatem consequuntur quam, sunt necessitatibus amet!
+                    </div>
+                  </div>
+                </div>
+              </div>
+            <div class="extended-background">
+              <div class="projects" id="projects">
+                <div class="projectHeader">
+                  <div>
+                    <div class="projectHeading">PROJECTS</div>
+                    <div class="projectName">LAMBADA</div>
+                    <div class="projectDesc">
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium deserunt nobis, consequuntur labore fuga cum reiciendis, at praesentium quidem, excepturi pariatur ratione voluptates totam similique asperiores assumenda recusandae iste. Eaque!
+                    </div>
+                  </div>
+                  <a
+                    href="https://github.com/kevin-ewing/lambada"
+                    target="_blank"
+                  >
+                    <img class="projectLink" src="resources/linkArrow.png" alt="link"
+                  /></a>
+                </div>
+              </div>
+        
+              <div class="projects" id="projects">
+                <a href="https://akshatbookstore.netlify.app/" target="_blank">
+                    <img class="projectImg" src="images/agents.jpg" alt="Book shop"
+                /></a>
+                <div class="projectHeader">
+                  <div>
+                    <div class="projectName">AGENT SIMULATED GENERATIVE ART</div>
+                    <div class="projectDesc">
+                      Lorem ipsum dolor sit amet consectetur, adipisicing elit. Itaque maiores aliquid sed fuga pariatur autem animi atque aperiam, neque mollitia aliquam nesciunt, repellat veritatis quibusdam! Voluptatem, distinctio a? Ullam, sit?
+                    </div>
+                  </div>
+                  <a href="https://akshatbookstore.netlify.app/" target="_blank">
+                    <img class="projectLink" src="resources/linkArrow.png" alt="link"
+                  /></a>
+                </div>
+              </div>
+        
+              <div class="projects" id="projects">
+                <a href="https://akshatjalan.github.io/HarrypotterWebsite-akshat/index.html" target="_blank">
+                    <img class="projectImg" src="images/cabin.jpg" alt="Book shop"
+                /></a>
+                <div class="projectHeader">
+                  <div>
+                    <div class="projectName">THREE.JS CABIN</div>
+                    <div class="projectDesc">
+                      Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione, cumque neque ipsa asperiores veniam harum deserunt quia repellat atque corrupti, eveniet iste quae rerum mollitia porro quis. Laborum, aut suscipit.
+                    </div>
+                  </div>
+                  <a
+                    href="https://akshatjalan.github.io/HarrypotterWebsite-akshat/index.html"
+                    target="_blank"
+                  >
+                    <img class="projectLink" src="resources/linkArrow.png" alt="link"
+                  /></a>
+                </div>
+              </div>
+        
+              <div class="contact" id="contact">
+                <div class="contactName">LET'S MAKE THINGS HAPPEN</div>
+              </div>
+
+              <div class="socials">
+                <a class="socialLink" href="mailto:kevin.c.ewing@outlook.com"
+                  >EMAIL</a
+                >
+                <a
+                  class="socialLink"
+                  href="https://www.linkedin.com/in/kevincewing/"
+                  target="_blank"
+                  >LINKEDIN</a
+                >
+                <a
+                  class="socialLink"
+                  href="https://github.com/kevin-ewing"
+                  target="_blank"
+                  >GITHUB</a
+                >
+                <a class="socialLink" href="resources/Kevin Ewing Resume.pdf" download>RESUME</a>
+              </div>
+        
+              <div class="footer">
+                <div class="footerRight">© 2024 Kevin Ewing.  All rights reserved.</div>
+              </div>
+            </div>
+            </div>
+        
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.3/gsap.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.3/ScrollTrigger.min.js"></script>
+        
+            <script src="hover.js"></script>
     </div>
 
 </body>

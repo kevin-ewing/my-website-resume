@@ -1,6 +1,10 @@
 let RESOLUTION = 200;
 let TRAIL_LENGTH_CAP = 300;
 let DELAY_CAP = 1;
+let WINDOW_Y_OFFSET = -80;
+let LINE_SPACING_MULTIPLIER = 130; // Adjust as needed for spacing between lines
+
+
 let angle = 0;
 let targetAngle = 0;
 let targetSpread = 0;
@@ -14,16 +18,13 @@ let fonts = [];
 let selectedFont;
 let fontPaths = [
   "fonts/JosefinSans-Light.ttf",
-  "fonts/LibreBaskerville-Regular.ttf",
   "fonts/OpenSans_Condensed-Light.ttf",
   "fonts/OpenSans_Condensed-Regular.ttf",
-  "fonts/PlayfairDisplay-Medium.ttf",
   "fonts/PlusJakartaSans-Light.ttf",
   "fonts/PlusJakartaSans-Regular.ttf",
   "fonts/Raleway-Bold.ttf",
   "fonts/Raleway-ExtraLight.ttf",
   "fonts/Raleway-Regular.ttf",
-  "fonts/Sedan-Regular.ttf",
   "fonts/ZillaSlab-Medium.ttf",
 ];
 
@@ -64,7 +65,6 @@ function setup() {
   noStroke();
 
   // Initialize letter structures
-  let lineSpacing = 120; // Adjust as needed for spacing between lines
   let totalChars = 0;
 
   for (let i = 0; i < lines.length; i++) {
@@ -75,9 +75,14 @@ function setup() {
   for (let lineNum = 0; lineNum < lines.length; lineNum++) {
     for (let lineLength = 0; lineLength < lines[lineNum].length; lineLength++) {
       let letter = lines[lineNum][lineLength];
-      let xOffset = -textWidth(lines[lineNum]) / 2; // Initialize x-offset
-      let yOffset = lineNum * lineSpacing - lineSpacing; // Initialize y-offset
+      let sizeMultiplier = 1.1;
 
+      if (lineNum != 0) {
+        sizeMultiplier = 0.8
+      }
+      textSize(windowWidth * 0.1 * sizeMultiplier)
+      let xOffset = -textWidth(lines[lineNum]) / 2; // Initialize x-offset
+      let yOffset = lineNum * sizeMultiplier* LINE_SPACING_MULTIPLIER - LINE_SPACING_MULTIPLIER; // Initialize y-offset
       if (lineLength != 0) {
         xOffset =
           letters[lettersIndex - 1].xOffset +
@@ -92,6 +97,7 @@ function setup() {
         letter: letter,
         spread: targetSpread,
         delay: 0,
+        sizeMultiplier: sizeMultiplier
       });
       lettersIndex += 1;
     }
@@ -102,7 +108,7 @@ function draw() {
   background(BG_COLOR);
 
   let targetX = mouseX - windowWidth / 2;
-  let targetY = mouseY - windowHeight / 2;
+  let targetY = mouseY - (windowHeight + WINDOW_Y_OFFSET) / 2;
   // Check if mouse is over canvas
   if (
     mouseX >= 0 &&
@@ -124,10 +130,10 @@ function draw() {
   // If idle for more than IDLE_THRESHOLD, move targetAngle using noise
   if (idleTimer > IDLE_THRESHOLD) {
     // Use noise to create smooth, unpredictable movement
-    let noiseX = map(noise(millis() * 0.0001), 0, 1, 0, windowHeight);
+    let noiseX = map(noise(millis() * 0.0001), 0, 1, 0, (windowHeight + WINDOW_Y_OFFSET));
     let noiseY = map(noise(millis() * 0.0001), 0, 1, 0, windowWidth);
     targetX = noiseX - windowWidth / 2;
-    targetY = noiseY - windowHeight / 2;
+    targetY = noiseY - (windowHeight + WINDOW_Y_OFFSET) / 2;
   }
 
   updateLetters(targetX, targetY);
@@ -152,7 +158,7 @@ function draw() {
         xOffset +
         cos(letter.angle) * stepDistance * (resolutionIndex - RESOLUTION);
       let positionY =
-        windowHeight / 2 +
+        (windowHeight + WINDOW_Y_OFFSET) / 2 +
         (sin(letter.angle) * letter.spread) / 2 +
         yOffset +
         sin(letter.angle) * stepDistance * (resolutionIndex - RESOLUTION);
@@ -162,14 +168,13 @@ function draw() {
       } else {
         fill(lerpColor(letter.colorPair[0], letter.colorPair[1], stepT));
       }
+      textSize(windowWidth * 0.1 * letter.sizeMultiplier)
       text(letter.letter, positionX, positionY);
     }
   }
 }
 
 function updateLetters(targetX, targetY) {
-  let wCenter = windowWidth / 2;
-  let hCenter = windowHeight / 2;
   targetAngle = atan2(targetY, targetX);
 
   for (let i = 0; i < letters.length; i++) {
@@ -187,7 +192,7 @@ function updateLetters(targetX, targetY) {
     targetSpread = lerp(
       letter.spread,
       constrain(
-        map(distanceToCenter, 0, windowWidth / 2, 0, 400),
+        map(distanceToCenter , 0, windowWidth / 2, 0, windowHeight), //TODO
         0,
         TRAIL_LENGTH_CAP
       ),
@@ -236,7 +241,33 @@ function resizeWindow() {
 }
 
 function mousePressed() {
-  setup();
+  randomizeFont()
+  randomizeColorPairs()
+
+  let lettersIndex = 0;
+  for (let lineNum = 0; lineNum < lines.length; lineNum++) {
+    for (let lineLength = 0; lineLength < lines[lineNum].length; lineLength++) {
+      let letter = lines[lineNum][lineLength];
+      let sizeMultiplier = 1.1;
+
+      if (lineNum != 0) {
+        sizeMultiplier = 0.8
+      }
+      textSize(windowWidth * 0.1 * sizeMultiplier)
+      let xOffset = -textWidth(lines[lineNum]) / 2;
+      let yOffset = lineNum * LINE_SPACING_MULTIPLIER - LINE_SPACING_MULTIPLIER;
+      if (lineLength != 0) {
+        xOffset =
+          letters[lettersIndex - 1].xOffset +
+          textWidth(letters[lettersIndex - 1].letter);
+      }
+
+      letters[lettersIndex].xOffset = xOffset;
+      letters[lettersIndex].yOffset = yOffset;
+      letters[lettersIndex].colorPair = colorPairs[lettersIndex];
+      lettersIndex += 1;
+    }
+  }
 }
 
 function randomizeFont() {
