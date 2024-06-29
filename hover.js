@@ -162,6 +162,10 @@ document.addEventListener("DOMContentLoaded", function() {
     return colors[Math.floor(Math.random() * colors.length)];
   }
   
+  function getRandomAngle() {
+    return Math.floor(Math.random() * 180)
+  }
+
   // Function to get a random gradient
   function getRandomGradient() {
     const color1 = getRandomColor();
@@ -169,7 +173,7 @@ document.addEventListener("DOMContentLoaded", function() {
     while (color1 === color2) {
       color2 = getRandomColor();
     }
-    return `linear-gradient(135deg, ${color1}, ${color2})`;
+    return `linear-gradient(${getRandomAngle()}deg, ${color1}, ${color2})`;
   }
   
   // Apply the gradient to the navbar

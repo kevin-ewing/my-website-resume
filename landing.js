@@ -4,7 +4,6 @@ let DELAY_CAP = 1;
 let WINDOW_Y_OFFSET = -80;
 let LINE_SPACING_MULTIPLIER = 130; // Adjust as needed for spacing between lines
 
-
 let angle = 0;
 let targetAngle = 0;
 let targetSpread = 0;
@@ -47,7 +46,7 @@ function setup() {
   var myCanvas = createCanvas(windowWidth, windowHeight);
   myCanvas.parent("landing");
   randomizeFont();
-  mousePrev = (mouseX, mouseY);
+  mousePrev = createVector(mouseX, mouseY);
   letters = [];
   colors = [
     color("#0364f2"), // Blue
@@ -75,14 +74,10 @@ function setup() {
   for (let lineNum = 0; lineNum < lines.length; lineNum++) {
     for (let lineLength = 0; lineLength < lines[lineNum].length; lineLength++) {
       let letter = lines[lineNum][lineLength];
-      let sizeMultiplier = 1.1;
-
-      if (lineNum != 0) {
-        sizeMultiplier = 0.8
-      }
-      textSize(windowWidth * 0.1 * sizeMultiplier)
+      let sizeMultiplier = lineNum != 0 ? 0.8 : 1.1;
+      textSize(windowWidth * 0.1 * sizeMultiplier);
       let xOffset = -textWidth(lines[lineNum]) / 2; // Initialize x-offset
-      let yOffset = lineNum * sizeMultiplier* LINE_SPACING_MULTIPLIER - LINE_SPACING_MULTIPLIER; // Initialize y-offset
+      let yOffset = lineNum * sizeMultiplier * LINE_SPACING_MULTIPLIER - LINE_SPACING_MULTIPLIER; // Initialize y-offset
       if (lineLength != 0) {
         xOffset =
           letters[lettersIndex - 1].xOffset +
@@ -102,11 +97,17 @@ function setup() {
       lettersIndex += 1;
     }
   }
+
+  // Add event listener for visibility change
+  document.addEventListener("visibilitychange", handleVisibilityChange, false);
 }
 
 function draw() {
-  background(BG_COLOR);
+  if (document.hidden) {
+    return; // Stop drawing if the document is hidden
+  }
 
+  background(BG_COLOR);
   let targetX = mouseX - windowWidth / 2;
   let targetY = mouseY - (windowHeight + WINDOW_Y_OFFSET) / 2;
   // Check if mouse is over canvas
@@ -115,13 +116,13 @@ function draw() {
     mouseX <= windowWidth &&
     mouseY >= 0 &&
     mouseY <= windowHeight &&
-    mousePrev != (mouseX, mouseY)
+    (mousePrev.x != mouseX || mousePrev.y != mouseY)
   ) {
     // Update targetAngle based on mouse movement
     // Reset idle timer since mouse moved
     idleTimer = 0;
     lastMouseMoved = millis();
-    mousePrev = (mouseX, mouseY);
+    mousePrev.set(mouseX, mouseY);
   } else {
     // Increment idle timer
     idleTimer = millis() - lastMouseMoved;
@@ -138,6 +139,9 @@ function draw() {
 
   updateLetters(targetX, targetY);
 
+  let halfWindowWidth = windowWidth / 2;
+  let halfWindowHeightOffset = (windowHeight + WINDOW_Y_OFFSET) / 2;
+
   for (
     let resolutionIndex = 0;
     resolutionIndex < RESOLUTION;
@@ -152,23 +156,25 @@ function draw() {
       let stepDistance = letter.spread / RESOLUTION;
 
       // Calculate position based on angle, distance, and stepT
+      let cosAngle = cos(letter.angle);
+      let sinAngle = sin(letter.angle);
       let positionX =
-        windowWidth / 2 +
-        (cos(letter.angle) * letter.spread) / 2 +
+        halfWindowWidth +
+        (cosAngle * letter.spread) / 2 +
         xOffset +
-        cos(letter.angle) * stepDistance * (resolutionIndex - RESOLUTION);
+        cosAngle * stepDistance * (resolutionIndex - RESOLUTION);
       let positionY =
-        (windowHeight + WINDOW_Y_OFFSET) / 2 +
-        (sin(letter.angle) * letter.spread) / 2 +
+        halfWindowHeightOffset +
+        (sinAngle * letter.spread) / 2 +
         yOffset +
-        sin(letter.angle) * stepDistance * (resolutionIndex - RESOLUTION);
+        sinAngle * stepDistance * (resolutionIndex - RESOLUTION);
 
       if (resolutionIndex == RESOLUTION - 1) {
         fill("black");
       } else {
         fill(lerpColor(letter.colorPair[0], letter.colorPair[1], stepT));
       }
-      textSize(windowWidth * 0.1 * letter.sizeMultiplier)
+      textSize(windowWidth * 0.1 * letter.sizeMultiplier);
       text(letter.letter, positionX, positionY);
     }
   }
@@ -176,6 +182,8 @@ function draw() {
 
 function updateLetters(targetX, targetY) {
   targetAngle = atan2(targetY, targetX);
+  let halfWindowWidth = windowWidth / 2;
+  let halfWindowHeight = windowHeight / 2;
 
   for (let i = 0; i < letters.length; i++) {
     let letter = letters[i];
@@ -192,14 +200,14 @@ function updateLetters(targetX, targetY) {
     targetSpread = lerp(
       letter.spread,
       constrain(
-        map(distanceToCenter , 0, windowWidth / 2, 0, windowHeight), //TODO
+        map(distanceToCenter, 0, halfWindowWidth, 0, windowHeight), //TODO
         0,
         TRAIL_LENGTH_CAP
       ),
       smoothing / 2
     );
     letter.spread = targetSpread;
-    letter.delay = map(distanceToLetter, 0, windowWidth / 2, 0, DELAY_CAP);
+    letter.delay = map(distanceToLetter, 0, halfWindowWidth, 0, DELAY_CAP);
   }
 }
 
@@ -241,21 +249,17 @@ function resizeWindow() {
 }
 
 function mousePressed() {
-  randomizeFont()
-  randomizeColorPairs()
+  randomizeFont();
+  randomizeColorPairs();
 
   let lettersIndex = 0;
   for (let lineNum = 0; lineNum < lines.length; lineNum++) {
     for (let lineLength = 0; lineLength < lines[lineNum].length; lineLength++) {
       let letter = lines[lineNum][lineLength];
-      let sizeMultiplier = 1.1;
-
-      if (lineNum != 0) {
-        sizeMultiplier = 0.8
-      }
-      textSize(windowWidth * 0.1 * sizeMultiplier)
+      let sizeMultiplier = lineNum != 0 ? 0.8 : 1.1;
+      textSize(windowWidth * 0.1 * sizeMultiplier);
       let xOffset = -textWidth(lines[lineNum]) / 2;
-      let yOffset = lineNum * LINE_SPACING_MULTIPLIER - LINE_SPACING_MULTIPLIER;
+      let yOffset = lineNum * sizeMultiplier * LINE_SPACING_MULTIPLIER - LINE_SPACING_MULTIPLIER;
       if (lineLength != 0) {
         xOffset =
           letters[lettersIndex - 1].xOffset +
@@ -273,4 +277,12 @@ function mousePressed() {
 function randomizeFont() {
   currentFont = random(fonts);
   textFont(currentFont);
+}
+
+function handleVisibilityChange() {
+  if (document.hidden) {
+    noLoop(); // Stop the draw loop
+  } else {
+    loop(); // Start the draw loop again
+  }
 }

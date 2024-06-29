@@ -56,8 +56,8 @@ body {
   margin: 0;
   background-color: transparent;
   color: black;
-  text-decoration: none; 
-  text-align: center; 
+  text-decoration: none;
+  text-align: center;
   font-weight: bold;
   transition: background-color 0.3s ease;
 }
@@ -66,12 +66,11 @@ body {
   background-color: rgba(0, 0, 0, 0.1);
 }
 
-
-
 /* ABOUT SECTION */
 
 .about {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   gap: 10px;
 }
@@ -92,7 +91,6 @@ body {
   padding-bottom: 20px;
 }
 
-
 .nameSection {
   flex-grow: 2;
   background-color: #131315;
@@ -102,7 +100,6 @@ body {
   font-size: 44px;
   font-weight: 600;
   letter-spacing: -2px;
-  width: 400px;
 }
 
 .nameSection span {
@@ -122,7 +119,6 @@ body {
   border-radius: 20px;
   font-size: 56px;
   font-weight: 600;
-  letter-spacing: -3px;
 }
 
 .myPic {
@@ -288,6 +284,7 @@ body {
   rotate: 4deg;
   transition: all ease-in-out 0.2s;
 }
+
 .projectLink:hover {
   transform: scale(1.05);
   rotate: -8deg;
@@ -350,6 +347,7 @@ body {
   flex-grow: 1;
   padding: 16px;
 }
+
 .socialLink:hover {
   background-color: #ff6522;
   transition: all ease-in-out 0.6s;
@@ -428,7 +426,6 @@ body {
   display: flex;
   flex-direction: column;
   gap: 10px;
-  padding-bottom
 }
 
 /* SMALL DESKTOP VIEW */
@@ -475,18 +472,22 @@ body {
     display: flex;
     overflow: scroll;
   }
-  .socials > a {
+
+  .socials>a {
     font-size: 20px;
     padding: 18px;
     border-radius: 20px;
   }
-  .socials > div {
+
+  .socials>div {
     font-size: 20px;
     padding: 18px;
     border-radius: 20px;
   }
+
   .socials::-webkit-scrollbar {
-    display: none; /* hide scrollbar */
+    display: none;
+    /* hide scrollbar */
   }
 
   .skills {
@@ -495,7 +496,8 @@ body {
   }
 
   .skills::-webkit-scrollbar {
-    display: none; /* hide scrollbar */
+    display: none;
+    /* hide scrollbar */
   }
 
   .companySkills {
@@ -550,25 +552,30 @@ body {
     display: flex;
     overflow: scroll;
   }
-  .socials > a {
+
+  .socials>a {
     font-size: 20px;
     padding: 18px;
     border-radius: 20px;
   }
-  .socials > div {
+
+  .socials>div {
     font-size: 20px;
     padding: 18px;
     border-radius: 20px;
   }
+
   .socials::-webkit-scrollbar {
-    display: none; /* hide scrollbar */
+    display: none;
+    /* hide scrollbar */
   }
 
   .skills {
     display: flex;
     flex-direction: column;
   }
-  .skills > div {
+
+  .skills>div {
     font-size: 32px;
   }
 

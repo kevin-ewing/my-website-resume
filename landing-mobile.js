@@ -15,16 +15,13 @@ let fonts = [];
 let selectedFont;
 let fontPaths = [
   "fonts/JosefinSans-Light.ttf",
-  "fonts/LibreBaskerville-Regular.ttf",
   "fonts/OpenSans_Condensed-Light.ttf",
   "fonts/OpenSans_Condensed-Regular.ttf",
-  "fonts/PlayfairDisplay-Medium.ttf",
   "fonts/PlusJakartaSans-Light.ttf",
   "fonts/PlusJakartaSans-Regular.ttf",
   "fonts/Raleway-Bold.ttf",
   "fonts/Raleway-ExtraLight.ttf",
   "fonts/Raleway-Regular.ttf",
-  "fonts/Sedan-Regular.ttf",
   "fonts/ZillaSlab-Medium.ttf",
 ];
 
