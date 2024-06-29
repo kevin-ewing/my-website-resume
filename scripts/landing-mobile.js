@@ -1,7 +1,7 @@
 let RESOLUTION = 100;
 let TRAIL_LENGTH_CAP = 300;
 let DELAY_CAP = 1;
-let windowYOffset = -400;
+let windowYOffset = -700;
 let angle = 0;
 let targetAngle = 0;
 let targetSpread = 0;
@@ -15,14 +15,9 @@ let fonts = [];
 let selectedFont;
 let fontPaths = [
   "fonts/JosefinSans-Light.ttf",
-  "fonts/OpenSans_Condensed-Light.ttf",
   "fonts/OpenSans_Condensed-Regular.ttf",
   "fonts/PlusJakartaSans-Light.ttf",
   "fonts/PlusJakartaSans-Regular.ttf",
-  "fonts/Raleway-Bold.ttf",
-  "fonts/Raleway-ExtraLight.ttf",
-  "fonts/Raleway-Regular.ttf",
-  "fonts/ZillaSlab-Medium.ttf",
 ];
 
 // Noise parameters
@@ -36,7 +31,7 @@ function preload() {
 }
 
 function setup() {
-  var myCanvas = createCanvas(windowWidth, windowHeight);
+  var myCanvas = createCanvas(windowWidth, 1000);
   myCanvas.parent("landing");
   randomizeFont();
   letters = [];

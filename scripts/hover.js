@@ -54,7 +54,7 @@ tl2.fromTo(
     opacity: 1,
     y: 0,
     ease: "power.out",
-    duration: 1,
+    duration: .5,
   }
 );
 
@@ -65,7 +65,7 @@ tl2.fromTo(
     opacity: 1,
     y: 0,
     ease: "power.out",
-    duration: 1,
+    duration: .5,
   }
 );
 
@@ -76,7 +76,7 @@ tl2.fromTo(
     opacity: 1,
     y: 0,
     ease: "power.out",
-    duration: 1,
+    duration: .5,
   }
 );
 
@@ -191,11 +191,38 @@ document.addEventListener("DOMContentLoaded", function() {
     });
   });
 
+
+    // Add hover effect to social links
+    const socialLinksEnd = document.querySelectorAll(".socialLinkEnd");
+    socialLinksEnd.forEach(link => {
+      link.addEventListener("mouseenter", function() {
+        link.style.background = getRandomGradient();
+      });
+      link.addEventListener("mouseleave", function() {
+        link.style.background = "#f7f7f7";
+      });
+    });
+
+      // Add hover effect to social links
+      const projectLinks = document.querySelectorAll(".projectLink");
+      projectLinks.forEach(link => {
+        link.addEventListener("mouseenter", function() {
+          link.style.background = getRandomGradient();
+        });
+        link.addEventListener("mouseleave", function() {
+          link.style.background = "#f7f7f7";
+        });
+      });
+
   // Function to set a random border-top color
   function setRandomBorderTopColor() {
     const downArrow = document.querySelector(".down-arrow");
     if (downArrow) {
       downArrow.style.borderTopColor = getRandomColor();
+    }
+    const downArrow2 = document.querySelector(".down-arrow2");
+    if (downArrow2) {
+      downArrow2.style.borderTopColor = getRandomColor();
     }
   }
 
