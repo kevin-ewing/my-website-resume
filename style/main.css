@@ -62,6 +62,7 @@
 /* Ensure the body and html take up the full height */
 html,
 body {
+  scroll-behavior: smooth;
   height: 100%;
   margin: 0;
   padding: 0;

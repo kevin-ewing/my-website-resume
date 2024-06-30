@@ -27,14 +27,14 @@ let fontPaths = [
   "fonts/ZillaSlab-Medium.ttf",
 ];
 
-let IDLE_THRESHOLD = 5000;
-let lastMouseMoved = 0; // Timestamp of last mouse movement
-let idleTimer = 0; // Timer for idle movement
+let IDLE_THRESHOLD = 3500;
+let lastMouseMoved = 0;
+let idleTimer = 0;
 let mousePrev;
 
 // Noise parameters
-let noiseScale = 0.1; // Adjust noise scale for frequency
-let noiseStrength = 0.5; // Adjust noise strength for magnitude
+let noiseScale = 0.1;
+let noiseStrength = 0.5;
 
 function preload() {
   for (let path of fontPaths) {
@@ -78,6 +78,10 @@ function setup() {
       textSize(windowWidth * 0.1 * sizeMultiplier);
       let xOffset = -textWidth(lines[lineNum]) / 2; // Initialize x-offset
       let yOffset = lineNum * sizeMultiplier * LINE_SPACING_MULTIPLIER - LINE_SPACING_MULTIPLIER; // Initialize y-offset
+      if (lineNum == 0) {
+        yOffset = yOffset - (windowWidth * .025);
+      }
+
       if (lineLength != 0) {
         xOffset =
           letters[lettersIndex - 1].xOffset +
@@ -258,8 +262,12 @@ function mousePressed() {
       let letter = lines[lineNum][lineLength];
       let sizeMultiplier = lineNum != 0 ? 0.8 : 1.1;
       textSize(windowWidth * 0.1 * sizeMultiplier);
-      let xOffset = -textWidth(lines[lineNum]) / 2;
-      let yOffset = lineNum * sizeMultiplier * LINE_SPACING_MULTIPLIER - LINE_SPACING_MULTIPLIER;
+      let xOffset = -textWidth(lines[lineNum]) / 2; // Initialize x-offset
+      let yOffset = lineNum * sizeMultiplier * LINE_SPACING_MULTIPLIER - LINE_SPACING_MULTIPLIER; // Initialize y-offset
+      if (lineNum == 0) {
+        yOffset = yOffset - (windowWidth * .015);
+      }
+
       if (lineLength != 0) {
         xOffset =
           letters[lettersIndex - 1].xOffset +

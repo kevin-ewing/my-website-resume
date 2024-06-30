@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
+  <head>
     <meta charset="UTF-8">
     <title>Kevin Ewing Resume Website</title>
     <link rel="stylesheet" href="style/main.css">
@@ -13,9 +13,9 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.5.0/p5.js"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.5.0/p5.js"></script>
     <link rel='stylesheet' href='https://unpkg.com/aos@2.3.0/dist/aos.css'>
-
 
     <script src="scripts/mobile.js"></script>
     <script>
@@ -28,256 +28,300 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@500;700&display=swap"
-    rel="stylesheet"
-    />
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@500;700&display=swap"
+      rel="stylesheet" />
 
-</head>
+  </head>
 
-
-<body>
+  <body>
     <div id="landing" onresize="resizeWindow()">
-        <script src="scripts/landing.js"></script>
+      <script src="scripts/landing.js"></script>
     </div>
     <div id="downIcon" onclick="location.href='#about'">
-        <div class="down-arrow"></div>
-      </div>
+      <div class="down-arrow"></div>
+    </div>
     <div id="content">
-            <div class="container">
-              <div class="about" id = "about">
-                <div class="aboutSection">
-                  <img class="myPic" alt="photo" src="images/kevin-ewing.jpg" />
-                  <div class="fieldSection">
-                    <div>Kevin Ewing</div>
-                    <div class="fieldName">Cloud Service Availability Developer at Genesys</div>
-                  </div>
-                </div>
-                <div class="navbar">
-                    <div class="pageLinks" onclick="location.href='#experience'">
-                        EXPERIENCE
-                    </div>
-                    <div class="pageLinks" onclick="location.href='#skills'">
-                        SKILLS
-                    </div>
-                    <div class="pageLinks" onclick="location.href='#projects'">
-                        PROJECTS
-                    </div>
-                    <div class="pageLinks" onclick="location.href='#contact'">
-                        CONTACT
-                    </div>
-                </div>
-                <div class="nameSection">
-                  <div class="aboutHeading">ABOUT</div>
-                  <p class="aboutDesc">
-                    A software engineer with a robust computer science education background, hands-on software engineering experience, 
-                    and a <span>passion for identifying problems and finding solutions.</span>
-                </p>
-                </div>
-              </div>
-              <div class="socials">
-                <a class="socialLink" href="mailto:kevin.c.ewing@outlook.com"
-                  >EMAIL</a
-                >
-                <a
-                  class="socialLink"
-                  href="https://www.linkedin.com/in/kevincewing/"
-                  target="_blank"
-                  >LINKEDIN</a
-                >
-                <a
-                  class="socialLink"
-                  href="https://github.com/kevin-ewing"
-                  target="_blank"
-                  >GITHUB</a
-                >
-                <a class="socialLink" href="resources/Kevin Ewing Resume.pdf" download>RESUME</a>
-              </div>
-        
-              <div class="skills" id="skills">
-                <div class="skillSection" id="lang">
-                    <div class="skillHeader">LANGUAGES</div>
-                    <div class="skillNameSection">
-                      <div class="skillName">Python</div>
-                      <div class="skillName">Java</div>
-                      <div class="skillName">Clojure</div>
-                    </div>
-                </div>
-                <div class="skillSection" id="frame">
-                  <div class="skillHeader">FRAMEWORKS</div>
-                  <div class="skillNameSection">
-                    <div class="skillName">Flask</div>
-                    <div class="skillName">React</div>
-                    <div class="skillName">Shiny</div>
-                    <!-- <div class="skillName">React Native</div> -->
-                  </div>
-                </div>
-                <div class="skillSection" id="devops">
-                  <div class="skillHeader">DEVOPS TOOLS</div>
-                  <div class="skillNameSection">
-                    <div class="skillName">AWS</div>
-                    <div class="skillName">Jenkins</div>
-                    <div class="skillName">Docker</div>
-                  </div>
-                </div>
-              </div>
-        
-              <div class="experience" id="experience">
-                <div class="companySection">
-                  <div class="experienceheading">EXPERIENCE</div>
-                  <div>
-                    <div class="companyName">GENESYS CLOUD</div>
-                    <div class="companyPeriod">June 2023 - Present</div>
-                    <div class="companySkills">
-                      <div class="companySkillName">Python</div>
-                      <div class="companySkillName">Clojure</div>
-                      <div class="companySkillName">AWS</div>
-                    </div>
-                  </div>
-                </div>
-        
-                <div class="experienceSection">
-                  <div class="experienceItem">
-                    <div class="experienceName">Software Engineer</div>
-                    <div class="experienceDesc">
-                      Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur placeat temporibus dignissimos numquam aperiam vero quasi asperiores amet voluptatem sunt, voluptas harum quisquam nemo unde facilis nesciunt similique quam vitae?
-                    </div>
-                  </div>
-                  <div class="experienceItem">
-                    <div class="experienceName">Associate Software Engineer</div>
-                    <div class="experienceDesc">
-                      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Illo in accusantium tenetur sequi accusamus quisquam quaerat, dignissimos dolore officia tempora eius hic aliquid cupiditate quidem quam maiores reiciendis commodi ab!
-                    </div>
-                  </div>
-                </div>
-              </div>
+      <div class="container">
+        <div class="about" id="about">
+          <div class="aboutSection">
+            <img class="myPic" alt="photo" src="images/kevin-ewing.jpg" />
+            <div class="fieldSection">
+              <div>Kevin Ewing</div>
+              <div class="fieldName">Cloud Service Availability Developer at
+                Genesys</div>
+            </div>
+          </div>
+          <div class="navbar">
+            <div class="pageLinks" onclick="location.href='#skills'">
+              SKILLS
+            </div>
+            <div class="pageLinks" onclick="location.href='#experience'">
+              EXPERIENCE
+            </div>
+            <div class="pageLinks" onclick="location.href='#projects'">
+              PROJECTS
+            </div>
+            <div class="pageLinks" onclick="location.href='#contact'">
+              CONTACT
+            </div>
+          </div>
+          <div class="nameSection">
+            <div class="aboutHeading">ABOUT</div>
+            <p class="aboutDesc">
+              A software engineer with a robust computer science education
+              background, hands-on software engineering experience,
+              and a <span>passion for identifying problems and finding
+                solutions.</span>
+            </p>
+          </div>
+        </div>
+        <div class="socials">
+          <a class="socialLink"
+            href="mailto:kevin.c.ewing@outlook.com">EMAIL</a>
+          <a
+            class="socialLink"
+            href="https://www.linkedin.com/in/kevincewing/"
+            target="_blank">LINKEDIN</a>
+          <a
+            class="socialLink"
+            href="https://github.com/kevin-ewing"
+            target="_blank">GITHUB</a>
+          <a class="socialLink" href="resources/Kevin Ewing Resume.pdf"
+            download>RESUME</a>
+        </div>
 
-              <div class="experience" id="experience">
-                <div class="companySection">
-                    <div class="experienceheading"></div>
-                  <div>
-                    <div class="companyName">MIDDLEBURY COLLEGE</div>
-                    <div class="companyPeriod">August 2019 - May 2023</div>
-                    <div class="companySkills">
-                      <div class="companySkillName">Python</div>
-                      <div class="companySkillName">C</div>
-                      <div class="companySkillName">R</div>
-                    </div>
-                  </div>
-                </div>
-        
-                <div class="experienceSection">
-                  <div class="experienceItem">
-                    <div class="experienceName">Middlebury Consulting Group Lead Data Scientist</div>
-                    <div class="experienceDesc">
-                      Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga velit porro ipsum, provident voluptates deserunt, dolorem soluta eaque odio ut officia similique. Voluptates magni perferendis similique totam nemo. Ipsa, vero!
-                    </div>
-                  </div>
-                  <div class="experienceItem">
-                    <div class="experienceName">Computer Science Department Peer Tutor</div>
-                    <div class="experienceDesc">
-                      Lorem ipsum dolor sit, amet consectetur adipisicing elit. Cum culpa placeat omnis error odio explicabo eum ex maxime rem at odit quis velit veniam voluptatem consequuntur quam, sunt necessitatibus amet!
-                    </div>
-                  </div>
-                </div>
-              </div>
+        <div class="skills" id="skills">
+          <div class="skillSection" id="lang">
+            <div class="skillHeader">LANGUAGES</div>
+            <div class="skillNameSection">
+              <div class="skillName">Python</div>
+              <div class="skillName">Java</div>
+              <div class="skillName">Clojure</div>
+            </div>
+          </div>
+          <div class="skillSection" id="frame">
+            <div class="skillHeader">FRAMEWORKS</div>
+            <div class="skillNameSection">
+              <div class="skillName">Flask</div>
+              <div class="skillName">React</div>
+              <div class="skillName">Shiny</div>
+              <!-- <div class="skillName">React Native</div> -->
+            </div>
+          </div>
+          <div class="skillSection" id="devops">
+            <div class="skillHeader">DEVOPS TOOLS</div>
+            <div class="skillNameSection">
+              <div class="skillName">AWS</div>
+              <div class="skillName">Jenkins</div>
+              <div class="skillName">Docker</div>
+            </div>
+          </div>
+        </div>
 
-            <div class="extended-background">
-              <div id="downIcon2" onclick="location.href='#projects'">
-                <div class="down-arrow2"></div>
-              </div>
-              <div class="projects" id="projects">
-                <div class="projectHeader">
-                  <div>
-                    <div class="projectHeading">PROJECTS</div>
-                    <div class="projectName">LAMBADA</div>
-                    <div class="projectDesc">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium deserunt nobis, consequuntur labore fuga cum reiciendis, at praesentium quidem, excepturi pariatur ratione voluptates totam similique asperiores assumenda recusandae iste. Eaque!
-                    </div>
-                  </div>
-                  <a
-                    href="https://github.com/kevin-ewing/lambada"
-                    target="_blank"
-                  >
-                    <img class="projectLink" src="resources/githubLogo.svg" alt="link"
-                  /></a>
-                </div>
-              </div>
-        
-              <div class="projects" id="projects">
-                <div class="projectImg-container">
-                    <a href="https://kevin-ewing.github.io/agents/" target="_blank">
-                      <img class="projectImg" src="images/agents.jpg" alt="Agent Image"/>
-                    </a>
-                </div>
-                <div class="projectHeader">
-                  <div>
-                    <div class="projectName">AGENT SIMULATED GENERATIVE ART</div>
-                    <div class="projectDesc">
-                      Lorem ipsum dolor sit amet consectetur, adipisicing elit. Itaque maiores aliquid sed fuga pariatur autem animi atque aperiam, neque mollitia aliquam nesciunt, repellat veritatis quibusdam! Voluptatem, distinctio a? Ullam, sit?
-                    </div>
-                  </div>
-                  <a href="https://github.com/kevin-ewing/agents" target="_blank">
-                    <img class="projectLink" src="resources/githubLogo.svg" alt="link"
-                  /></a>
-                </div>
-              </div>
-        
-              <div class="projects" id="projects"> 
-                <div class="projectImg-container">
-                    <a href="https://kevin-ewing.github.io/whimsical_cabin/" target="_blank">
-                        <img class="projectImg" src="images/cabin.jpg" alt="Cabin Image">
-                    </a>
-                </div>
-                <div class="projectHeader">
-                  <div>
-                    <div class="projectName">THREE.JS CABIN</div>
-                    <div class="projectDesc">
-                      Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione, cumque neque ipsa asperiores veniam harum deserunt quia repellat atque corrupti, eveniet iste quae rerum mollitia porro quis. Laborum, aut suscipit.
-                    </div>
-                  </div>
-                  <a
-                    href="https://github.com/kevin-ewing/whimsical_cabin"
-                    target="_blank"
-                  >
-                    <img class="projectLink" src="resources/githubLogo.svg" alt="link"
-                  /></a>
-                </div>
-              </div>
-        
-              <div class="contact" id="contact">
-                <div class="contactName">LET'S BUILD COOL THINGS</div>
-              </div>
-
-              <div class="socialsEnd">
-                <a class="socialLinkEnd" href="mailto:kevin.c.ewing@outlook.com"
-                  >EMAIL</a
-                >
-                <a
-                  class="socialLinkEnd"
-                  href="https://www.linkedin.com/in/kevincewing/"
-                  target="_blank"
-                  >LINKEDIN</a
-                >
-                <a
-                  class="socialLinkEnd"
-                  href="https://github.com/kevin-ewing"
-                  target="_blank"
-                  >GITHUB</a
-                >
-                <a class="socialLinkEnd" href="resources/Kevin Ewing Resume.pdf" download>RESUME</a>
-              </div>
-        
-              <div class="footer">
-                <div class="footerRight">© 2024 Kevin Ewing.  All rights reserved.</div>
+        <div class="experience" id="experience">
+          <div class="companySection">
+            <div class="experienceheading">EXPERIENCE</div>
+            <div>
+              <div class="companyName">GENESYS CLOUD</div>
+              <div class="companyPeriod">June 2023 - Present</div>
+              <div class="companySkills">
+                <div class="companySkillName">Python</div>
+                <div class="companySkillName">Clojure</div>
+                <div class="companySkillName">AWS</div>
               </div>
             </div>
+          </div>
+
+          <div class="experienceSection">
+            <div class="experienceItem">
+              <div class="experienceName">Software Engineer</div>
+              <div class="experienceDesc">
+                In my current role as a Software Engineer, I've developed
+                company-wide rollback reporting and monitoring software to
+                enhance team performance transparency. I've also worked on
+                automating feature deployments, including integrating updates
+                for our internal change management software to streamline
+                production environment updates. Additionally, I've created
+                user classification software to manage resource access levels
+                based on user roles, ensuring efficient and secure
+                access control across the organization.
+              </div>
             </div>
-        
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.3/gsap.min.js"></script>
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.3/ScrollTrigger.min.js"></script>
-        
-            <script src="scripts/hover.js"></script>
+            <div class="experienceItem">
+              <div class="experienceName">Associate Software Engineer</div>
+              <div class="experienceDesc">
+                As an Associate Software Engineer at Genesys, I built,
+                maintained, and improved access management automation tools that
+                handled cloud resource and resource package provisioning,
+                deprovisioning, and access auditing. These improvements
+                significantly boosted our services resilience and ensured
+                company-wide security and compliance. Additionally, I refined
+                service monitoring, reporting and made improvements to CI/CD
+                pipelines.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="experience" id="experience">
+          <div class="companySection">
+            <div class="experienceheading"></div>
+            <div>
+              <div class="companyName">MIDDLEBURY COLLEGE</div>
+              <div class="companyPeriod">August 2019 - May 2023</div>
+              <div class="companySkills">
+                <div class="companySkillName">Python</div>
+                <div class="companySkillName">C</div>
+                <div class="companySkillName">R</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="experienceSection">
+            <div class="experienceItem">
+              <div class="experienceName">Middlebury Consulting Group Lead Data
+                Scientist</div>
+              <div class="experienceDesc">
+                As the Lead Data Scientist for the Middlebury Consulting Group,
+                I oversaw an 8-member data science team, steering technical
+                initiatives and projects. I managed a team of developers to
+                provide a third-party review and consultation on the World Data
+                Lab's World Population Clock model, addressing technical debt
+                and recommending future development strategies. Additionally, I
+                collaborated with consulting teams, offering guidance on data
+                science-driven decision-making and resource gathering to
+                improve project outcomes.
+              </div>
+            </div>
+            <div class="experienceItem">
+              <div class="experienceName">Computer Science Department Teaching
+                Assistant</div>
+              <div class="experienceDesc">
+                As a Computer Science Department Teaching Assistant, I hosted
+                biweekly office hours for the upper-level Systems Programming
+                elective, assisting students with projects to rewrite the C
+                standard library functions, fread(3), fwrite(3), mmap(2), and
+                malloc(3), as well as command line tools including a shell and
+                ls. Additionally, I independently built Shiny web applications
+                in R to visualize tick population densities and pathogen trends.
+                I also ensured polished demos and presented for the new
+                Middlebury College midd.data initiative.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="extended-background">
+          <div id="downIcon2" onclick="location.href='#projects'">
+            <div class="down-arrow2"></div>
+          </div>
+          <div class="projects" id="projects">
+            <div class="projectHeader">
+              <div>
+                <div class="projectHeading">PROJECTS</div>
+                <div class="projectName">LAMBADA</div>
+                <div class="projectDesc">
+                  Lambada is a project to provide a macro interface between the
+                  AWS Lambda Java runtime and Clojure code. By bridging the gap
+                  between these technologies, Lambada enhances the development
+                  experience for those working with serverless functions in
+                  Clojure.
+                </div>
+              </div>
+              <a
+                href="https://github.com/kevin-ewing/lambada"
+                target="_blank">
+                <img class="projectLink" src="resources/githubLogo.svg"
+                  alt="link" /></a>
+            </div>
+          </div>
+
+          <div class="projects" id="projects">
+            <div class="projectImg-container">
+              <a href="https://kevin-ewing.github.io/agents/" target="_blank">
+                <img class="projectImg" src="images/agents.jpg"
+                  alt="Agent Image" />
+              </a>
+            </div>
+            <div class="projectHeader">
+              <div>
+                <div class="projectName">AGENT SIMULATED GENERATIVE ART</div>
+                <div class="projectDesc">
+                  This project, written in p5.js, explores the intersection of
+                  algorithms and creativity by simulating agents to generate
+                  art. Each agent follows predefined rules and behaviors,
+                  creating intricate and unique visual patterns. By leveraging
+                  the capabilities of p5.js, the project demonstrates how simple
+                  rules can lead to complex and aesthetically pleasing results,
+                  showcasing the potential of generative art.
+                </div>
+              </div>
+              <a href="https://github.com/kevin-ewing/agents" target="_blank">
+                <img class="projectLink" src="resources/githubLogo.svg"
+                  alt="link" /></a>
+            </div>
+          </div>
+
+          <div class="projects" id="projects">
+            <div class="projectImg-container">
+              <a href="https://kevin-ewing.github.io/whimsical_cabin/"
+                target="_blank">
+                <img class="projectImg" src="images/cabin.jpg"
+                  alt="Cabin Image">
+              </a>
+            </div>
+            <div class="projectHeader">
+              <div>
+                <div class="projectName">THREE.JS CABIN</div>
+                <div class="projectDesc">
+                  This project features a cabin model I created in Blender and
+                  rendered real-time in the browser using three.js. It
+                  demonstrates the seamless integration of 3D modeling and
+                  web-based rendering, providing an interactive and visually
+                  appealing experience.
+                </div>
+              </div>
+              <a
+                href="https://github.com/kevin-ewing/whimsical_cabin"
+                target="_blank">
+                <img class="projectLink" src="resources/githubLogo.svg"
+                  alt="link" /></a>
+            </div>
+          </div>
+
+          <div class="contact" id="contact">
+            <div class="contactName">LET'S BUILD COOL THINGS</div>
+          </div>
+
+          <div class="socialsEnd">
+            <a class="socialLinkEnd"
+              href="mailto:kevin.c.ewing@outlook.com">EMAIL</a>
+            <a
+              class="socialLinkEnd"
+              href="https://www.linkedin.com/in/kevincewing/"
+              target="_blank">LINKEDIN</a>
+            <a
+              class="socialLinkEnd"
+              href="https://github.com/kevin-ewing"
+              target="_blank">GITHUB</a>
+            <a class="socialLinkEnd" href="resources/Kevin Ewing Resume.pdf"
+              download>RESUME</a>
+          </div>
+
+          <div class="footer">
+            <div class="footerRight">© 2024 Kevin Ewing. All rights
+              reserved.</div>
+          </div>
+        </div>
+      </div>
+
+      <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.3/gsap.min.js"></script>
+      <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.3/ScrollTrigger.min.js"></script>
+
+      <script src="scripts/hover.js"></script>
     </div>
 
-</body>
+  </body>
 </html>
