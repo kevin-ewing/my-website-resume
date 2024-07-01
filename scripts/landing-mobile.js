@@ -20,7 +20,8 @@ let fontPaths = [
 ];
 let noiseScale = 0.1;
 let noiseStrength = 0.5;
-
+let lastChangeTime = 0;
+let changeInterval = 2000;
 
 function preload() {
   for (let path of fontPaths) {
@@ -181,7 +182,10 @@ function resizeWindow() {
 
 
 function touchStarted() {
-  setup();
+  if (millis() - lastChangeTime > changeInterval) {
+    setup();
+    lastChangeTime = millis();
+  }
 }
 
 
