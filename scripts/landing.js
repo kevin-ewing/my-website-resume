@@ -76,8 +76,8 @@ function setup() {
       let letter = lines[lineNum][lineLength];
       let sizeMultiplier = lineNum != 0 ? 0.8 : 1.1;
       textSize(windowWidth * 0.1 * sizeMultiplier);
-      let xOffset = -textWidth(lines[lineNum]) / 2; // Initialize x-offset
-      let yOffset = lineNum * sizeMultiplier * LINE_SPACING_MULTIPLIER - LINE_SPACING_MULTIPLIER; // Initialize y-offset
+      let xOffset = -textWidth(lines[lineNum]) / 2;
+      let yOffset = lineNum * sizeMultiplier * LINE_SPACING_MULTIPLIER - LINE_SPACING_MULTIPLIER;
       if (lineNum == 0) {
         yOffset = yOffset - (windowWidth * .025);
       }
@@ -102,8 +102,26 @@ function setup() {
     }
   }
 
-  // Add event listener for visibility change
-  document.addEventListener("visibilitychange", handleVisibilityChange, false);
+  // Setup Intersection Observer
+  let observerOptions = {
+    root: null, // Use the viewport as the root
+    rootMargin: "0px",
+    threshold: 0 // Trigger when even one pixel is visible
+  };
+
+  let observer = new IntersectionObserver(handleIntersection, observerOptions);
+  let target = document.querySelector("#landing");
+  observer.observe(target);
+}
+
+function handleIntersection(entries) {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      loop();
+    } else {
+      noLoop();
+    }
+  });
 }
 
 function draw() {
@@ -204,7 +222,7 @@ function updateLetters(targetX, targetY) {
     targetSpread = lerp(
       letter.spread,
       constrain(
-        map(distanceToCenter, 0, halfWindowWidth, 0, windowHeight), //TODO
+        map(distanceToCenter, 0, halfWindowWidth, 0, TRAIL_LENGTH_CAP), //TODO
         0,
         TRAIL_LENGTH_CAP
       ),
@@ -215,14 +233,20 @@ function updateLetters(targetX, targetY) {
   }
 }
 
-function lerpAngle(a, b, t) {
-  let difference = b - a;
+function lerpAngle(currentAngle, targetAngle, dampingFactor) {
+  let difference = targetAngle - currentAngle;
   if (difference > PI) {
     difference -= TWO_PI;
   } else if (difference < -PI) {
     difference += TWO_PI;
   }
-  return a + difference * t;
+  let newAngle = currentAngle + difference * dampingFactor;
+  if (newAngle > TWO_PI) {
+    newAngle -= TWO_PI;
+  } else if (newAngle < 0) {
+    newAngle += TWO_PI;
+  }
+  return newAngle;
 }
 
 function randomDifferentColor() {
@@ -289,8 +313,10 @@ function randomizeFont() {
 
 function handleVisibilityChange() {
   if (document.hidden) {
-    noLoop(); // Stop the draw loop
+    noLoop();
   } else {
-    loop(); // Start the draw loop again
+    loop();
   }
 }
+
+document.addEventListener("visibilitychange", handleVisibilityChange);

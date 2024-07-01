@@ -31,7 +31,7 @@ function preload() {
 }
 
 function setup() {
-  var myCanvas = createCanvas(windowWidth, windowHeight/2 + 200);
+  var myCanvas = createCanvas(windowWidth, windowHeight/2 + 100);
   myCanvas.parent("landing");
   randomizeFont();
   letters = [];
