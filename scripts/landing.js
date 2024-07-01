@@ -3,16 +3,14 @@ let TRAIL_LENGTH_CAP = 300;
 let DELAY_CAP = 1;
 let WINDOW_Y_OFFSET = -80;
 let LINE_SPACING_MULTIPLIER = 130; // Adjust as needed for spacing between lines
-
 let angle = 0;
 let targetAngle = 0;
 let targetSpread = 0;
 let smoothing = 0.05; // Smoothing factor for momentum
 let colors;
 let colorPairs;
-let lines = ["KEVIN  EWING", "SOFTWARE", "ENGINEER"];
+let lines = ["KEVIN EWING", "SOFTWARE", "ENGINEER"];
 let letters = [];
-
 let fonts = [];
 let selectedFont;
 let fontPaths = [
@@ -26,21 +24,20 @@ let fontPaths = [
   "fonts/Raleway-Regular.ttf",
   "fonts/ZillaSlab-Medium.ttf",
 ];
-
 let IDLE_THRESHOLD = 3500;
 let lastMouseMoved = 0;
 let idleTimer = 0;
 let mousePrev;
-
-// Noise parameters
 let noiseScale = 0.1;
 let noiseStrength = 0.5;
+
 
 function preload() {
   for (let path of fontPaths) {
     fonts.push(loadFont(path));
   }
 }
+
 
 function setup() {
   var myCanvas = createCanvas(windowWidth, windowHeight);
@@ -49,27 +46,21 @@ function setup() {
   mousePrev = createVector(mouseX, mouseY);
   letters = [];
   colors = [
-    color("#0364f2"), // Blue
-    color("#058500"), // Green
-    color("#ff4300"), // Reddish/Orange
-    color("#eeba00"), // Yellow
+    color("#0364f2"),
+    color("#058500"),
+    color("#ff4300"),
+    color("#eeba00"),
   ];
-
   randomizeColorPairs();
   BG_COLOR = color("white");
   background(BG_COLOR);
   textAlign(LEFT, CENTER);
   textSize(windowWidth * 0.1);
-
   noStroke();
-
-  // Initialize letter structures
   let totalChars = 0;
-
   for (let i = 0; i < lines.length; i++) {
     totalChars += lines[i].length;
   }
-
   let lettersIndex = 0;
   for (let lineNum = 0; lineNum < lines.length; lineNum++) {
     for (let lineLength = 0; lineLength < lines[lineNum].length; lineLength++) {
@@ -81,13 +72,11 @@ function setup() {
       if (lineNum == 0) {
         yOffset = yOffset - (windowWidth * .025);
       }
-
       if (lineLength != 0) {
         xOffset =
           letters[lettersIndex - 1].xOffset +
           textWidth(letters[lettersIndex - 1].letter);
       }
-
       letters.push({
         xOffset: xOffset,
         yOffset: yOffset,
@@ -101,18 +90,16 @@ function setup() {
       lettersIndex += 1;
     }
   }
-
-  // Setup Intersection Observer
   let observerOptions = {
-    root: null, // Use the viewport as the root
+    root: null,
     rootMargin: "0px",
-    threshold: 0 // Trigger when even one pixel is visible
+    threshold: 0
   };
-
   let observer = new IntersectionObserver(handleIntersection, observerOptions);
   let target = document.querySelector("#landing");
   observer.observe(target);
 }
+
 
 function handleIntersection(entries) {
   entries.forEach(entry => {
@@ -124,15 +111,14 @@ function handleIntersection(entries) {
   });
 }
 
+
 function draw() {
   if (document.hidden) {
-    return; // Stop drawing if the document is hidden
+    return;
   }
-
   background(BG_COLOR);
   let targetX = mouseX - windowWidth / 2;
   let targetY = mouseY - (windowHeight + WINDOW_Y_OFFSET) / 2;
-  // Check if mouse is over canvas
   if (
     mouseX >= 0 &&
     mouseX <= windowWidth &&
@@ -140,73 +126,51 @@ function draw() {
     mouseY <= windowHeight &&
     (mousePrev.x != mouseX || mousePrev.y != mouseY)
   ) {
-    // Update targetAngle based on mouse movement
-    // Reset idle timer since mouse moved
     idleTimer = 0;
     lastMouseMoved = millis();
     mousePrev.set(mouseX, mouseY);
   } else {
-    // Increment idle timer
     idleTimer = millis() - lastMouseMoved;
   }
-
-  // If idle for more than IDLE_THRESHOLD, move targetAngle using noise
   if (idleTimer > IDLE_THRESHOLD) {
-    // Use noise to create smooth, unpredictable movement
     let noiseX = map(noise(millis() * 0.0001), 0, 1, 0, (windowHeight + WINDOW_Y_OFFSET));
     let noiseY = map(noise(millis() * 0.0001), 0, 1, 0, windowWidth);
     targetX = noiseX - windowWidth / 2;
     targetY = noiseY - (windowHeight + WINDOW_Y_OFFSET) / 2;
   }
-
   updateLetters(targetX, targetY);
-
   let halfWindowWidth = windowWidth / 2;
   let halfWindowHeightOffset = (windowHeight + WINDOW_Y_OFFSET) / 2;
-
   for (
     let resolutionIndex = 0;
     resolutionIndex < RESOLUTION;
     resolutionIndex++
   ) {
     let stepT = resolutionIndex / (RESOLUTION - 1);
-
     for (let letterIndex = 0; letterIndex < letters.length; letterIndex++) {
       let letter = letters[letterIndex];
       let xOffset = letter.xOffset;
       let yOffset = letter.yOffset;
       let stepDistance = letter.spread / RESOLUTION;
-
-      // Calculate position based on angle, distance, and stepT
       let cosAngle = cos(letter.angle);
       let sinAngle = sin(letter.angle);
-      let positionX =
-        halfWindowWidth +
-        (cosAngle * letter.spread) / 2 +
-        xOffset +
-        cosAngle * stepDistance * (resolutionIndex - RESOLUTION);
-      let positionY =
-        halfWindowHeightOffset +
-        (sinAngle * letter.spread) / 2 +
-        yOffset +
-        sinAngle * stepDistance * (resolutionIndex - RESOLUTION);
-
       if (resolutionIndex == RESOLUTION - 1) {
         fill("black");
       } else {
         fill(lerpColor(letter.colorPair[0], letter.colorPair[1], stepT));
       }
       textSize(windowWidth * 0.1 * letter.sizeMultiplier);
-      text(letter.letter, positionX, positionY);
+      text(letter.letter,
+         positionX = halfWindowWidth + (cosAngle * letter.spread) / 2 + xOffset + cosAngle * stepDistance * (resolutionIndex - RESOLUTION), 
+         halfWindowHeightOffset + (sinAngle * letter.spread) / 2 + yOffset + sinAngle * stepDistance * (resolutionIndex - RESOLUTION));
     }
   }
 }
 
+
 function updateLetters(targetX, targetY) {
   targetAngle = atan2(targetY, targetX);
   let halfWindowWidth = windowWidth / 2;
-  let halfWindowHeight = windowHeight / 2;
-
   for (let i = 0; i < letters.length; i++) {
     let letter = letters[i];
     let distanceToCenter = dist(targetX, targetY, 0, 0);
@@ -216,13 +180,11 @@ function updateLetters(targetX, targetY) {
       letter.xOffset,
       letter.yOffset
     );
-
-    // Update values for each letter based on targetAngle
     letter.angle = lerpAngle(letter.angle, targetAngle, smoothing);
     targetSpread = lerp(
       letter.spread,
       constrain(
-        map(distanceToCenter, 0, halfWindowWidth, 0, TRAIL_LENGTH_CAP), //TODO
+        map(distanceToCenter, 0, halfWindowWidth, 0, TRAIL_LENGTH_CAP),
         0,
         TRAIL_LENGTH_CAP
       ),
@@ -232,6 +194,7 @@ function updateLetters(targetX, targetY) {
     letter.delay = map(distanceToLetter, 0, halfWindowWidth, 0, DELAY_CAP);
   }
 }
+
 
 function lerpAngle(currentAngle, targetAngle, dampingFactor) {
   let difference = targetAngle - currentAngle;
@@ -249,6 +212,7 @@ function lerpAngle(currentAngle, targetAngle, dampingFactor) {
   return newAngle;
 }
 
+
 function randomDifferentColor() {
   let color1, color2;
   do {
@@ -258,36 +222,36 @@ function randomDifferentColor() {
   return [color1, color2];
 }
 
+
 function randomizeColorPairs() {
   colorPairs = [];
   let totalChars = 0;
-
   for (let i = 0; i < lines.length; i++) {
     totalChars += lines[i].length;
   }
-
   for (let i = 0; i < totalChars; i++) {
     colorPairs.push(randomDifferentColor());
   }
 }
+
 
 function resizeWindow() {
   resizeCanvas(windowWidth, windowHeight);
   draw();
 }
 
+
 function mousePressed() {
   randomizeFont();
   randomizeColorPairs();
-
   let lettersIndex = 0;
   for (let lineNum = 0; lineNum < lines.length; lineNum++) {
     for (let lineLength = 0; lineLength < lines[lineNum].length; lineLength++) {
       let letter = lines[lineNum][lineLength];
       let sizeMultiplier = lineNum != 0 ? 0.8 : 1.1;
       textSize(windowWidth * 0.1 * sizeMultiplier);
-      let xOffset = -textWidth(lines[lineNum]) / 2; // Initialize x-offset
-      let yOffset = lineNum * sizeMultiplier * LINE_SPACING_MULTIPLIER - LINE_SPACING_MULTIPLIER; // Initialize y-offset
+      let xOffset = -textWidth(lines[lineNum]) / 2;
+      let yOffset = lineNum * sizeMultiplier * LINE_SPACING_MULTIPLIER - LINE_SPACING_MULTIPLIER;
       if (lineNum == 0) {
         yOffset = yOffset - (windowWidth * .015);
       }
@@ -306,10 +270,12 @@ function mousePressed() {
   }
 }
 
+
 function randomizeFont() {
   currentFont = random(fonts);
   textFont(currentFont);
 }
+
 
 function handleVisibilityChange() {
   if (document.hidden) {
@@ -318,5 +284,6 @@ function handleVisibilityChange() {
     loop();
   }
 }
+
 
 document.addEventListener("visibilitychange", handleVisibilityChange);

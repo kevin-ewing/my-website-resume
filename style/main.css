@@ -48,7 +48,6 @@
   margin-bottom: 20px;
 }
 
-
 @keyframes moveUpDown {
   0%, 100% {
     transform: translateY(0);
@@ -59,7 +58,6 @@
   }
 }
 
-/* Ensure the body and html take up the full height */
 html,
 body {
   scroll-behavior: smooth;
