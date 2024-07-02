@@ -15,10 +15,10 @@
     <link rel='stylesheet' href='https://unpkg.com/aos@2.3.0/dist/aos.css'>
     <script src="scripts/mobile.js"></script>
     <script>
-        SA.redirection_mobile({
-            mobile_url: "kevin-ewing.github.io/my-website-resume/mobile.html",
-            mobile_prefix: "https"
-        });
+      SA.redirection_mobile({
+          mobile_url: window.location.protocol + "//" + window.location.host + "/mobile.html",
+          mobile_prefix: window.location.protocol
+      });
     </script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
