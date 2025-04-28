@@ -269,7 +269,7 @@ class TumbleLet {
             }
   
             var closePoint = 0;
-            for (i = 0; i < this.p.commands.length; i++) {
+            for (var i = 0; i < this.p.commands.length; i++) {
               if (this.p.commands[i].type == "M") {
                 if(i > 0){
                   beginContour();
@@ -325,14 +325,11 @@ class TumbleLet {
     }
   
     displayExtrudePatch(){
-      if(sidesType == 1){
-        fill(sideSolidColor);
-      }
       noStroke();
   
       var closePoint = 0;
       var z = 0;
-      for (i = 0; i < this.p.commands.length; i++) {
+      for (var i = 0; i < this.p.commands.length; i++) {
         if(sidesType == 2){
           fill(colorSet[this.cols[i]]);
         }
@@ -398,7 +395,7 @@ class TumbleLet {
         stroke(strokeColor);
         strokeWeight(strokeW);
   
-        for (i = 0; i < this.p.commands.length; i++) {
+        for (var i = 0; i < this.p.commands.length; i++) {
           if(this.p.commands[i].type != "Z"){
             line(
               this.p.commands[i].x, this.p.commands[i].y, 0,
@@ -407,15 +404,6 @@ class TumbleLet {
           }
         }
       pop();
-    }
-  
-    displayDebug(){
-      // noStroke();
-      // fill(textColor);
-  
-      // for(var m = 0; m < this.p.length; m++){
-      //   ellipse(this.p[m].x, this.p[m].y, 5, 5);
-      // }
     }
   }
   

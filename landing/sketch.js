@@ -1,4 +1,4 @@
-var bkgdColor, textColor, strokeColor, sideSolidColor;
+var bkgdColor, textColor, strokeColor;
 var colorSet = [];
 
 var inputText = [];
@@ -68,8 +68,8 @@ var thisDensity = 1;
 var selFont = 0;
 
 function preload(){
-  tFont[0] = loadFont("boost_resources/FormulaCondensed-Bold.otf");
-  tFontData[0] = loadBytes("boost_resources/FormulaCondensed-Bold.otf");
+  tFont[0] = loadFont("landing/landing_resources/FormulaCondensed-Bold.otf");
+  tFontData[0] = loadBytes("landing/landing_resources/FormulaCondensed-Bold.otf");
   tFontFactor[0] = 0.82;
 }
 
@@ -94,13 +94,13 @@ function setup(){
   textColor = color('#ffffff');
   strokeColor = color('#000000');
   bkgdColor = color('#000000');
-  sideSolidColor = color('#f26666');
 
-  colorSet[0] = color('#ffffff');
-  colorSet[1] = color('#4e7cd9');
-  colorSet[2] = color('#02733e');
-  colorSet[3] = color('#f23030');
-  colorSet[4] = color('#f26666');
+  colorSet[0] = color('#dee3e2');
+  colorSet[1] = color('#fccbcb');
+  colorSet[2] = color('#78b3d6');
+  colorSet[3] = color('#d86969');
+  colorSet[4] = color('#4f7969');
+
 
   frameRate(frate);
   curveDetail(res);
