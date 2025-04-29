@@ -1,5 +1,5 @@
 const MAX_SIZE = 200
-let TEXT = "Kevin Ewing\nSoftware\nEngineer";
+let TEXT = "Contact Me";
 
 function setText() {
   inputText = TEXT.match(/[^\r\n]+/g);

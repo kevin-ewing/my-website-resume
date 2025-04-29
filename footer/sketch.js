@@ -1,3 +1,5 @@
+const WINDOW_HEIGHT = 300
+
 var bkgdColor, textColor, strokeColor;
 var colorSet = [];
 
@@ -6,7 +8,7 @@ var tFont;
 var tFontData;
 var myFont;
 var tFontFactor;
-var starterText = "Kevin Ewing\nSoftware\nEngineer";
+var starterText = "Contact Me";
 
 var pgTextSize = 100;
 var res = 8;
@@ -61,7 +63,7 @@ function preload() {
 }
 
 function setup() {
-  createCanvas(windowWidth, windowHeight, WEBGL);
+  createCanvas(windowWidth, WINDOW_HEIGHT, WEBGL);
 
   thisDensity = pixelDensity();
 
@@ -127,27 +129,7 @@ function windowResized() {
 function resizeForPreview() {
   var tempWidth, tempHeight;
 
-  if (saveMode == 0) {
-    resizeCanvas(windowWidth, windowHeight, WEBGL);
-  } else if (saveMode == 1) {
-    if (windowWidth > windowHeight * 9 / 16) {
-      tempHeight = windowHeight;
-      tempWidth = windowHeight * 9 / 16;
-    } else {
-      tempWidth = windowWidth;
-      tempHeight = windowWidth * 16 / 9;
-    }
-    resizeCanvas(tempWidth, tempHeight, WEBGL);
-  } else if (saveMode == 2) {
-    if (windowWidth < windowHeight) {
-      tempWidth = windowWidth;
-      tempHeight = windowWidth;
-    } else {
-      tempHeight = windowHeight;
-      tempWidth = windowHeight;
-    }
-    resizeCanvas(tempWidth, tempHeight, WEBGL);
-  }
+  resizeCanvas(windowWidth, WINDOW_HEIGHT, WEBGL);
 
   cwidth = width;
   cheight = height;
