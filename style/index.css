@@ -13,6 +13,15 @@
   align-items: center;
   flex-direction: column;
 }
+
+.home-container-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  min-height: 100vh;
+  width: 100%;
+}
  
 .home-hero {
   width: 100%;
@@ -80,8 +89,8 @@
 }
  
 .home-icon10 {
-  width: 36px;
-  height: 36px;
+  width: 24px;
+  height: 24px;
 }
  
 .home-links-container1 {
@@ -94,19 +103,36 @@
   margin-right: var(--dl-layout-space-tripleunit);
   text-decoration: none;
 }
+
+.home-link10:hover {
+  color: #fccbcb;
+}
  
 .home-link11 {
   margin-right: var(--dl-layout-space-tripleunit);
   text-decoration: none;
+}
+
+.home-link11:hover {
+  color: #78b3d6;
 }
  
 .home-link12 {
   margin-right: var(--dl-layout-space-tripleunit);
   text-decoration: none;
 }
+
+.home-link12:hover {
+  color: #d86969;
+}
+ 
  
 .home-link13 {
   text-decoration: none;
+}
+
+.home-link13:hover {
+  color: #4f7969;
 }
  
 .home-right-side {
@@ -124,6 +150,10 @@
   padding-right: var(--dl-layout-space-fiveunits);
   padding-bottom: var(--dl-layout-space-unit);
   background-color: var(--dl-color-gray-black);
+}
+
+.home-cta-btn:hover {
+  background-color: #78b3d6;
 }
  
 .home-mobile-menu {
@@ -222,7 +252,7 @@
 }
  
 .home-text13 {
-  width: 433px;
+  width: auto;
   height: 60px;
   text-align: center;
 }
@@ -683,9 +713,15 @@
 }
  
 .home-views-container {
+  font-weight:300;
   display: flex;
   align-items: center;
   flex-direction: row;
+}
+
+.home-views-container:hover {
+  color:#4f7969;
+  fill: #007acc;
 }
  
 .home-icon23 {
@@ -838,12 +874,14 @@
  
 .home-image {
   width: 100%;
-  height: 400px;
-  object-position: top;
+  height: auto;
+  max-width: 100%;
   object-fit: cover;
+  object-position: top;
   border-radius: var(--dl-layout-radius-radius8);
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
+  display: block;
 }
  
 .home-content-container4 {
@@ -941,11 +979,39 @@
   margin-bottom: 4em;
 }
 
-.home-icon {
-  width: 24px;
-  height: 24px;
+.card-icon {
+  margin-bottom: .25em;
+  width: 30px;
+  height: 30px;
 }
- 
+
+.home-icon {
+  width: 30px;
+  height: 30px;
+}
+
+.footer-icon1,
+.footer-icon2,
+.footer-icon3 {
+  width: 30px;
+  height: 30px;
+  color: #ffffff;
+}
+
+/* On hover, change color which affects the SVG via currentColor */
+.footer-icon1:hover {
+  color: #78b3d6;
+}
+
+.footer-icon2:hover {
+  color: #d86969;
+}
+
+.footer-icon3:hover {
+  color: #4f7969;
+}
+
+
 .home-icon31 {
   width: 24px;
   height: 24px;

@@ -66,17 +66,6 @@
   display: list-item;
 }
  
-.button {
-  color: var(--dl-color-gray-black);
-  display: inline-block;
-  padding: 0.5rem 1rem;
-  font-family: "Open Sans";
-  border-color: var(--dl-color-gray-black);
-  border-width: 1px;
-  border-radius: 4px;
-  background-color: var(--dl-color-gray-white);
-}
- 
 .textarea {
   color: var(--dl-color-gray-black);
   cursor: auto;

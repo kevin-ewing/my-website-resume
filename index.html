@@ -31,7 +31,6 @@
   <meta name="msapplication-TileImage" content="resources/favicon/ms-icon-144x144.png">
   <meta name="theme-color" content="#ffffff">
 
-  <link rel="stylesheet" href="style/main.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -74,49 +73,6 @@
     figcaption {
       margin: 0;
       padding: 0;
-    }
-
-    button {
-      background-color: transparent;
-    }
-
-    button,
-    input,
-    optgroup,
-    select,
-    textarea {
-      font-family: inherit;
-      font-size: 100%;
-      line-height: 1.15;
-      margin: 0;
-    }
-
-    button,
-    select {
-      text-transform: none;
-    }
-
-    button,
-    [type="button"],
-    [type="reset"],
-    [type="submit"] {
-      -webkit-appearance: button;
-      color: inherit;
-    }
-
-    button::-moz-focus-inner,
-    [type="button"]::-moz-focus-inner,
-    [type="reset"]::-moz-focus-inner,
-    [type="submit"]::-moz-focus-inner {
-      border-style: none;
-      padding: 0;
-    }
-
-    button:-moz-focus,
-    [type="button"]:-moz-focus,
-    [type="reset"]:-moz-focus,
-    [type="submit"]:-moz-focus {
-      outline: 1px dotted ButtonText;
     }
 
     a {
@@ -228,13 +184,13 @@
           <div data-role="BurgerMenu" class="home-burger-menu"><svg viewBox="0 0 1024 1024" class="home-icon10">
               <path d="M128 256h768v86h-768v-86zM128 554v-84h768v84h-768zM128 768v-86h768v86h-768z"></path>
             </svg></div>
-          <div class="home-links-container1"><a href="#skills" class="home-link10 Anchor">Skills</a><a
-              href="#experience" class="home-link11 Anchor">Experience</a><a href="#projects"
-              class="home-link12 Anchor">Projects</a><a href="https://kevin-ewing.com/blog"
+          <div class="home-links-container1"><a href="#skills" class="home-link10 Anchor"
+              style="margin-left:1em;">Skills</a><a href="#experience" class="home-link11 Anchor">Experience</a><a
+              href="#projects" class="home-link12 Anchor">Projects</a><a href="https://kevin-ewing.com/blog"
               class="home-link13 Anchor">Blog</a></div>
         </div>
         <div class="home-right-side">
-          <a href="resources/Kevin Ewing Resume.pdf" target="_blank" class="home-cta-btn button Anchor">Resume</a>
+          <a href="resources/Kevin Ewing Resume.pdf" target="_blank" class="home-cta-btn Anchor">Resume</a>
         </div>
         <div data-role="MobileMenu" class="home-mobile-menu">
           <div class="home-container2"><img alt="image" src="https://play.teleporthq.io/static/svg/default-img.svg"
@@ -251,224 +207,250 @@
         </div>
       </div>
     </div>
-    <div id="skills" class="home-features">
-      <div class="home-heading-container1">
-        <h1 class="home-text10 Section-Heading"><span>Kevin Ewing</span><br class="Section-Heading" /></h1>
-        <h4 class="home-text13"><span>Cloud Service Availability Developer at
-            Genesys</span><br class="home-text15" /><br class="Section-Heading" /></h4>
-      </div>
-      <div class="home-cards-container1">
-        <div class="home-features-card1">
-          <div class="home-icon-container1"><svg viewBox="0 0 1024 1024" class="home-icon14">
-              <path
-                d="M533.333 234.667c-11.776 0-21.333 9.557-21.333 21.333s9.557 21.333 21.333 21.333c46.208 0 83.797 37.589 83.797 83.797 0 11.776 9.557 21.333 21.333 21.333s21.333-9.557 21.333-21.333c0-69.717-56.747-126.464-126.464-126.464z">
-              </path>
-              <path
-                d="M533.333 42.667c-176.469 0-320 143.531-320 320 0 63.403 18.773 124.672 54.357 177.707 0.981 2.005 2.091 3.925 3.413 5.76 77.867 111.189 91.563 146.347 91.563 179.2v128c0 23.552 19.115 42.667 42.667 42.667h85.333c0 11.093 4.693 22.187 12.373 30.293 8.107 7.68 19.2 12.373 30.293 12.373 11.093 0 22.187-4.693 30.293-12.373 7.68-8.107 12.373-19.2 12.373-30.293h85.333c23.552 0 42.667-19.115 42.667-42.667v-128c0-33.365 13.611-68.693 90.965-179.157 38.187-54.4 58.368-117.845 58.368-183.509 0-176.469-143.531-320-320-320zM618.667 810.667h-170.667v-42.667h170.667v42.667zM725.12 497.195c-62.549 89.301-91.435 140.331-101.76 185.472h-47.36v-85.333c0-23.552-19.115-42.667-42.667-42.667s-42.667 19.115-42.667 42.667v85.333h-47.488c-10.24-43.947-38.315-93.867-98.389-180.053-0.939-1.877-2.048-3.712-3.285-5.504-28.032-39.851-42.837-86.357-42.837-134.443 0-129.408 105.259-234.667 234.667-234.667s234.667 105.259 234.667 234.667c0 48.043-14.805 94.549-42.88 134.528z">
-              </path>
-            </svg></div>
-          <div class="home-text-container1"><span class="home-heading1 Card-Heading">Languages </span><span
-              class="home-text17 Card-Text">I have experience programming
-              both professionally and
-              academically in the following languages:&nbsp;C, Clojure,
-              Haskell, Java, JavaScript, Python, R</span></div>
+    <div class="home-container-center">
+      <div id="skills" class="home-features">
+        <div class="home-heading-container1">
+          <h1 class="home-text10 Section-Heading"><span>Kevin Ewing</span><br class="Section-Heading" /></h1>
+          <h4 class="home-text13"><span>Cloud Service Availability Developer at
+              Genesys</span><br class="home-text15" /><br class="Section-Heading" /></h4>
         </div>
-        <div class="home-features-card2">
-          <div class="home-icon-container2"><svg viewBox="0 0 1024 1024" class="home-icon17">
-              <path
-                d="M533.333 234.667c-11.776 0-21.333 9.557-21.333 21.333s9.557 21.333 21.333 21.333c46.208 0 83.797 37.589 83.797 83.797 0 11.776 9.557 21.333 21.333 21.333s21.333-9.557 21.333-21.333c0-69.717-56.747-126.464-126.464-126.464z">
-              </path>
-              <path
-                d="M533.333 42.667c-176.469 0-320 143.531-320 320 0 63.403 18.773 124.672 54.357 177.707 0.981 2.005 2.091 3.925 3.413 5.76 77.867 111.189 91.563 146.347 91.563 179.2v128c0 23.552 19.115 42.667 42.667 42.667h85.333c0 11.093 4.693 22.187 12.373 30.293 8.107 7.68 19.2 12.373 30.293 12.373 11.093 0 22.187-4.693 30.293-12.373 7.68-8.107 12.373-19.2 12.373-30.293h85.333c23.552 0 42.667-19.115 42.667-42.667v-128c0-33.365 13.611-68.693 90.965-179.157 38.187-54.4 58.368-117.845 58.368-183.509 0-176.469-143.531-320-320-320zM618.667 810.667h-170.667v-42.667h170.667v42.667zM725.12 497.195c-62.549 89.301-91.435 140.331-101.76 185.472h-47.36v-85.333c0-23.552-19.115-42.667-42.667-42.667s-42.667 19.115-42.667 42.667v85.333h-47.488c-10.24-43.947-38.315-93.867-98.389-180.053-0.939-1.877-2.048-3.712-3.285-5.504-28.032-39.851-42.837-86.357-42.837-134.443 0-129.408 105.259-234.667 234.667-234.667s234.667 105.259 234.667 234.667c0 48.043-14.805 94.549-42.88 134.528z">
-              </path>
-            </svg></div>
-          <div class="home-text-container2"><span class="home-heading2 Card-Heading">Development
-              Tools</span><span class="home-text18 Card-Text">I have set up,
-              maintained, and configured a variety of
-              development tools, including: Ansible, AWS, Bedrock, Celery,
-              CloudFormation, Docker, Git, GitHub Actions, Jenkins, New
-              Relic, Terraform.</span></div>
-        </div>
-        <div class="home-features-card3">
-          <div class="home-icon-container3"><svg viewBox="0 0 1024 1024" class="home-icon20">
-              <path
-                d="M533.333 234.667c-11.776 0-21.333 9.557-21.333 21.333s9.557 21.333 21.333 21.333c46.208 0 83.797 37.589 83.797 83.797 0 11.776 9.557 21.333 21.333 21.333s21.333-9.557 21.333-21.333c0-69.717-56.747-126.464-126.464-126.464z">
-              </path>
-              <path
-                d="M533.333 42.667c-176.469 0-320 143.531-320 320 0 63.403 18.773 124.672 54.357 177.707 0.981 2.005 2.091 3.925 3.413 5.76 77.867 111.189 91.563 146.347 91.563 179.2v128c0 23.552 19.115 42.667 42.667 42.667h85.333c0 11.093 4.693 22.187 12.373 30.293 8.107 7.68 19.2 12.373 30.293 12.373 11.093 0 22.187-4.693 30.293-12.373 7.68-8.107 12.373-19.2 12.373-30.293h85.333c23.552 0 42.667-19.115 42.667-42.667v-128c0-33.365 13.611-68.693 90.965-179.157 38.187-54.4 58.368-117.845 58.368-183.509 0-176.469-143.531-320-320-320zM618.667 810.667h-170.667v-42.667h170.667v42.667zM725.12 497.195c-62.549 89.301-91.435 140.331-101.76 185.472h-47.36v-85.333c0-23.552-19.115-42.667-42.667-42.667s-42.667 19.115-42.667 42.667v85.333h-47.488c-10.24-43.947-38.315-93.867-98.389-180.053-0.939-1.877-2.048-3.712-3.285-5.504-28.032-39.851-42.837-86.357-42.837-134.443 0-129.408 105.259-234.667 234.667-234.667s234.667 105.259 234.667 234.667c0 48.043-14.805 94.549-42.88 134.528z">
-              </path>
-            </svg></div>
-          <div class="home-text-container3"><span class="home-heading3 Card-Heading">Frameworks </span><span
-              class="home-text19 Card-Text">I have worked on and contributed
-              to services that use the
-              following frameworks: Flask, React, Shiny, Spring, ggplot2,
-              Serverless Framework, Unreal
-              Engine.</span></div>
+        <div class="home-cards-container1">
+          <div class="home-cards-container1">
+            <div class="home-features-card1">
+              <div class="home-icon-container1">
+                <img src="resources/language.svg" class="home-icon14" alt="Languages Icon" />
+              </div>
+              <div class="home-text-container1">
+                <span class="home-heading1 Card-Heading">Languages</span>
+                <span class="home-text17 Card-Text">
+                  I have experience programming both professionally and academically in the following languages:
+                  C, Clojure, Haskell, Java, JavaScript, Python, R
+                </span>
+              </div>
+            </div>
+
+            <div class="home-features-card2">
+              <div class="home-icon-container2">
+                <img src="resources/dev-tools.svg" class="home-icon17" alt="Development Tools Icon" />
+              </div>
+              <div class="home-text-container2">
+                <span class="home-heading2 Card-Heading">Development Tools</span>
+                <span class="home-text18 Card-Text">
+                  I have set up, maintained, and configured a variety of development tools, including:
+                  Ansible, AWS, Bedrock, Celery, CloudFormation, Docker, Git, GitHub Actions, Jenkins,
+                  New Relic, Terraform.
+                </span>
+              </div>
+            </div>
+
+            <div class="home-features-card3">
+              <div class="home-icon-container3">
+                <img src="resources/framework.svg" class="home-icon20" alt="Frameworks Icon" />
+              </div>
+              <div class="home-text-container3">
+                <span class="home-heading3 Card-Heading">Frameworks</span>
+                <span class="home-text19 Card-Text">
+                  I have worked on and contributed to services that use the following frameworks:
+                  Flask, React, Shiny, Spring, ggplot2, Serverless Framework, Unreal Engine.
+                </span>
+              </div>
+            </div>
+          </div>
+
         </div>
       </div>
-    </div>
-    <div class="home-section-separator1"></div>
-    <div id="experience" class="home-services">
-      <div class="home-heading-container2">
-        <h1 class="home-text20 Section-Heading">Professional
-          Experience</h1><span class="home-text21 Section-Text"><span>I am a
-            software engineer with experience building internal
-            tools, automation systems, and access management solutions in
-            both startup and enterprise environments. My background spans
-            full-time engineering roles and leadership in data science and
-            teaching, with a strong foundation in system-level programming,
-            infrastructure-as-code, and cross-functional
-            collaboration.</span><br class="Section-Text" /></span>
-      </div>
-      <div class="home-cards-container2">
-        <div class="home-service-card1">
-          <h3 class="home-text24 Card-Heading">Software Engineer</h3><span class="home-text25">February 2024 –
-            Present&nbsp;</span><span class="home-text26 Card-Text"><span>In my current role as a
-              Software Engineer, I've developed
-              company-wide rollback reporting and monitoring software to
-              enhance team performance transparency. I've also worked on
-              automating feature deployments, including integrating updates
-              for our internal change management software to streamline
-              production environment updates. Additionally, I've created
-              user classification software to manage resource access levels
-              based on user roles, ensuring efficient and secure access
-              control across the organization.</span><br class="Card-Text" /><span class="Card-Text">
-            </span></span>
+      <div class="home-section-separator1"></div>
+      <div id="experience" class="home-services">
+        <div class="home-heading-container2">
+          <h1 class="home-text20 Section-Heading">Professional
+            Experience</h1><span class="home-text21 Section-Text"><span>I am a
+              software engineer with experience building internal
+              tools, automation systems, and access management solutions in
+              both startup and enterprise environments. My background spans
+              full-time engineering roles and leadership in data science and
+              teaching, with a strong foundation in system-level programming,
+              infrastructure-as-code, and cross-functional
+              collaboration.</span><br class="Section-Text" /></span>
         </div>
-        <div class="home-service-card2">
-          <h3 class="home-text30 Card-Heading">Associate Software
-            Engineer</h3><span class="home-text31">June 2023 - January
-            2024</span><span class="home-text32 Card-Text"><span>As an
-              Associate Software Engineer at Genesys, I built,
-              maintained, and improved access management automation tools
-              that handled cloud resource and resource package provisioning,
-              de-provisioning, and access auditing. These improvements
-              significantly boosted our service's resilience and ensured
-              company-wide security and compliance. Additionally, I refined
-              service monitoring, and reporting and made improvements to
-              CI/CD pipelines.</span><br class="home-text34 Card-Text" /><span class="home-text35 Card-Text">
+        <div class="home-cards-container2">
+          <div class="home-service-card1">
+            <h3 class="home-text24 Card-Heading">Software Engineer</h3><span class="home-text25">February 2024 –
+              Present&nbsp;</span><span class="home-text26 Card-Text"><span>In my current role as a
+                Software Engineer, I've developed
+                company-wide rollback reporting and monitoring software to
+                enhance team performance transparency. I've also worked on
+                automating feature deployments, including integrating updates
+                for our internal change management software to streamline
+                production environment updates. Additionally, I've created
+                user classification software to manage resource access levels
+                based on user roles, ensuring efficient and secure access
+                control across the organization.</span><br class="Card-Text" /><span class="Card-Text">
+              </span></span>
+          </div>
+          <div class="home-service-card2">
+            <h3 class="home-text30 Card-Heading">Associate Software
+              Engineer</h3><span class="home-text31">June 2023 - January
+              2024</span><span class="home-text32 Card-Text"><span>As an
+                Associate Software Engineer at Genesys, I built,
+                maintained, and improved access management automation tools
+                that handled cloud resource and resource package provisioning,
+                de-provisioning, and access auditing. These improvements
+                significantly boosted our service's resilience and ensured
+                company-wide security and compliance. Additionally, I refined
+                service monitoring, and reporting and made improvements to
+                CI/CD pipelines.</span><br class="home-text34 Card-Text" /><span class="home-text35 Card-Text">
+              </span>
             </span>
-          </span>
-        </div>
-        <div class="home-service-card3">
-          <h3 class="home-text36"><span>Middlebury Consulting Group Lead Data
-              Scientist</span><br class="Card-Heading" /></h3><span class="home-text39">September 2022 –&nbsp; May
-            2023</span><span class="home-text40 Card-Text"><span>As the Lead Data Scientist
-              for the Middlebury Consulting
-              Group, I oversaw an 8-member data science team, steering
-              technical initiatives and projects. I managed a team of
-              developers to provide a third-party review and consultation on
-              the World Data Lab's World Population Clock model, addressing
-              technical debt and recommending future development strategies.
-              Additionally, I collaborated with consulting teams, offering
-              guidance on data science-driven decision-making and
-              resource-gathering to improve project outcomes.</span><br class="home-text42 Card-Text" />
-          </span>
-        </div>
-        <div class="home-service-card4">
-          <h3 class="home-text43 Card-Heading"><span>Computer Science
-              Department Teaching Assistant</span><br class="Card-Heading" /></h3><span class="home-text46">September
-            2022 – May 2023</span><span class="home-text47 Card-Text"><span>As a Computer Science
-              Department Teaching Assistant, I hosted
-              biweekly office hours for the upper-level Systems Programming
-              elective, assisting students with projects to rewrite the C
-              standard library functions, fread(3), fwrite(3), mmap(2), and
-              malloc(3), as well as command line tools including a shell and
-              ls. Additionally, I independently built Shiny web applications
-              in R to visualize tick population densities and pathogen
-              trends. I also ensured polished demos and presented for the
-              new Middlebury College midd.data initiative.</span><span class="home-text49 Card-Text">
-            </span></span>
+          </div>
+          <div class="home-service-card3">
+            <h3 class="home-text36 Card-Heading"><span>Middlebury Consulting Group Lead Data
+                Scientist</span><br class="Card-Heading" /></h3><span class="home-text39">September 2022 –&nbsp; May
+              2023</span><span class="home-text40 Card-Text"><span>As the Lead Data Scientist
+                for the Middlebury Consulting
+                Group, I oversaw an 8-member data science team, steering
+                technical initiatives and projects. I managed a team of
+                developers to provide a third-party review and consultation on
+                the World Data Lab's World Population Clock model, addressing
+                technical debt and recommending future development strategies.
+                Additionally, I collaborated with consulting teams, offering
+                guidance on data science-driven decision-making and
+                resource-gathering to improve project outcomes.</span><br class="home-text42 Card-Text" />
+            </span>
+          </div>
+          <div class="home-service-card4">
+            <h3 class="home-text43 Card-Heading"><span>Computer Science
+                Department Teaching Assistant</span><br class="Card-Heading" /></h3><span class="home-text46">September
+              2022 – May 2023</span><span class="home-text47 Card-Text"><span>As a Computer Science
+                Department Teaching Assistant, I hosted
+                biweekly office hours for the upper-level Systems Programming
+                elective, assisting students with projects to rewrite the C
+                standard library functions, fread(3), fwrite(3), mmap(2), and
+                malloc(3), as well as command line tools including a shell and
+                ls. Additionally, I independently built Shiny web applications
+                in R to visualize tick population densities and pathogen
+                trends. I also ensured polished demos and presented for the
+                new Middlebury College midd.data initiative.</span><span class="home-text49 Card-Text">
+              </span></span>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="home-section-separator1"></div>
-    <div id="projects" class="home-our-story">
-      <div class="home-heading-container3">
-        <h1 class="home-text50 Section-Heading">Projects</h1><span class="home-text51 Section-Text">Outside of work,
-          most of my coding
-          is driven by creativity—often visual, often exploratory. From
-          generative art experiments to interactive 3D web scenes, my personal
-          projects are a playground for combining technical precision with
-          artistic expression.</span>
-      </div>
-      <div class="home-cards-container3">
-        <div class="home-right-section">
-          <div class="home-card1"><img alt="Generative Art Blog" src="resources/projects/blog.jpg"
-              class="home-image" />
-            <div class="home-content-container1"><span class="home-text52 SmallCard-Heading">Generative Art
-                Blog</span>
-              <span class="home-text54">
-                My generative art blog offers a behind-the-scenes look at my
-                creative and coding process using p5.js. By blending code with
-                curiosity, it explores the patterns, experiments, and
-                unexpected beauty that emerge at the intersection of logic and
-                play. </span>
+      <div class="home-section-separator1"></div>
+      <div id="projects" class="home-our-story">
+        <div class="home-heading-container3">
+          <h1 class="home-text50 Section-Heading">Projects</h1><span class="home-text51 Section-Text">Outside of work,
+            most of my coding
+            is driven by creativity—often visual, often exploratory. From
+            generative art experiments to interactive 3D web scenes, my personal
+            projects are a playground for combining technical precision with
+            artistic expression.</span>
+        </div>
+        <div class="home-cards-container3">
+          <div class="home-right-section">
+            <div class="home-card1">
+              <a href="https://kevin-ewing.com/blog">
+                <img alt="Generative Art Blog" src="resources/projects/blog.jpg" class="home-image" />
+              </a>
+              <div class="home-content-container1"><span class="home-text52 SmallCard-Heading">Generative Art
+                  Blog</span>
+                <span class="home-text54">
+                  My generative art blog offers a behind-the-scenes look at my
+                  creative and coding process using p5.js. By blending code with
+                  curiosity, it explores the patterns, experiments, and
+                  unexpected beauty that emerge at the intersection of logic and
+                  play. </span>
+              </div>
+              <div class="home-info-container1"><span class="Card-Text">February 2025 - Current</span>
+                <div class="home-stats-container1">
+                  <a href="https://github.com/kevin-ewing/blog" class="home-views-container">
+                    <svg class="card-icon" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg"
+                      style="margin-top: 0.25em; margin-right: 0.25em;" fill="currentColor">
+                      <path fill-rule="evenodd" clip-rule="evenodd"
+                        d="M8 0C3.58 0 0 3.58 0 8C0 11.54 2.29 14.53 5.47 15.59C5.87 15.66 6.02 15.42 6.02 15.21C6.02 15.02 6.01 14.39 6.01 13.72C4 14.09 3.48 13.23 3.32 12.78C3.23 12.55 2.84 11.84 2.5 11.65C2.22 11.5 1.82 11.13 2.49 11.12C3.12 11.11 3.57 11.7 3.72 11.94C4.44 13.15 5.59 12.81 6.05 12.6C6.12 12.08 6.33 11.73 6.56 11.53C4.78 11.33 2.92 10.64 2.92 7.58C2.92 6.71 3.23 5.99 3.74 5.43C3.66 5.23 3.38 4.41 3.82 3.31C3.82 3.31 4.49 3.1 6.02 4.13C6.66 3.95 7.34 3.86 8.02 3.86C8.7 3.86 9.38 3.95 10.02 4.13C11.55 3.09 12.22 3.31 12.22 3.31C12.66 4.41 12.38 5.23 12.3 5.43C12.81 5.99 13.12 6.7 13.12 7.58C13.12 10.65 11.25 11.33 9.47 11.53C9.76 11.78 10.01 12.26 10.01 13.01C10.01 14.08 10 14.94 10 15.21C10 15.42 10.15 15.67 10.55 15.59C13.71 14.53 16 11.53 16 8C16 3.58 12.42 0 8 0Z"
+                        transform="scale(64)" />
+                    </svg>
+                    <span class="Card-Text">GitHub</span>
+                  </a>
+                </div>
+              </div>
             </div>
-            <div class="home-info-container1"><span class="Card-Text">February 2025 - Current</span>
-              <div class="home-stats-container1">
-                <a href="https://kevin-ewing.com/blog" class="home-views-container">
-                  <img src="resources/website.svg" class="home-icon23" alt="Website Logo" />
-                  <span class="Card-Text">Website</span>
+            <div class="home-card2">
+              <a href="https://clojars.org/org.clojars.kevin-ewing/lambada">
+                <img alt="Lambada on Clojars" src="resources/projects/lambada.jpg" class="home-image" />
+              </a>
+              <div class="home-content-container2">
+                <span class="home-text54 SmallCard-Heading">
+                  Lambada
+                </span>
+                <span class="home-text54">
+                  Lambada is a project to provide a macro interface between the
+                  AWS Lambda Java runtime and Clojure code. By bridging the gap
+                  between these technologies, Lambada enhances the development
+                  experience for those working with serverless functions in
+                  Clojure.
+                </span>
+              </div>
+              <div class="home-info-container2"><span class="Card-Text">October 2023</span>
+                <div class="home-stats-container2">
+                  <a href="https://github.com/kevin-ewing/lambada" class="home-views-container">
+                    <svg class="card-icon" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg"
+                      style="margin-top: 0.25em; margin-right: 0.25em;" fill="currentColor">
+                      <path fill-rule="evenodd" clip-rule="evenodd"
+                        d="M8 0C3.58 0 0 3.58 0 8C0 11.54 2.29 14.53 5.47 15.59C5.87 15.66 6.02 15.42 6.02 15.21C6.02 15.02 6.01 14.39 6.01 13.72C4 14.09 3.48 13.23 3.32 12.78C3.23 12.55 2.84 11.84 2.5 11.65C2.22 11.5 1.82 11.13 2.49 11.12C3.12 11.11 3.57 11.7 3.72 11.94C4.44 13.15 5.59 12.81 6.05 12.6C6.12 12.08 6.33 11.73 6.56 11.53C4.78 11.33 2.92 10.64 2.92 7.58C2.92 6.71 3.23 5.99 3.74 5.43C3.66 5.23 3.38 4.41 3.82 3.31C3.82 3.31 4.49 3.1 6.02 4.13C6.66 3.95 7.34 3.86 8.02 3.86C8.7 3.86 9.38 3.95 10.02 4.13C11.55 3.09 12.22 3.31 12.22 3.31C12.66 4.41 12.38 5.23 12.3 5.43C12.81 5.99 13.12 6.7 13.12 7.58C13.12 10.65 11.25 11.33 9.47 11.53C9.76 11.78 10.01 12.26 10.01 13.01C10.01 14.08 10 14.94 10 15.21C10 15.42 10.15 15.67 10.55 15.59C13.71 14.53 16 11.53 16 8C16 3.58 12.42 0 8 0Z"
+                        transform="scale(64)" />
+                    </svg>
+                    <span class="Card-Text">GitHub</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+            <div class="home-card3">
+              <a href="https://kevin-ewing.github.io/agents/">
+                <img alt="Ant Pheromones Simulation" src="resources/projects/agents.jpg" class="home-image" />
+              </a>
+              <div class="home-content-container3"><span class="home-text56 SmallCard-Heading">Ant Pheromones
+                  Simulation</span><span class="home-text54">
+                  This project, written in p5.js, explores the intersection of
+                  algorithms and creativity by simulating agents to generate
+                  art. Each agent follows predefined rules and behaviors,
+                  creating intricate and unique visual patterns. By leveraging
+                  the capabilities of p5.js, the project demonstrates how simple
+                  rules can lead to complex and aesthetically pleasing results,
+                  showcasing the potential of generative art. </span></div>
+              <div class="home-info-container3"><span class="Card-Text">December 2022 - March 2023</span>
+                <a href="https://github.com/kevin-ewing/agents" class="home-views-container">
+                  <svg class="card-icon" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg"
+                    style="margin-top: 0.25em; margin-right: 0.25em;" fill="currentColor">
+                    <path fill-rule="evenodd" clip-rule="evenodd"
+                      d="M8 0C3.58 0 0 3.58 0 8C0 11.54 2.29 14.53 5.47 15.59C5.87 15.66 6.02 15.42 6.02 15.21C6.02 15.02 6.01 14.39 6.01 13.72C4 14.09 3.48 13.23 3.32 12.78C3.23 12.55 2.84 11.84 2.5 11.65C2.22 11.5 1.82 11.13 2.49 11.12C3.12 11.11 3.57 11.7 3.72 11.94C4.44 13.15 5.59 12.81 6.05 12.6C6.12 12.08 6.33 11.73 6.56 11.53C4.78 11.33 2.92 10.64 2.92 7.58C2.92 6.71 3.23 5.99 3.74 5.43C3.66 5.23 3.38 4.41 3.82 3.31C3.82 3.31 4.49 3.1 6.02 4.13C6.66 3.95 7.34 3.86 8.02 3.86C8.7 3.86 9.38 3.95 10.02 4.13C11.55 3.09 12.22 3.31 12.22 3.31C12.66 4.41 12.38 5.23 12.3 5.43C12.81 5.99 13.12 6.7 13.12 7.58C13.12 10.65 11.25 11.33 9.47 11.53C9.76 11.78 10.01 12.26 10.01 13.01C10.01 14.08 10 14.94 10 15.21C10 15.42 10.15 15.67 10.55 15.59C13.71 14.53 16 11.53 16 8C16 3.58 12.42 0 8 0Z"
+                      transform="scale(64)" />
+                  </svg>
+                  <span class="Card-Text">GitHub</span>
                 </a>
               </div>
             </div>
-          </div>
-          <div class="home-card2"><img alt="Lambada on Clojars" src="resources/projects/lambada.jpg"
-              class="home-image" />
-            <div class="home-content-container2">
-              <span class="home-text54 SmallCard-Heading">
-                Lambada
-              </span>
-              <span class="home-text54">
-                Lambada is a project to provide a macro interface between the
-                AWS Lambda Java runtime and Clojure code. By bridging the gap
-                between these technologies, Lambada enhances the development
-                experience for those working with serverless functions in
-                Clojure.
-              </span>
-            </div>
-            <div class="home-info-container2"><span class="Card-Text">October 2023</span>
-              <div class="home-stats-container2">
-                <a href="https://github.com/kevin-ewing/lambada" class="home-views-container">
-                  <img src="resources/githubLogo.svg" class="home-icon23" alt="GitHub Logo" />
-                  <span class="Card-Text">Github</span>
+            <div class="home-card4">
+              <a href="https://kevin-ewing.github.io/whimsical_cabin/">
+                <img alt="ThreeJS Cabin" src="resources/projects/cabin.jpg" class="home-image" />
+              </a>
+              <div class="home-content-container4"><span class="home-text58 SmallCard-Heading">Three.js Cabin</span>
+                <span class="home-text54">
+                  This project features a cabin model I created in Blender and
+                  rendered real-time in the browser using three.js. It
+                  demonstrates the seamless integration of 3D modeling and
+                  web-based rendering, providing an interactive and visually
+                  appealing experience.</span>
+              </div>
+              <div class="home-info-container4"><span class="Card-Text">June 2023 - August 2024</span>
+                <a href="https://github.com/kevin-ewing/whimsical_cabin" class="home-views-container">
+                  <svg class="card-icon" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg"
+                    style="margin-top: 0.25em; margin-right: 0.25em;" fill="currentColor">
+                    <path fill-rule="evenodd" clip-rule="evenodd"
+                      d="M8 0C3.58 0 0 3.58 0 8C0 11.54 2.29 14.53 5.47 15.59C5.87 15.66 6.02 15.42 6.02 15.21C6.02 15.02 6.01 14.39 6.01 13.72C4 14.09 3.48 13.23 3.32 12.78C3.23 12.55 2.84 11.84 2.5 11.65C2.22 11.5 1.82 11.13 2.49 11.12C3.12 11.11 3.57 11.7 3.72 11.94C4.44 13.15 5.59 12.81 6.05 12.6C6.12 12.08 6.33 11.73 6.56 11.53C4.78 11.33 2.92 10.64 2.92 7.58C2.92 6.71 3.23 5.99 3.74 5.43C3.66 5.23 3.38 4.41 3.82 3.31C3.82 3.31 4.49 3.1 6.02 4.13C6.66 3.95 7.34 3.86 8.02 3.86C8.7 3.86 9.38 3.95 10.02 4.13C11.55 3.09 12.22 3.31 12.22 3.31C12.66 4.41 12.38 5.23 12.3 5.43C12.81 5.99 13.12 6.7 13.12 7.58C13.12 10.65 11.25 11.33 9.47 11.53C9.76 11.78 10.01 12.26 10.01 13.01C10.01 14.08 10 14.94 10 15.21C10 15.42 10.15 15.67 10.55 15.59C13.71 14.53 16 11.53 16 8C16 3.58 12.42 0 8 0Z"
+                      transform="scale(64)" />
+                  </svg>
+                  <span class="Card-Text">GitHub</span>
                 </a>
               </div>
-            </div>
-          </div>
-          <div class="home-card3"><img alt="Ant Pheromones Simulation" src="resources/projects/agents.jpg"
-              class="home-image" />
-            <div class="home-content-container3"><span class="home-text56 SmallCard-Heading">Ant Pheromones
-                Simulation</span><span class="home-text54">
-                This project, written in p5.js, explores the intersection of
-                algorithms and creativity by simulating agents to generate
-                art. Each agent follows predefined rules and behaviors,
-                creating intricate and unique visual patterns. By leveraging
-                the capabilities of p5.js, the project demonstrates how simple
-                rules can lead to complex and aesthetically pleasing results,
-                showcasing the potential of generative art. </span></div>
-            <div class="home-info-container3"><span class="Card-Text">December 2022 - March 2023</span>
-              <a href="https://github.com/kevin-ewing/agents" class="home-views-container">
-                <img src="resources/githubLogo.svg" class="home-icon23" alt="GitHub Logo" />
-                <span class="Card-Text">Github</span>
-              </a>
-            </div>
-          </div>
-          <div class="home-card4"><img alt="ThreeJS Cabin" src="resources/projects/cabin.jpg" class="home-image" />
-            <div class="home-content-container4"><span class="home-text58 SmallCard-Heading">Three.js Cabin</span>
-              <span class="home-text54">
-                This project features a cabin model I created in Blender and
-                rendered real-time in the browser using three.js. It
-                demonstrates the seamless integration of 3D modeling and
-                web-based rendering, providing an interactive and visually
-                appealing experience. class="Card-Text">12 Apr 2021</span>
-            </div>
-            <div class="home-info-container4"><span class="Card-Text">June 2023 - August 2024</span>
-              <a href="https://github.com/kevin-ewing/whimsical_cabin" class="home-views-container">
-                <img src="resources/githubLogo.svg" class="home-icon23" alt="GitHub Logo" />
-                <span class="Card-Text">Github</span>
-              </a>
             </div>
           </div>
         </div>
@@ -485,21 +467,47 @@
         </div>
       </div>
       <div class="home-social-links">
-        <a href="mailto:your-email@example.com" target="_blank" rel="noopener noreferrer">
-          <img src="resources/footer/email.svg" class="home-icon" alt="Email">
+        <a href="mailto:kevin.c.ewing@outlook.com" target="_blank" rel="noopener noreferrer">
+          <svg class="footer-icon2" viewBox="0 0 469.2 469.2" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
+            style="margin-top:0.25em;margin-right:0.25em;">
+            <path
+              d="M22.202,77.023C25.888,75.657,29.832,74.8,34,74.8h401.2c4.168,0,8.112,0.857,11.798,2.224L267.24,246.364
+              c-18.299,17.251-46.975,17.251-65.28,0L22.202,77.023z M464.188,377.944c3.114-5.135,5.012-11.098,5.012-17.544V108.8
+              c0-4.569-0.932-8.915-2.57-12.899L298.411,254.367L464.188,377.944z M283.2,268.464c-13.961,11.961-31.253,18.027-48.6,18.027
+              c-17.347,0-34.64-6.06-48.6-18.027L20.692,391.687c4.094,1.741,8.582,2.714,13.308,2.714h401.2c4.726,0,9.214-0.973,13.308-2.714
+              L283.2,268.464z M2.571,95.9C0.932,99.885,0,104.23,0,108.8V360.4c0,6.446,1.897,12.409,5.012,17.544l165.777-123.577L2.571,95.9z" />
+          </svg>
         </a>
-        <a href="https://www.linkedin.com/in/your-linkedin-profile" target="_blank" rel="noopener noreferrer">
-          <img src="resources/footer/LinkedIn Logo.svg" class="home-icon" alt="LinkedIn">
+        <a href="https://www.linkedin.com/in/kevincewing/" target="_blank" rel="noopener noreferrer">
+          <svg class="footer-icon1" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg"
+            style="margin-top: 0.25em; margin-right: 0.25em;" fill="currentColor">
+            <path fill-rule="evenodd" clip-rule="evenodd"
+              d="M8 0C3.58 0 0 3.58 0 8C0 11.54 2.29 14.53 5.47 15.59C5.87 15.66 6.02 15.42 6.02 15.21C6.02 15.02 6.01 14.39 6.01 13.72C4 14.09 3.48 13.23 3.32 12.78C3.23 12.55 2.84 11.84 2.5 11.65C2.22 11.5 1.82 11.13 2.49 11.12C3.12 11.11 3.57 11.7 3.72 11.94C4.44 13.15 5.59 12.81 6.05 12.6C6.12 12.08 6.33 11.73 6.56 11.53C4.78 11.33 2.92 10.64 2.92 7.58C2.92 6.71 3.23 5.99 3.74 5.43C3.66 5.23 3.38 4.41 3.82 3.31C3.82 3.31 4.49 3.1 6.02 4.13C6.66 3.95 7.34 3.86 8.02 3.86C8.7 3.86 9.38 3.95 10.02 4.13C11.55 3.09 12.22 3.31 12.22 3.31C12.66 4.41 12.38 5.23 12.3 5.43C12.81 5.99 13.12 6.7 13.12 7.58C13.12 10.65 11.25 11.33 9.47 11.53C9.76 11.78 10.01 12.26 10.01 13.01C10.01 14.08 10 14.94 10 15.21C10 15.42 10.15 15.67 10.55 15.59C13.71 14.53 16 11.53 16 8C16 3.58 12.42 0 8 0Z"
+              transform="scale(64)" />
+          </svg>
         </a>
-        <a href="https://github.com/your-github-username" target="_blank" rel="noopener noreferrer">
-          <img src="resources/githubLogoWhite.svg" class="home-icon" alt="GitHub">
+        <a href="https://github.com/kevin-ewing" target="_blank" rel="noopener noreferrer">
+          <svg class="footer-icon3" viewBox="0 0 310 310" xmlns="http://www.w3.org/2000/svg" fill="currentColor">
+            <path d="M72.16,99.73H9.927c-2.762,0-5,2.239-5,5v199.928c0,2.762,2.238,5,5,5H72.16c2.762,0,5-2.238,5-5V104.73
+              C77.16,101.969,74.922,99.73,72.16,99.73z" />
+            <path d="M41.066,0.341C18.422,0.341,0,18.743,0,41.362C0,63.991,18.422,82.4,41.066,82.4
+              c22.626,0,41.033-18.41,41.033-41.038C82.1,18.743,63.692,0.341,41.066,0.341z" />
+            <path d="M230.454,94.761c-24.995,0-43.472,10.745-54.679,22.954V104.73c0-2.761-2.238-5-5-5h-59.599
+              c-2.762,0-5,2.239-5,5v199.928c0,2.762,2.238,5,5,5h62.097c2.762,0,5-2.238,5-5v-98.918c0-33.333,9.054-46.319,32.29-46.319
+              c25.306,0,27.317,20.818,27.317,48.034v97.204c0,2.762,2.238,5,5,5H305c2.762,0,5-2.238,5-5V194.995
+              C310,145.43,300.549,94.761,230.454,94.761z" />
+          </svg>
         </a>
       </div>
-      <div class="home-copyright-container"><span>© Copyright,
-          2024</span></div>
+      <div class="home-copyright-container">
+        <span>© Copyright, <span id="current-year"></span></span>
+      </div>
     </div>
   </div>
   </div>
+  <script>
+    document.getElementById('current-year').textContent = new Date().getFullYear();
+  </script>
   <script>
     document.querySelectorAll('a.Anchor[href^="#"]').forEach(anchor => {
       anchor.addEventListener('click', function (e) {

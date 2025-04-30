@@ -6,7 +6,7 @@ var tFont;
 var tFontData;
 var myFont;
 var tFontFactor;
-var starterText = "Kevin Ewing\nSoftware\nEngineer";
+var starterText = "Error\n404";
 
 var pgTextSize = 100;
 var res = 8;
@@ -98,15 +98,6 @@ function draw() {
   perspective();
 
   background(bkgdColor);
-
-  if (mouseX >= 0 && mouseX <= width && mouseY >= 0 && mouseY <= height) {
-    let targetX = map(mouseX, 0, width, -200, 200);
-    let targetY = map(mouseY, 0, height, -200, 200);
-    camPos.x = lerp(camPos.x, targetX, 0.05);
-    camPos.y = lerp(camPos.y, targetY, 0.05);
-  }
-  camera(-camPos.x, -camPos.y, height / 2.0 / tan(PI * 30.0 / 180.0), 0, 0, 0, 0, 1, 0);
-
   push();
   coreBase.run();
   pop();
