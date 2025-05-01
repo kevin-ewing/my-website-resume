@@ -651,6 +651,19 @@
   flex-direction: row;
   justify-content: space-between;
 }
+
+.home-card {
+    width: 48%;
+    display: flex;
+    align-items: flex-start;
+    border-color: var(--dl-color-gray-900);
+    border-width: 1px;
+    border-radius: var(--dl-layout-radius-radius8);
+    margin-bottom: var(--dl-layout-space-fourunits);
+    flex-direction: column;
+    justify-content: space-between;
+    margin-top: 0.5em;
+}
  
 .home-card1 {
   width: 48%;
@@ -1225,6 +1238,9 @@
     width: 100%;
   }
   .home-card4 {
+    width: 100%;
+  }
+  .home-card {
     width: 100%;
   }
 }
