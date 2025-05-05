@@ -53,95 +53,95 @@ var numFrames = 300;
 let camPos;
 
 function preload() {
-  tFont = loadFont("resources/FormulaCondensed-Bold.otf");
-  tFontData = loadBytes("resources/FormulaCondensed-Bold.otf");
-  tFontFactor = 0.82;
+    tFont = loadFont("resources/FormulaCondensed-Bold.otf");
+    tFontData = loadBytes("resources/FormulaCondensed-Bold.otf");
+    tFontFactor = 0.82;
 }
 
 function setup() {
-  createCanvas(windowWidth, windowHeight, WEBGL);
+    createCanvas(windowWidth, windowHeight, WEBGL);
 
-  cwidth = width;
-  cheight = height;
+    cwidth = width;
+    cheight = height;
 
-  mouseCenter = createVector(0, 0);
-  camPos = createVector(0, 0);
+    mouseCenter = createVector(0, 0);
+    camPos = createVector(0, 0);
 
-  myFont = opentype.parse(tFontData.bytes.buffer);
+    myFont = opentype.parse(tFontData.bytes.buffer);
 
-  wWindowMin = width / 8,
-    wWindowMax = width;
-  wWindow = map(scaler, 0, 1, wWindowMin, wWindowMax);
+    wWindowMin = width / 8,
+        wWindowMax = width;
+    wWindow = map(scaler, 0, 1, wWindowMin, wWindowMax);
 
-  textColor = color('#ffffff');
-  strokeColor = color('#000000');
-  bkgdColor = color('#000000');
+    textColor = color('#ffffff');
+    strokeColor = color('#000000');
+    bkgdColor = color('#000000');
 
-  colorSet[0] = color('#dee3e2');
-  colorSet[1] = color('#fccbcb');
-  colorSet[2] = color('#78b3d6');
-  colorSet[3] = color('#d86969');
-  colorSet[4] = color('#4f7969');
+    colorSet[0] = color('#dee3e2');
+    colorSet[1] = color('#fccbcb');
+    colorSet[2] = color('#78b3d6');
+    colorSet[3] = color('#d86969');
+    colorSet[4] = color('#4f7969');
 
 
-  frameRate(frate);
-  curveDetail(res);
+    frameRate(frate);
+    curveDetail(res);
 
-  strokeJoin(ROUND);
-  strokeCap(ROUND);
-  rectMode(CENTER);
-  setText();
+    strokeJoin(ROUND);
+    strokeCap(ROUND);
+    rectMode(CENTER);
+    setText();
 }
 
 function draw() {
-  // ortho();
-  perspective();
+    // ortho();
+    perspective();
 
-  background(bkgdColor);
-  push();
-  coreBase.run();
-  pop();
+    background(bkgdColor);
+    push();
+    coreBase.run();
+    pop();
 }
 
 function quadLerp(p0, p1, p2, t) {
-  return ((1 - t) * (1 - t)) * p0 + 2 * ((1 - t) * t * p1) + t * t * p2;
+    return ((1 - t) * (1 - t)) * p0 + 2 * ((1 - t) * t * p1) + t * t * p2;
 }
 
 function windowResized() {
-  resizeForPreview();
+    resizeForPreview();
 }
 
 function resizeForPreview() {
-  var tempWidth, tempHeight;
+    var tempWidth, tempHeight;
 
-  if (saveMode == 0) {
-    resizeCanvas(windowWidth, windowHeight, WEBGL);
-  } else if (saveMode == 1) {
-    if (windowWidth > windowHeight * 9 / 16) {
-      tempHeight = windowHeight;
-      tempWidth = windowHeight * 9 / 16;
-    } else {
-      tempWidth = windowWidth;
-      tempHeight = windowWidth * 16 / 9;
+    if (saveMode == 0) {
+        resizeCanvas(windowWidth, windowHeight, WEBGL);
+    } else if (saveMode == 1) {
+        if (windowWidth > windowHeight * 9 / 16) {
+            tempHeight = windowHeight;
+            tempWidth = windowHeight * 9 / 16;
+        } else {
+            tempWidth = windowWidth;
+            tempHeight = windowWidth * 16 / 9;
+        }
+        resizeCanvas(tempWidth, tempHeight, WEBGL);
+    } else if (saveMode == 2) {
+        if (windowWidth < windowHeight) {
+            tempWidth = windowWidth;
+            tempHeight = windowWidth;
+        } else {
+            tempHeight = windowHeight;
+            tempWidth = windowHeight;
+        }
+        resizeCanvas(tempWidth, tempHeight, WEBGL);
     }
-    resizeCanvas(tempWidth, tempHeight, WEBGL);
-  } else if (saveMode == 2) {
-    if (windowWidth < windowHeight) {
-      tempWidth = windowWidth;
-      tempHeight = windowWidth;
-    } else {
-      tempHeight = windowHeight;
-      tempWidth = windowHeight;
-    }
-    resizeCanvas(tempWidth, tempHeight, WEBGL);
-  }
 
-  cwidth = width;
-  cheight = height;
+    cwidth = width;
+    cheight = height;
 
-  wWindowMin = width / 8,
-    wWindowMax = width;
-  wWindow = map(scaler, 0, 1, wWindowMin, wWindowMax);
+    wWindowMin = width / 8,
+        wWindowMax = width;
+    wWindow = map(scaler, 0, 1, wWindowMin, wWindowMax);
 
-  setText();
+    setText();
 }
