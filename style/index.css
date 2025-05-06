@@ -886,18 +886,24 @@
   justify-content: space-between;
 }
  
-.home-image {
+.home-image-wrapper {
   width: 100%;
-  height: auto;
-  max-width: 100%;
-  object-fit: cover;
-  object-position: top;
+  aspect-ratio: 2 / 1; /* Adjust as needed for your image */
+  max-height: 300px;
+  overflow: hidden;
   border-radius: var(--dl-layout-radius-radius8);
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
+}
+
+.home-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
   display: block;
 }
- 
+
 .home-content-container4 {
   display: flex;
   align-items: flex-start;
@@ -1301,4 +1307,12 @@ footer-canvas{
     color: white;
     font-weight: 300;
     font-size: 24px;
+}
+
+.more-button-centered {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  height: 100px; /* or any value > 0 */
 }
