@@ -888,7 +888,7 @@
  
 .home-image-wrapper {
   width: 100%;
-  aspect-ratio: 2 / 1; /* Adjust as needed for your image */
+  aspect-ratio: 2.4 / 1;
   max-height: 300px;
   overflow: hidden;
   border-radius: var(--dl-layout-radius-radius8);
