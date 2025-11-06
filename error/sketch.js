@@ -6,7 +6,6 @@ var tFont;
 var tFontData;
 var myFont;
 var tFontFactor;
-var starterText = "Error\n404";
 
 var pgTextSize = 100;
 var res = 8;

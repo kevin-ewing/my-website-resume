@@ -1,5 +1,5 @@
 const MAX_SIZE = 200
-let TEXT = "Error\n404";
+let TEXT = "Error 404";
 
 function setText() {
   inputText = TEXT.match(/[^\r\n]+/g);
