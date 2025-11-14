@@ -17,6 +17,9 @@ class AppWindow {
 
     this.isVisible = true;
 
+    this.lastTitleBarClick = 0;
+    this.titleDoubleClickDelay = 300;
+
     // Dragging
     this.isDragging = false;
     this.dragOffsetX = 0;
@@ -87,7 +90,7 @@ class AppWindow {
   }
 
   toggleMaximize() {
-    const margin = 8;
+    const margin = 0;
 
     if (!this.isMaximized) {
       this.restoreRect = {
@@ -98,9 +101,9 @@ class AppWindow {
       };
 
       this.x = margin;
-      this.y = this.menuHeight + margin;
+      this.y = this.menuHeight;
       this.w = width - margin * 2;
-      this.h = height - this.menuHeight - this.dockHeight - margin * 2;
+      this.h = height - this.menuHeight - this.dockHeight;
 
       this.isMaximized = true;
     } else if (this.restoreRect) {
@@ -139,8 +142,18 @@ class AppWindow {
       return;
     }
 
-    // Start dragging from title bar
+    const now = millis();
+
+    // Start dragging from title bar (and handle double-click zoom)
     if (this.inTitleBar(mx, my)) {
+      if (now - this.lastTitleBarClick <= this.titleDoubleClickDelay) {
+        this.toggleMaximize();
+        this.lastTitleBarClick = 0;
+        this.isDragging = false;
+        return;
+      }
+
+      this.lastTitleBarClick = now;
       this.isDragging = true;
       this.dragOffsetX = mx - this.x;
       this.dragOffsetY = my - this.y;
@@ -160,14 +173,14 @@ class AppWindow {
       if (this.resizeEdges.right) {
         let newW = this.startW + dx;
         newW = max(this.minW, newW);
-        newW = min(newW, width - this.x - 16);
+        newW = min(newW, width - this.x);
         this.w = newW;
       }
 
       if (this.resizeEdges.bottom) {
         let newH = this.startH + dy;
         newH = max(this.minH, newH);
-        newH = min(newH, height - this.y - 120);
+        newH = min(newH, height - this.y - this.dockHeight);
         this.h = newH;
       }
 
@@ -182,8 +195,10 @@ class AppWindow {
     this.x = mx - this.dragOffsetX;
     this.y = my - this.dragOffsetY;
 
-    this.x = constrain(this.x, 8, width - this.w - 8);
-    this.y = constrain(this.y, 40, height - this.h - 120);
+    const maxX = max(0, width - this.w);
+    const maxY = max(this.menuHeight, height - this.h - this.dockHeight);
+    this.x = constrain(this.x, 0, maxX);
+    this.y = constrain(this.y, this.menuHeight, maxY);
   }
 
   draw(isActive) {

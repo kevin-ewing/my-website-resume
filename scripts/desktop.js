@@ -7,6 +7,9 @@ class Desktop {
 
     this.windows = [];
     this.activeWindow = null;
+    this.wallpaperBuffer = null;
+    this.wallpaperPalette = null;
+    this.wallpaperDirty = true;
 
     // Map to your real icons (finder.png, safari.png, etc.)
     this.apps = [
@@ -25,14 +28,15 @@ class Desktop {
 
   onResize() {
     this.dock.onResize();
+    this.wallpaperDirty = true;
+    const dockClearance = this.getDockClearance();
 
     for (const win of this.windows) {
-      win.x = constrain(win.x, 16, width - win.w - 16);
-      win.y = constrain(
-        win.y,
-        this.menuHeight + 16,
-        height - win.h - this.dockHeight - 16
-      );
+      const maxX = max(0, width - win.w);
+      const bottomLimit = max(this.menuHeight, height - dockClearance - win.h);
+      win.x = constrain(win.x, 0, maxX);
+      win.y = constrain(win.y, this.menuHeight, bottomLimit);
+      win.dockHeight = dockClearance;
     }
   }
 
@@ -47,6 +51,17 @@ class Desktop {
       }
     }
 
+    this.syncActiveWindow();
+
+    const runningIds = new Set();
+    for (const win of this.windows) {
+      if (win.isVisible || win.openAt) {
+        runningIds.add(win.appId);
+      }
+    }
+    const activeId = this.activeWindow ? this.activeWindow.appId : null;
+
+    this.dock.setAppStates(runningIds, activeId);
     this.dock.update(mouseX, mouseY);
   }
 
@@ -58,14 +73,265 @@ class Desktop {
   }
 
   drawWallpaper() {
-    const c1 = color(20, 32, 80);
-    const c2 = color(12, 74, 144);
+    if (
+      !this.wallpaperBuffer ||
+      this.wallpaperBuffer.width !== width ||
+      this.wallpaperBuffer.height !== height ||
+      this.wallpaperDirty
+    ) {
+      this.generateWallpaper();
+      this.wallpaperDirty = false;
+    }
 
-    for (let y = 0; y < height; y++) {
-      const t = y / height;
-      const col = lerpColor(c1, c2, t);
-      stroke(col);
-      line(0, y, width, y);
+    push();
+    drawingContext.save();
+    drawingContext.imageSmoothingEnabled = true;
+    image(this.wallpaperBuffer, 0, 0, width, height);
+    drawingContext.restore();
+    pop();
+  }
+
+  generateWallpaper() {
+    if (width === 0 || height === 0) return;
+
+    const palette = this.pickWallpaperPalette();
+    const baseLayer = createGraphics(width, height);
+    const ctx = baseLayer.drawingContext;
+    ctx.clearRect(0, 0, width, height);
+
+    const gradient = ctx.createLinearGradient(
+      palette.baseAngle > 0.5 ? 0 : width,
+      height,
+      palette.baseAngle > 0.5 ? width : 0,
+      0
+    );
+    for (const stop of palette.baseStops) {
+      gradient.addColorStop(stop.pos, stop.color);
+    }
+    ctx.fillStyle = gradient;
+    ctx.fillRect(0, 0, width, height);
+
+    const drawBloom = ({
+      x,
+      y,
+      rx,
+      ry,
+      rotation,
+      colors
+    }) => {
+      ctx.save();
+      ctx.translate(x * width, y * height);
+      ctx.rotate(rotation);
+      const radius = max(rx * width, ry * height);
+      const bloomGrad = ctx.createRadialGradient(0, 0, 0, 0, 0, radius);
+      for (const stop of colors) {
+        bloomGrad.addColorStop(stop.pos, stop.color);
+      }
+      ctx.fillStyle = bloomGrad;
+      ctx.beginPath();
+      ctx.ellipse(0, 0, rx * width, ry * height, 0, 0, TWO_PI);
+      ctx.fill();
+      ctx.restore();
+    };
+
+    for (const bloom of palette.blooms) {
+      drawBloom(bloom);
+    }
+
+    const blurred = createGraphics(width, height);
+    const bctx = blurred.drawingContext;
+    bctx.save();
+    bctx.filter = `blur(${palette.blurRadius}px)`;
+    bctx.drawImage(baseLayer.canvas, 0, 0);
+    bctx.restore();
+
+    this.applyGrain(bctx, palette.grainOpacity);
+
+    this.wallpaperBuffer = blurred;
+  }
+
+  applyGrain(ctx, opacity) {
+    const density = width * height * 0.001;
+    ctx.globalAlpha = opacity;
+    for (let i = 0; i < density; i++) {
+      const gx = random(width);
+      const gy = random(height);
+      const shade = random(200, 255);
+      ctx.fillStyle = `rgba(${shade}, ${shade}, ${shade}, ${random(0.05, 0.15)})`;
+      ctx.fillRect(gx, gy, 1, 1);
+    }
+    ctx.globalAlpha = 1;
+  }
+
+  pickWallpaperPalette() {
+    const palettes = [
+      {
+        baseStops: [
+          { pos: 0, color: "#02041a" },
+          { pos: 0.4, color: "#0a2f7a" },
+          { pos: 0.75, color: "#3e33a8" },
+          { pos: 1, color: "#a31b64" }
+        ],
+        blooms: [
+          {
+            x: random(0.2, 0.3),
+            y: random(0.4, 0.5),
+            rx: random(0.35, 0.45),
+            ry: random(0.25, 0.32),
+            rotation: radians(random(-20, -5)),
+            colors: [
+              { pos: 0, color: "rgba(255,210,120,0.45)" },
+              { pos: 0.5, color: "rgba(255,110,95,0.35)" },
+              { pos: 1, color: "rgba(255,110,95,0)" }
+            ]
+          },
+          {
+            x: random(0.65, 0.75),
+            y: random(0.6, 0.7),
+            rx: random(0.45, 0.55),
+            ry: random(0.35, 0.42),
+            rotation: radians(random(10, 25)),
+            colors: [
+              { pos: 0, color: "rgba(255,240,150,0.6)" },
+              { pos: 0.6, color: "rgba(255,170,66,0.35)" },
+              { pos: 1, color: "rgba(255,170,66,0)" }
+            ]
+          },
+          {
+            x: random(0.6, 0.75),
+            y: random(0.18, 0.28),
+            rx: random(0.3, 0.4),
+            ry: random(0.22, 0.3),
+            rotation: radians(random(-10, 5)),
+            colors: [
+              { pos: 0, color: "rgba(90,218,255,0.55)" },
+              { pos: 0.7, color: "rgba(37,148,255,0.3)" },
+              { pos: 1, color: "rgba(37,148,255,0)" }
+            ]
+          },
+          {
+            x: random(0.35, 0.45),
+            y: random(0.78, 0.88),
+            rx: random(0.28, 0.4),
+            ry: random(0.2, 0.3),
+            rotation: radians(random(0, 15)),
+            colors: [
+              { pos: 0, color: "rgba(155,78,255,0.35)" },
+              { pos: 0.7, color: "rgba(155,78,255,0.15)" },
+              { pos: 1, color: "rgba(155,78,255,0)" }
+            ]
+          }
+        ],
+        blurRadius: 32,
+        baseAngle: random(),
+        grainOpacity: 0.08
+      },
+      {
+        baseStops: [
+          { pos: 0, color: "#020d34" },
+          { pos: 0.45, color: "#05487b" },
+          { pos: 0.7, color: "#4c2aa8" },
+          { pos: 1, color: "#0fa3c0" }
+        ],
+        blooms: [
+          {
+            x: random(0.2, 0.3),
+            y: random(0.4, 0.5),
+            rx: random(0.4, 0.52),
+            ry: random(0.3, 0.36),
+            rotation: radians(random(-25, -5)),
+            colors: [
+              { pos: 0, color: "rgba(255,214,150,0.5)" },
+              { pos: 1, color: "rgba(255,105,105,0)" }
+            ]
+          },
+          {
+            x: random(0.65, 0.8),
+            y: random(0.6, 0.75),
+            rx: random(0.35, 0.5),
+            ry: random(0.3, 0.38),
+            rotation: radians(random(5, 18)),
+            colors: [
+              { pos: 0, color: "rgba(255,232,130,0.55)" },
+              { pos: 1, color: "rgba(255,160,66,0)" }
+            ]
+          },
+          {
+            x: random(0.55, 0.7),
+            y: random(0.15, 0.25),
+            rx: random(0.35, 0.45),
+            ry: random(0.25, 0.32),
+            rotation: radians(random(-12, 8)),
+            colors: [
+              { pos: 0, color: "rgba(72,212,255,0.55)" },
+              { pos: 1, color: "rgba(0,156,255,0)" }
+            ]
+          }
+        ],
+        blurRadius: 38,
+        baseAngle: random(),
+        grainOpacity: 0.06
+      }
+    ];
+
+    this.wallpaperPalette = random(palettes);
+    return this.wallpaperPalette;
+  }
+
+  getDockTop() {
+    if (this.dock && typeof this.dock.getTop === "function") {
+      return this.dock.getTop();
+    }
+    return height - this.dockHeight;
+  }
+
+  getDockClearance() {
+    return height - this.getDockTop();
+  }
+
+  getAppFrame(appId, dockClearance = this.getDockClearance()) {
+    const dockTop = this.getDockTop();
+    const usableHeight = max(200, dockTop - this.menuHeight);
+
+    const clampY = (val, winH) => {
+      const maxY = max(this.menuHeight, dockTop - winH);
+      return constrain(val, this.menuHeight, maxY);
+    };
+
+    switch (appId) {
+      case "finder": {
+        const w = min(420, width * 0.4);
+        const h = min(360, usableHeight * 0.55);
+        const x = 32;
+        const y = clampY(this.menuHeight + 24, h);
+        return { x, y, w, h };
+      }
+      case "safari": {
+        const sidePad = max(60, width * 0.08);
+        const w = max(640, width - sidePad * 2);
+        const h = usableHeight;
+        const x = (width - w) / 2;
+        const y = this.menuHeight;
+        return { x, y, w, h };
+      }
+      case "terminal": {
+        const w = min(480, width * 0.4);
+        const h = min(280, usableHeight * 0.45);
+        const x = max(20, width - w - 48);
+        const y = clampY(this.menuHeight + 48, h);
+        return { x, y, w, h };
+      }
+      default: {
+        const minW = min(520, width - 140);
+        const maxW = max(minW, width - 80);
+        const w = constrain(random(minW, maxW), 360, width - 40);
+        const minH = min(320, usableHeight - 30);
+        const maxH = max(minH, usableHeight);
+        const h = constrain(random(minH, maxH), 260, usableHeight);
+        const x = constrain(width / 2 - w / 2 + random(-120, 120), 0, width - w);
+        const y = clampY(this.menuHeight + random(20, 80), h);
+        return { x, y, w, h };
+      }
     }
   }
 
@@ -100,22 +366,25 @@ class Desktop {
   openApp(appId) {
     let existing = this.windows.find(w => w.appId === appId);
     const delay = random(150, 450); // fake "loading" time
+    const dockClearance = this.getDockClearance();
 
     if (existing) {
+      existing.dockHeight = dockClearance;
+      if (existing.isVisible) {
+        this.bringToFront(existing);
+        return;
+      }
+      if (existing.openAt && millis() < existing.openAt) {
+        return;
+      }
       existing.isVisible = false;
       existing.openAt = millis() + delay;
       this.bringToFront(existing);
       return;
     }
 
-    const margin = 80;
-    const w = min(700, width - margin * 2);
-    const h = min(
-      480,
-      height - this.menuHeight - this.dockHeight - margin
-    );
-    const x = width / 2 - w / 2 + random(-40, 40);
-    const y = this.menuHeight + margin / 2 + random(-20, 20);
+    const frame = this.getAppFrame(appId, dockClearance);
+    const { x, y, w, h } = frame;
 
     const app = this.apps.find(a => a.id === appId);
     const title = app ? app.title : "Window";
@@ -128,7 +397,7 @@ class Desktop {
       w,
       h,
       this.menuHeight,
-      this.dockHeight
+      dockClearance
     );
 
     win.isVisible = false;
@@ -170,5 +439,22 @@ class Desktop {
     if (this.activeWindow) {
       this.activeWindow.mouseDragged(x, y, px, py);
     }
+  }
+
+  syncActiveWindow() {
+    if (!this.activeWindow) return;
+    if (this.activeWindow.isVisible || this.activeWindow.openAt) return;
+
+    for (let i = this.windows.length - 1; i >= 0; i--) {
+      const candidate = this.windows[i];
+      if (candidate.isVisible) {
+        this.activeWindow = candidate;
+        this.topBar.setActiveApp(candidate.title);
+        return;
+      }
+    }
+
+    this.activeWindow = null;
+    this.topBar.setActiveApp(null);
   }
 }

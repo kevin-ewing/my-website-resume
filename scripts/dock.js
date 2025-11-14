@@ -9,19 +9,28 @@ class DockIcon {
     this.size = size;
 
     this.baseSize = size;
-    this.scale = 1;
 
     this.isHovered = false;
+    this.isOpen = false;
+    this.isActive = false;
+    this.tooltipAlpha = 0; // 0..1 lerped
 
     // Vertical bounce state
     this.isLaunching = false;
     this.launchStart = 0;
-    this.launchDuration = 700; // ms ~ two bounces
+    this.launchDuration = 900; // slightly longer for believable bounce
     this.bounceOffset = 0;     // negative = up
+    this.bounceCycles = 2.6;
+    this.bounceAmplitude = 28;
+    this.bounceDamping = 1.35;
   }
 
-  update(isHovered) {
+  update(isHovered, isOpen, isActive) {
     this.isHovered = isHovered;
+    this.isOpen = isOpen;
+    this.isActive = isActive;
+
+    this.tooltipAlpha = lerp(this.tooltipAlpha, isHovered ? 1 : 0, 0.22);
 
     if (this.isLaunching) {
       const elapsed = millis() - this.launchStart;
@@ -31,20 +40,11 @@ class DockIcon {
         this.isLaunching = false;
         this.bounceOffset = 0;
       } else {
-        // Two vertical bounces, decaying amplitude
-        const bounces = 2;
-        const angle = t * TWO_PI * bounces;
-        const amp = 18; // pixels
-        const sine = sin(angle);
-        // Only bounce upward from baseline, fade out over time
-        this.bounceOffset = -abs(sine) * amp * (1 - t);
+        this.bounceOffset = this.sampleBounceOffset(t);
       }
     } else {
       this.bounceOffset = 0;
     }
-
-    // No scaling on hover or click — keep at 1
-    this.scale = 1;
   }
 
   launchBounce() {
@@ -54,7 +54,7 @@ class DockIcon {
 
   hitTest(mx, my) {
     const centerY = this.y + this.bounceOffset;
-    const half = (this.baseSize * this.scale) / 2;
+    const half = this.baseSize / 2;
     return (
       mx >= this.x - half && mx <= this.x + half &&
       my >= centerY - half && my <= centerY + half
@@ -66,7 +66,6 @@ class DockIcon {
 
     const centerY = this.y + this.bounceOffset;
     translate(this.x, centerY);
-    scale(this.scale);
 
     const img = ICON_IMAGES[this.appId];
     if (img) {
@@ -83,15 +82,31 @@ class DockIcon {
       text("?", 0, 0);
     }
 
-    if (this.isHovered) {
-      this.drawTooltip(centerY);
-    }
+    pop();
 
+    this.drawIndicator(centerY);
+
+    this.drawTooltip(centerY);
+  }
+
+  drawIndicator(centerY) {
+    if (!this.isOpen) return;
+
+    push();
+    const indicatorY = centerY + this.baseSize / 2 + 4;
+    noStroke();
+    const diameter = 4;
+    const alpha = this.isActive ? 230 : 150;
+    fill(248, 249, 253, alpha);
+    ellipse(this.x, indicatorY, diameter, diameter);
     pop();
   }
 
   drawTooltip(centerY) {
+    if (this.tooltipAlpha <= 0.02) return;
+
     push();
+    const eased = this.tooltipAlpha;
 
     const paddingX = 10;
     const paddingY = 6;
@@ -103,21 +118,26 @@ class DockIcon {
     const tooltipX = this.x - w / 2;
     const tooltipY = centerY - this.baseSize / 2 - h - 8;
 
-    // Shadow
+    drawingContext.save();
+    drawingContext.globalAlpha = eased;
     noStroke();
-    fill(0, 0, 0, 60);
-    rect(tooltipX + 2, tooltipY + 3, w, h, 8);
-
-    // Background
     fill(255, 255, 255, 235);
     rect(tooltipX, tooltipY, w, h, 8);
 
-    // Text
     fill(29, 29, 31);
     textAlign(CENTER, CENTER);
     text(this.label, this.x, tooltipY + h / 2 + 1);
+    drawingContext.restore();
 
     pop();
+  }
+
+  sampleBounceOffset(t) {
+    const clamped = constrain(t, 0, 1);
+    const envelope = pow(1 - clamped, this.bounceDamping);
+    const phase = clamped * PI * this.bounceCycles;
+    const sine = sin(phase);
+    return -abs(sine) * this.bounceAmplitude * envelope;
   }
 }
 
@@ -135,8 +155,11 @@ class Dock {
     this.barHeight = 0;
     this.barX = 0;
     this.barY = 0;
+    this.cornerRadius = 18;
 
     this.icons = [];
+    this.openAppIds = new Set();
+    this.activeAppId = null;
     this.createIcons();
   }
 
@@ -176,12 +199,16 @@ class Dock {
     for (let i = this.icons.length - 1; i >= 0; i--) {
       if (this.icons[i].hitTest(mx, my)) {
         hovered = this.icons[i];
-        break;w
+        break;
       }
     }
 
     for (const icon of this.icons) {
-      icon.update(icon === hovered);
+      icon.update(
+        icon === hovered,
+        this.openAppIds.has(icon.appId),
+        this.activeAppId === icon.appId
+      );
     }
   }
 
@@ -189,9 +216,16 @@ class Dock {
     push();
 
     // Dock background: only as big as the icons + padding
-    noStroke();
-    fill(255, 255, 255, 190);
-    rect(this.barX, this.barY, this.barWidth, this.barHeight, this.barHeight / 2);
+    stroke(255, 255, 255, 100);
+    strokeWeight(1);
+    fill(255, 255, 255, 150);
+    rect(
+      this.barX,
+      this.barY,
+      this.barWidth,
+      this.barHeight,
+      this.cornerRadius
+    );
 
     for (const icon of this.icons) {
       icon.draw();
@@ -207,5 +241,14 @@ class Dock {
       }
     }
     return null;
+  }
+
+  setAppStates(openIds, activeId) {
+    this.openAppIds = new Set(openIds);
+    this.activeAppId = activeId;
+  }
+
+  getTop() {
+    return this.barY;
   }
 }
