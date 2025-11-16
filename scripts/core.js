@@ -19,6 +19,9 @@ function setup() {
   pixelDensity(window.devicePixelRatio || 1);
   textFont("SF Pro Text"); // from your fonts.css
   desktop = new Desktop();
+  setTimeout(() => {
+    document.dispatchEvent(new Event("desktop-ready"));
+  }, 300);
 }
 
 function draw() {

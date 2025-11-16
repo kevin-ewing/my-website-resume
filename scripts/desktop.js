@@ -22,25 +22,88 @@ class Desktop {
       { id: "blender",  title: "Blender" },
     ];
 
+    this.projects = [
+      {
+        id: "retro-terminal",
+        name: "Retro Terminal",
+        summary: "A playful shell simulator with CRT shaders and playful command responses.",
+        role: "Design Engineer · Built the full stack prototype in 2 weeks.",
+        highlights: [
+          "Procedural scanline + bloom pipeline in WebGL",
+          "Command router powered by a lightweight DSL",
+          "Integrated 'company lore' easter eggs for recruiters"
+        ],
+        stack: "Three.js, Tone.js, Cloudflare Workers"
+      },
+      {
+        id: "ml-playback",
+        name: "ML Playback",
+        summary: "Audio-reactive web experience that translates model output into immersive soundscapes.",
+        role: "Creative Technologist · Led visual + audio system design.",
+        highlights: [
+          "Real-time shader composition driven by inference embeddings",
+          "Dynamic sound bed layered with WebAudio granular synthesis",
+          "On-device caching for buttery demo playback"
+        ],
+        stack: "WebGL2, WebAudio, TensorFlow.js"
+      },
+      {
+        id: "co-create",
+        name: "Co-Create",
+        summary: "Multiplayer whiteboard that feels like a native design tool, tuned for sprint workshops.",
+        role: "Staff Engineer · Architected sync + presence layers.",
+        highlights: [
+          "Sub-50ms CRDT sync across large files",
+          "Fast fuzzy search palette for dropping patterns",
+          "Integrated AI assistant for rapid mock suggestions"
+        ],
+        stack: "React, Yjs, WASM text engine"
+      },
+      {
+        id: "atelier",
+        name: "Atelier",
+        summary: "A living style guide that renders 3D brand elements inside web docs.",
+        role: "Design Engineer · Created the rendering runtime and author tooling.",
+        highlights: [
+          "Node-based material editor right in the docs",
+          "Drag-to-recolor glyphs with GPU color grading",
+          "One-click export to marketing decks"
+        ],
+        stack: "Svelte, WebGL, mdx"
+      }
+    ];
+
     this.topBar = new TopBar(this.menuHeight, "Kevin Desktop");
     this.dock = new Dock(this.apps, this.dockHeight);
+    this.cursorStyle = "default";
+    this.desktopFiles = new DesktopFiles(
+      [
+        { id: "retro-terminal", label: "retro-terminal.proj", kind: "project", projectId: "retro-terminal" },
+        { id: "ml-playback", label: "ml-playback.proj", kind: "project", projectId: "ml-playback" },
+        { id: "co-create", label: "co-create.proj", kind: "project", projectId: "co-create" },
+        { id: "atelier", label: "atelier.proj", kind: "project", projectId: "atelier" }
+      ],
+      this.menuHeight
+    );
+    this.desktopFiles.layout(width, height, this.getDockClearance());
   }
 
   onResize() {
     this.dock.onResize();
-    this.wallpaperDirty = true;
     const dockClearance = this.getDockClearance();
 
     for (const win of this.windows) {
-      const maxX = max(0, width - win.w);
-      const bottomLimit = max(this.menuHeight, height - dockClearance - win.h);
-      win.x = constrain(win.x, 0, maxX);
-      win.y = constrain(win.y, this.menuHeight, bottomLimit);
-      win.dockHeight = dockClearance;
+      win.adjustToViewport(width, height, dockClearance);
+    }
+
+    if (this.desktopFiles) {
+      this.desktopFiles.layout(width, height, dockClearance);
     }
   }
 
   update() {
+    this.removeClosedWindows();
+
     const now = millis();
 
     // Handle delayed window visibility
@@ -55,7 +118,7 @@ class Desktop {
 
     const runningIds = new Set();
     for (const win of this.windows) {
-      if (win.isVisible || win.openAt) {
+      if (win.isVisible || win.openAt || win.isMinimized) {
         runningIds.add(win.appId);
       }
     }
@@ -63,22 +126,40 @@ class Desktop {
 
     this.dock.setAppStates(runningIds, activeId);
     this.dock.update(mouseX, mouseY);
+    if (this.desktopFiles) {
+      this.desktopFiles.update(mouseX, mouseY);
+    }
+    this.updateCursor();
+  }
+
+  removeClosedWindows() {
+    if (this.windows.length === 0) return;
+    let changed = false;
+    this.windows = this.windows.filter(win => {
+      if (win.isClosed) {
+        changed = true;
+        return false;
+      }
+      return true;
+    });
+    if (changed && this.activeWindow && this.activeWindow.isClosed) {
+      this.activeWindow = null;
+      this.topBar.setActiveApp(null);
+    }
   }
 
   draw() {
     this.drawWallpaper();
     this.topBar.draw();
+    if (this.desktopFiles) {
+      this.desktopFiles.draw();
+    }
     this.drawWindows();
     this.dock.draw();
   }
 
   drawWallpaper() {
-    if (
-      !this.wallpaperBuffer ||
-      this.wallpaperBuffer.width !== width ||
-      this.wallpaperBuffer.height !== height ||
-      this.wallpaperDirty
-    ) {
+    if (!this.wallpaperBuffer || this.wallpaperDirty) {
       this.generateWallpaper();
       this.wallpaperDirty = false;
     }
@@ -346,11 +427,66 @@ class Desktop {
   getTopWindowAt(x, y) {
     for (let i = this.windows.length - 1; i >= 0; i--) {
       const w = this.windows[i];
-      if (w.isVisible && w.hitTest(x, y)) {
+      if (
+        w.isVisible &&
+        !w.isMinimizing &&
+        !w.isRestoring &&
+        w.hitTest(x, y)
+      ) {
         return w;
       }
     }
     return null;
+  }
+
+  getCursorTarget(mx, my) {
+    for (let i = this.windows.length - 1; i >= 0; i--) {
+      const win = this.windows[i];
+      if (!win.isVisible || win.isMinimizing || win.isRestoring) continue;
+
+      if (!win.hitTest(mx, my)) continue;
+
+      const resizeEdges = win.resizeEdgesFor(mx, my);
+      if (resizeEdges.right || resizeEdges.left || resizeEdges.bottom) {
+        return { type: "resize", win, edges: resizeEdges };
+      }
+
+      if (win.inTitleBar(mx, my) && !win.isHoveringTrafficLights(mx, my)) {
+        return { type: "title", win };
+      }
+      return { type: "window", win };
+    }
+    return null;
+  }
+
+  cursorForResize(edges) {
+    if (edges.right && edges.bottom) return "nwse-resize";
+    if (edges.left && edges.bottom) return "nesw-resize";
+    if (edges.right || edges.left) return "ew-resize";
+    if (edges.bottom) return "ns-resize";
+    return "default";
+  }
+
+  updateCursor() {
+    let desired = "default";
+
+    if (this.activeWindow && this.activeWindow.isResizing) {
+      desired = this.cursorForResize(this.activeWindow.resizeEdges);
+    }
+
+    if (desired === "default") {
+      const target = this.getCursorTarget(mouseX, mouseY);
+      if (target) {
+        if (target.type === "resize") {
+          desired = this.cursorForResize(target.edges);
+        }
+      }
+    }
+
+    if (desired !== this.cursorStyle) {
+      cursor(desired);
+      this.cursorStyle = desired;
+    }
   }
 
   bringToFront(win) {
@@ -364,12 +500,20 @@ class Desktop {
   }
 
   openApp(appId) {
+    this.removeClosedWindows();
+
     let existing = this.windows.find(w => w.appId === appId);
     const delay = random(150, 450); // fake "loading" time
     const dockClearance = this.getDockClearance();
 
     if (existing) {
       existing.dockHeight = dockClearance;
+      if (existing.isMinimized) {
+        existing.openAt = null;
+        existing.restoreFromDock();
+        this.bringToFront(existing);
+        return;
+      }
       if (existing.isVisible) {
         this.bringToFront(existing);
         return;
@@ -397,7 +541,8 @@ class Desktop {
       w,
       h,
       this.menuHeight,
-      dockClearance
+      dockClearance,
+      this.dock
     );
 
     win.isVisible = false;
@@ -407,11 +552,52 @@ class Desktop {
     this.bringToFront(win);
   }
 
+  openProjectWindow(projectId) {
+    const project = this.projects.find(p => p.id === projectId);
+    if (!project) return;
+
+    const appId = `project-${project.id}`;
+    let existing = this.windows.find(w => w.appId === appId && !w.isClosed);
+    if (existing) {
+      if (!existing.isVisible) {
+        existing.isVisible = true;
+      }
+      this.bringToFront(existing);
+      return;
+    }
+
+    const dockClearance = this.getDockClearance();
+    const frame = this.getAppFrame("project", dockClearance);
+    const { x, y, w, h } = frame;
+
+    const win = new AppWindow(
+      appId,
+      `Project - ${project.name}`,
+      x,
+      y,
+      w,
+      h,
+      this.menuHeight,
+      dockClearance,
+      this.dock,
+      {
+        customBlocks: this.buildProjectBlocks(project),
+        closeOnMinimize: true
+      }
+    );
+
+    this.windows.push(win);
+    this.bringToFront(win);
+  }
+
   mousePressed(x, y) {
     // Dock click
     const dockIcon = this.dock.getIconAt(x, y);
     if (dockIcon) {
-      dockIcon.launchBounce();
+      const isFirstLaunch = !this.dock.openAppIds.has(dockIcon.appId);
+      if (isFirstLaunch) {
+        dockIcon.launchBounce();
+      }
       this.openApp(dockIcon.appId);
       return;
     }
@@ -424,6 +610,28 @@ class Desktop {
       return;
     }
 
+    // Desktop file click
+    if (this.desktopFiles) {
+      const action = this.desktopFiles.pointerDown(
+        x,
+        y,
+        width,
+        height,
+        this.getDockClearance()
+      );
+      if (action) {
+        if (action.type === "openApp" && action.appId) {
+          this.openApp(action.appId);
+        } else if (action.type === "openProject" && action.projectId) {
+          this.openProjectWindow(action.projectId);
+        } else if (action.type === "select") {
+          this.activeWindow = null;
+          this.topBar.setActiveApp(null);
+        }
+        return;
+      }
+    }
+
     // Clicked empty desktop
     this.activeWindow = null;
     this.topBar.setActiveApp(null);
@@ -433,11 +641,17 @@ class Desktop {
     if (this.activeWindow) {
       this.activeWindow.mouseReleased(x, y);
     }
+    if (this.desktopFiles) {
+      this.desktopFiles.pointerUp();
+    }
   }
 
   mouseDragged(x, y, px, py) {
     if (this.activeWindow) {
       this.activeWindow.mouseDragged(x, y, px, py);
+    }
+    if (this.desktopFiles && this.desktopFiles.isDragging()) {
+      this.desktopFiles.pointerDrag(x, y);
     }
   }
 
@@ -456,5 +670,31 @@ class Desktop {
 
     this.activeWindow = null;
     this.topBar.setActiveApp(null);
+  }
+
+  buildProjectBlocks(project) {
+    const blocks = [
+      { type: "h1", text: project.name },
+      { type: "p", text: project.summary }
+    ];
+
+    if (project.role) {
+      blocks.push({ type: "h2", text: "Role" });
+      blocks.push({ type: "p", text: project.role });
+    }
+
+    if (project.highlights && project.highlights.length) {
+      blocks.push({ type: "h2", text: "Highlights" });
+      for (const item of project.highlights) {
+        blocks.push({ type: "p", text: `• ${item}` });
+      }
+    }
+
+    if (project.stack) {
+      blocks.push({ type: "h2", text: "Stack" });
+      blocks.push({ type: "p", text: project.stack });
+    }
+
+    return blocks;
   }
 }

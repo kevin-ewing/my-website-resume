@@ -113,7 +113,7 @@ class DockIcon {
     textSize(12);
     const textW = textWidth(this.label);
     const w = textW + paddingX * 2;
-    const h = 26;
+    const h = 20;
 
     const tooltipX = this.x - w / 2;
     const tooltipY = centerY - this.baseSize / 2 - h - 8;
@@ -122,7 +122,7 @@ class DockIcon {
     drawingContext.globalAlpha = eased;
     noStroke();
     fill(255, 255, 255, 235);
-    rect(tooltipX, tooltipY, w, h, 8);
+    rect(tooltipX, tooltipY, w, h, h/2);
 
     fill(29, 29, 31);
     textAlign(CENTER, CENTER);
@@ -246,6 +246,16 @@ class Dock {
   setAppStates(openIds, activeId) {
     this.openAppIds = new Set(openIds);
     this.activeAppId = activeId;
+  }
+
+  getIconCenter(appId) {
+    const icon = this.icons.find(i => i.appId === appId);
+    if (!icon) return null;
+    return {
+      x: icon.x,
+      y: icon.y,
+      size: icon.baseSize
+    };
   }
 
   getTop() {

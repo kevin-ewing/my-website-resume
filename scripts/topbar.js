@@ -99,7 +99,7 @@ class TopBar {
   drawBatteryIcon(x, midY) {
     const bodyW = 18;
     const bodyH = 9;
-    const capW = 3;
+    const capW = 2;
     const top = midY - bodyH / 2;
 
     push();
@@ -108,7 +108,7 @@ class TopBar {
     strokeWeight(1.2);
     noFill();
     rect(x - bodyW, top, bodyW, bodyH, 1);
-    rect(x, midY - 3.5, capW, 7, 1);
+    rect(x, midY - 2, capW, 4, 1);
 
     const level = constrain(this.batteryLevel || 0, 0, 1);
     const fillWidth = (bodyW - 3.5) * level;
@@ -116,13 +116,6 @@ class TopBar {
     const fillColor = level <= 0.2 ? color(255, 69, 58) : color(40, 40, 42);
     fill(fillColor);
     rect(x - bodyW + 1, top + 1, max(2, fillWidth), bodyH - 2, 1);
-
-    if (this.isBatteryCharging) {
-      fill(255);
-      const boltX = x - bodyW / 2;
-      triangle(boltX - 2, midY - 4, boltX + 1, midY, boltX - 1, midY);
-      triangle(boltX + 2, midY + 4, boltX - 1, midY, boltX + 1, midY);
-    }
 
     const percent = Math.round(level * 100);
     const percentLabel = `${percent}%`;

@@ -1,7 +1,7 @@
 // scripts/window.js
 
 class AppWindow {
-  constructor(appId, title, x, y, w, h, menuHeight, dockHeight) {
+  constructor(appId, title, x, y, w, h, menuHeight, dockHeight, dockRef = null, options = {}) {
     this.appId = appId;
     this.title = title;
     this.x = x;
@@ -27,11 +27,12 @@ class AppWindow {
 
     // Resizing
     this.isResizing = false;
-    this.resizeEdges = { right: false, bottom: false };
+    this.resizeEdges = { right: false, left: false, bottom: false };
     this.startMouseX = 0;
     this.startMouseY = 0;
     this.startW = 0;
     this.startH = 0;
+    this.startX = 0;
 
     this.minW = 320;
     this.minH = 200;
@@ -40,8 +41,18 @@ class AppWindow {
     this.isMaximized = false;
     this.restoreRect = null; // { x, y, w, h }
 
-    // Delayed open
+    // Delayed open / minimize
     this.openAt = null;
+    this.isMinimized = false;
+    this.isClosed = false;
+    this.isMinimizing = false;
+    this.isRestoring = false;
+    this.transitionDuration = 220;
+    this.transition = null;
+
+    this.dockRef = dockRef;
+    this.customBlocks = options.customBlocks || null;
+    this.closeOnMinimize = !!options.closeOnMinimize;
   }
 
   hitTest(mx, my) {
@@ -68,7 +79,7 @@ class AppWindow {
     };
   }
 
-  hitResizeZone(mx, my) {
+  resizeEdgesFor(mx, my) {
     const margin = 10;
     const rightEdgeX = this.x + this.w;
     const bottomEdgeY = this.y + this.h;
@@ -78,15 +89,31 @@ class AppWindow {
       my >= this.y + this.titleBarHeight &&
       my <= bottomEdgeY;
 
+    const overLeft =
+      Math.abs(mx - this.x) <= margin &&
+      my >= this.y + this.titleBarHeight &&
+      my <= bottomEdgeY;
+
     const overBottom =
       Math.abs(my - bottomEdgeY) <= margin &&
       mx >= this.x &&
       mx <= rightEdgeX;
 
-    this.resizeEdges.right = overRight;
-    this.resizeEdges.bottom = overBottom;
+    return {
+      right: overRight,
+      left: overLeft,
+      bottom: overBottom
+    };
+  }
 
-    return overRight || overBottom;
+  hitResizeZone(mx, my) {
+    const edges = this.resizeEdgesFor(mx, my);
+
+    this.resizeEdges.right = edges.right;
+    this.resizeEdges.left = edges.left;
+    this.resizeEdges.bottom = edges.bottom;
+
+    return edges.right || edges.left || edges.bottom;
   }
 
   toggleMaximize() {
@@ -122,7 +149,13 @@ class AppWindow {
 
     // Close
     if (dist(mx, my, lights.close.x, lights.close.y) <= lights.close.r) {
-      this.isVisible = false;
+      this.handleClose();
+      return;
+    }
+
+    // Minimize
+    if (dist(mx, my, lights.minimize.x, lights.minimize.y) <= lights.minimize.r) {
+      this.minimize();
       return;
     }
 
@@ -139,6 +172,7 @@ class AppWindow {
       this.startMouseY = my;
       this.startW = this.w;
       this.startH = this.h;
+      this.startX = this.x;
       return;
     }
 
@@ -169,6 +203,18 @@ class AppWindow {
     if (this.isResizing) {
       const dx = mx - this.startMouseX;
       const dy = my - this.startMouseY;
+
+      if (this.resizeEdges.left) {
+        const rightEdge = this.startX + this.startW;
+        let newX = this.startX + dx;
+        const maxX = rightEdge - this.minW;
+        newX = constrain(newX, 0, maxX);
+        let newW = rightEdge - newX;
+        newW = max(this.minW, newW);
+        newW = min(newW, width - newX);
+        this.x = newX;
+        this.w = newW;
+      }
 
       if (this.resizeEdges.right) {
         let newW = this.startW + dx;
@@ -201,10 +247,50 @@ class AppWindow {
     this.y = constrain(this.y, this.menuHeight, maxY);
   }
 
+  adjustToViewport(viewportW, viewportH, dockHeight) {
+    if (viewportW <= 0 || viewportH <= 0) return;
+
+    this.dockHeight = dockHeight;
+    const usableWidth = max(140, viewportW);
+    if (this.w > usableWidth) {
+      this.w = usableWidth;
+    }
+    const maxX = max(0, viewportW - this.w);
+    this.x = constrain(this.x, 0, maxX);
+
+    const usableHeight = max(
+      140,
+      viewportH - dockHeight - this.menuHeight
+    );
+    if (this.h > usableHeight) {
+      this.h = usableHeight;
+    }
+    const maxY = max(
+      this.menuHeight,
+      viewportH - dockHeight - this.h
+    );
+    this.y = constrain(this.y, this.menuHeight, maxY);
+  }
+
   draw(isActive) {
-    if (!this.isVisible) return;
+    if (!this.isVisible && !this.transition) return;
+
+    const transitionState = this.computeTransitionTransform();
+    if (!this.isVisible && !transitionState) {
+      return;
+    }
 
     push();
+    let alphaPushed = false;
+    if (transitionState) {
+      translate(transitionState.x, transitionState.y);
+      scale(transitionState.scale);
+      translate(-this.x, -this.y);
+      drawingContext.save();
+      drawingContext.globalAlpha *= transitionState.alpha;
+      alphaPushed = true;
+      isActive = false;
+    }
 
     const borderColor = color(176, 178, 186, 220);
     const bodyColor = isActive ? color(245, 245, 248) : color(248, 248, 250);
@@ -237,9 +323,10 @@ class AppWindow {
 
     // Traffic lights
     const lights = this.trafficLights();
-    this.drawTrafficLight(lights.close, color(255, 95, 86), isActive);
-    this.drawTrafficLight(lights.minimize, color(255, 189, 46), isActive);
-    this.drawTrafficLight(lights.zoom, color(51, 214, 87), isActive);
+    const showLightGlyphs = this.isHoveringTrafficLights(mouseX, mouseY);
+    this.drawTrafficLight(lights.close, color(255, 95, 86), isActive, showLightGlyphs, "close");
+    this.drawTrafficLight(lights.minimize, color(255, 189, 46), isActive, showLightGlyphs, "minimize");
+    this.drawTrafficLight(lights.zoom, color(51, 214, 87), isActive, showLightGlyphs, "zoom");
 
     // Title
     fill(titleTextColor);
@@ -250,17 +337,201 @@ class AppWindow {
     // Content
     this.drawContent();
 
+    if (alphaPushed) {
+      drawingContext.restore();
+    }
     pop();
   }
 
-  drawTrafficLight(light, baseColor, isActive) {
+  drawTrafficLight(light, baseColor, isActive, showGlyph, glyphType) {
     push();
-    stroke(214, 214, 220);
+    stroke(214, 214, 220, 120);
     strokeWeight(1);
     const inactive = lerpColor(baseColor, color(230), 0.4);
-    fill(isActive ? baseColor : inactive);
+    const fillColor = isActive ? baseColor : inactive;
+    fillColor.setAlpha(showGlyph ? 200 : 130);
+    fill(fillColor);
     circle(light.x, light.y, light.r * 2);
+
+    if (showGlyph) {
+      this.drawLightGlyph(light, glyphType);
+    }
+
     pop();
+  }
+
+  drawLightGlyph(light, type) {
+    push();
+    stroke(55, 55, 60, 170);
+    strokeWeight(1.5);
+    strokeCap(ROUND);
+    noFill();
+    const inset = light.r - 4;
+
+    switch (type) {
+      case "close":
+        line(light.x - inset, light.y - inset, light.x + inset, light.y + inset);
+        line(light.x - inset, light.y + inset, light.x + inset, light.y - inset);
+        break;
+      case "minimize":
+        line(light.x - inset, light.y, light.x + inset, light.y);
+        break;
+      case "zoom":
+        line(light.x - inset, light.y, light.x + inset, light.y);
+        line(light.x, light.y - inset, light.x, light.y + inset);
+        break;
+    }
+
+    pop();
+  }
+
+  isHoveringTrafficLights(mx, my) {
+    const lights = this.trafficLights();
+    return (
+      dist(mx, my, lights.close.x, lights.close.y) <= lights.close.r ||
+      dist(mx, my, lights.minimize.x, lights.minimize.y) <= lights.minimize.r ||
+      dist(mx, my, lights.zoom.x, lights.zoom.y) <= lights.zoom.r
+    );
+  }
+
+  minimize() {
+    if (this.closeOnMinimize) {
+      this.handleClose();
+      return;
+    }
+
+    if ((!this.isVisible && !this.isMinimized) || this.isMinimizing) return;
+    this.cancelTransition();
+    this.isMinimized = true;
+    this.isRestoring = false;
+    this.openAt = null;
+    this.isVisible = true;
+
+    const target = this.getMinimizeTarget();
+    if (target) {
+      this.startMinimizeAnimation(target);
+      return;
+    }
+
+    this.isVisible = false;
+  }
+
+  getMinimizeTarget() {
+    if (!this.dockRef || !this.appId) return null;
+    return this.dockRef.getIconCenter(this.appId);
+  }
+
+  buildTargetRect(target) {
+    if (!target) return null;
+    const baseSize = target.size ? target.size : this.w * 0.12;
+    const scale = constrain(baseSize / this.w, 0.06, 0.25);
+    const widthScaled = this.w * scale;
+    const heightScaled = this.h * scale;
+    return {
+      x: target.x - widthScaled / 2,
+      y: target.y - heightScaled / 2,
+      w: widthScaled,
+      h: heightScaled
+    };
+  }
+
+  startMinimizeAnimation(target) {
+    const toRect = this.buildTargetRect(target);
+    if (!toRect) {
+      this.isVisible = false;
+      return;
+    }
+
+    this.isMinimizing = true;
+    this.transition = {
+      kind: "minimize",
+      start: millis(),
+      duration: this.transitionDuration,
+      from: { x: this.x, y: this.y, w: this.w, h: this.h, alpha: 1 },
+      to: { ...toRect, alpha: 0 }
+    };
+  }
+
+  startRestoreAnimation(target) {
+    const fromRect = this.buildTargetRect(target);
+    if (!fromRect) {
+      this.isVisible = true;
+      this.isMinimized = false;
+      return;
+    }
+
+    this.isRestoring = true;
+    this.isMinimized = false;
+    this.isVisible = true;
+    this.transition = {
+      kind: "restore",
+      start: millis(),
+      duration: this.transitionDuration,
+      from: { ...fromRect, alpha: 0 },
+      to: { x: this.x, y: this.y, w: this.w, h: this.h, alpha: 1 }
+    };
+  }
+
+  restoreFromDock() {
+    this.cancelTransition();
+    const target = this.getMinimizeTarget();
+    if (target) {
+      this.startRestoreAnimation(target);
+    } else {
+      this.isMinimized = false;
+      this.isVisible = true;
+    }
+  }
+
+  handleClose() {
+    this.cancelTransition(false);
+    this.isClosed = true;
+    this.isVisible = false;
+    this.isMinimized = false;
+    this.openAt = null;
+  }
+
+  cancelTransition(keepVisible = true) {
+    this.transition = null;
+    this.isMinimizing = false;
+    this.isRestoring = false;
+    if (keepVisible) {
+      this.isVisible = true;
+    }
+  }
+
+  computeTransitionTransform() {
+    if (!this.transition) return null;
+    const { kind, start, duration, from, to } = this.transition;
+    const elapsed = millis() - start;
+    const t = constrain(elapsed / duration, 0, 1);
+    const eased = this.easeInOutCubic(t);
+    const x = lerp(from.x, to.x, eased);
+    const y = lerp(from.y, to.y, eased);
+    const w = lerp(from.w, to.w, eased);
+    const scale = w / this.w;
+    const alpha = lerp(from.alpha, to.alpha, eased);
+
+    if (t >= 1) {
+      this.transition = null;
+      this.isMinimizing = false;
+      this.isRestoring = false;
+      if (kind === "minimize") {
+        this.isVisible = false;
+      } else if (kind === "restore") {
+        this.isVisible = true;
+        this.isMinimized = false;
+      }
+      return null;
+    }
+
+    return { x, y, scale, alpha };
+  }
+
+  easeInOutCubic(t) {
+    return t < 0.5
+      ? 4 * t * t * t
+      : 1 - pow(-2 * t + 2, 3) / 2;
   }
 
   drawContent() {
@@ -344,6 +615,9 @@ class AppWindow {
   }
 
   getContentBlocks() {
+    if (this.customBlocks) {
+      return this.customBlocks;
+    }
     switch (this.appId) {
       case "finder":
         return [
